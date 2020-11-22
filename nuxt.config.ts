@@ -21,7 +21,7 @@ export default {
 
   router: process.env.DEPLOY_ENV === 'GH_PAGES'
     ? {
-      base: 'my-doomsday-clock-application'
+      base: '/my-doomsday-clock-application/'
     }
     : {}
   ,
