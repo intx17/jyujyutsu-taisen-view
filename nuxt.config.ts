@@ -70,7 +70,7 @@ export default {
     '/my-doomsday-clock-application/api/': {
       target: process.env.API_ROOT,
       pathRewrite: {
-        '^/my-doomsday-clock-application/api/': '/'
+        '^/my-doomsday-clock-application/api/': ''
       }
     },
   },
@@ -80,11 +80,11 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    // proxy: true,
-    // prefix: process.env.DEPLOY_ENV === 'GH_PAGES'
-      // ? '/my-doomsday-clock-application/api'
-      // : '/api'
-    prefix: '/api'
+    proxy: true,
+    prefix: process.env.DEPLOY_ENV === 'GH_PAGES'
+      ? '/my-doomsday-clock-application/api'
+      : '/api'
+
   },
 
   /*
