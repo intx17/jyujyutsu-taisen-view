@@ -80,6 +80,7 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    proxy: true,
     prefix: process.env.DEPLOY_ENV === 'GH_PAGES'
       ? '/my-doomsday-clock-application/api'
       : '/api'
