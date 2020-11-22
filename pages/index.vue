@@ -29,7 +29,7 @@ import { AlertColor } from "~/src/enums/alertColor";
   },
   async asyncData ( { $axios }) {
     try {
-      const response: GetPositivesResponse = await $axios.$get('/v1/positives?prefecture=東京都');
+      const response: GetPositivesResponse = await $axios.$get('ttps://5b9wubkeh9.execute-api.ap-northeast-1.amazonaws.com/prod/v1/positives?prefecture=東京都');
 
       // TMP unix time
       const deadline = moment('2050-01-01');
