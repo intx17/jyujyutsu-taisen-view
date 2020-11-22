@@ -1,25 +1,25 @@
-importScripts('/_nuxt/workbox.4c4f5ca6.js')
+importScripts('my-doomsday-clock-application/_nuxt/workbox.4c4f5ca6.js')
 
 workbox.precaching.precacheAndRoute([
   {
-    "url": "/_nuxt/1281c39.js",
-    "revision": "2bd789de4684b9480fc118053552cd55"
-  },
-  {
-    "url": "/_nuxt/1417b41.js",
+    "url": "my-doomsday-clock-application/_nuxt/1417b41.js",
     "revision": "13e0b13b50383776d1169c66355f90a2"
   },
   {
-    "url": "/_nuxt/3e36ed8.js",
-    "revision": "d51448c12e435f3f217db27f649aff50"
-  },
-  {
-    "url": "/_nuxt/431da26.js",
+    "url": "my-doomsday-clock-application/_nuxt/431da26.js",
     "revision": "d1f7d69b81468f840847812ff719e8fd"
   },
   {
-    "url": "/_nuxt/87a8737.js",
+    "url": "my-doomsday-clock-application/_nuxt/8783461.js",
+    "revision": "44fced918898691d511f9ebd0d7d0619"
+  },
+  {
+    "url": "my-doomsday-clock-application/_nuxt/87a8737.js",
     "revision": "3ed79099c1a18ef64a8e1afd8ec187f9"
+  },
+  {
+    "url": "my-doomsday-clock-application/_nuxt/ff391db.js",
+    "revision": "8de24eede60e623548976eb20de59437"
   }
 ], {
   "cacheId": "my-doomsday-clock-application",
@@ -30,6 +30,6 @@ workbox.precaching.precacheAndRoute([
 workbox.clientsClaim()
 workbox.skipWaiting()
 
-workbox.routing.registerRoute(new RegExp('/_nuxt/.*'), workbox.strategies.cacheFirst({}), 'GET')
+workbox.routing.registerRoute(new RegExp('my-doomsday-clock-application/_nuxt/.*'), workbox.strategies.cacheFirst({}), 'GET')
 
-workbox.routing.registerRoute(new RegExp('/.*'), workbox.strategies.networkFirst({}), 'GET')
+workbox.routing.registerRoute(new RegExp('my-doomsday-clock-application/.*'), workbox.strategies.networkFirst({}), 'GET')
