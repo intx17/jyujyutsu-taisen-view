@@ -19,6 +19,13 @@ export default {
     ]
   },
 
+  router: process.env.DEPLOY_ENV === 'GH_PAGES'
+    ? {
+      base: 'my-doomsday-clock-application'
+    }
+    : {}
+  ,
+
   /*
   ** Customize the progress-bar color
   */
@@ -47,6 +54,12 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
   ],
+
+  manifest: {
+    name: '俺流終末時計',
+    lang: 'ja',
+  },
+
   /*
   ** Axios module configuration
   */
