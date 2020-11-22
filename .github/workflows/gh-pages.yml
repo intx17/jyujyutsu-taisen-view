@@ -15,7 +15,7 @@ jobs:
       - name: generate
         run: npm run generate:gh-pages
         env:
-          API_ROOT: ${{ secrets.API_ROOT }}
+          API_PROXY_ROOT: ${{ secrets.API_PROXY_ROOT }}
 
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
