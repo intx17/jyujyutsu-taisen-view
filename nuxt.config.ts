@@ -60,21 +60,29 @@ export default {
     lang: 'ja',
   },
 
-  /*
-  ** Axios module configuration
-  */
-  axios: {
-    // See https://github.com/nuxt-community/axios-module#options
-    proxy: true
-  },
-
   proxy: {
     '/api/': {
       target: process.env.API_ROOT,
       pathRewrite: {
         '^/api/': '/'
       }
-    }
+    },
+    '/my-doomsday-clock-application/api/': {
+      target: process.env.API_ROOT,
+      pathRewrite: {
+        '^/my-doomsday-clock-application/api/': '/'
+      }
+    },
+  },
+
+  /*
+    ** Axios module configuration
+  */
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
+    prefix: process.env.DEPLOY_ENV === 'GH_PAGES'
+      ? '/my-doomsday-clock-application/api'
+      : '/api'
   },
 
   /*
