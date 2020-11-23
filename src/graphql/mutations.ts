@@ -44,3 +44,48 @@ export const deleteCovid19Positive = /* GraphQL */ `
     }
   }
 `;
+export const createMyDoomsDayClockUser = /* GraphQL */ `
+  mutation CreateMyDoomsDayClockUser(
+    $input: CreateMyDoomsDayClockUserInput!
+    $condition: ModelMyDoomsDayClockUserConditionInput
+  ) {
+    createMyDoomsDayClockUser(input: $input, condition: $condition) {
+      id
+      name
+      prefecture
+      doomsDay
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateMyDoomsDayClockUser = /* GraphQL */ `
+  mutation UpdateMyDoomsDayClockUser(
+    $input: UpdateMyDoomsDayClockUserInput!
+    $condition: ModelMyDoomsDayClockUserConditionInput
+  ) {
+    updateMyDoomsDayClockUser(input: $input, condition: $condition) {
+      id
+      name
+      prefecture
+      doomsDay
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteMyDoomsDayClockUser = /* GraphQL */ `
+  mutation DeleteMyDoomsDayClockUser(
+    $input: DeleteMyDoomsDayClockUserInput!
+    $condition: ModelMyDoomsDayClockUserConditionInput
+  ) {
+    deleteMyDoomsDayClockUser(input: $input, condition: $condition) {
+      id
+      name
+      prefecture
+      doomsDay
+      createdAt
+      updatedAt
+    }
+  }
+`;

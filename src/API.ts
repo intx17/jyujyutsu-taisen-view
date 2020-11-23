@@ -66,6 +66,33 @@ export type DeleteCovid19PositiveInput = {
   id?: string | null,
 };
 
+export type CreateMyDoomsDayClockUserInput = {
+  id?: string | null,
+  name: string,
+  prefecture: string,
+  doomsDay: string,
+};
+
+export type ModelMyDoomsDayClockUserConditionInput = {
+  name?: ModelStringInput | null,
+  prefecture?: ModelStringInput | null,
+  doomsDay?: ModelStringInput | null,
+  and?: Array< ModelMyDoomsDayClockUserConditionInput | null > | null,
+  or?: Array< ModelMyDoomsDayClockUserConditionInput | null > | null,
+  not?: ModelMyDoomsDayClockUserConditionInput | null,
+};
+
+export type UpdateMyDoomsDayClockUserInput = {
+  id: string,
+  name?: string | null,
+  prefecture?: string | null,
+  doomsDay?: string | null,
+};
+
+export type DeleteMyDoomsDayClockUserInput = {
+  id?: string | null,
+};
+
 export type ModelCovid19PositiveFilterInput = {
   id?: ModelIDInput | null,
   content?: ModelStringInput | null,
@@ -89,6 +116,16 @@ export type ModelIDInput = {
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
   size?: ModelSizeInput | null,
+};
+
+export type ModelMyDoomsDayClockUserFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  prefecture?: ModelStringInput | null,
+  doomsDay?: ModelStringInput | null,
+  and?: Array< ModelMyDoomsDayClockUserFilterInput | null > | null,
+  or?: Array< ModelMyDoomsDayClockUserFilterInput | null > | null,
+  not?: ModelMyDoomsDayClockUserFilterInput | null,
 };
 
 export type CreateCovid19PositiveMutationVariables = {
@@ -139,6 +176,57 @@ export type DeleteCovid19PositiveMutation = {
   } | null,
 };
 
+export type CreateMyDoomsDayClockUserMutationVariables = {
+  input: CreateMyDoomsDayClockUserInput,
+  condition?: ModelMyDoomsDayClockUserConditionInput | null,
+};
+
+export type CreateMyDoomsDayClockUserMutation = {
+  createMyDoomsDayClockUser:  {
+    __typename: "MyDoomsDayClockUser",
+    id: string,
+    name: string,
+    prefecture: string,
+    doomsDay: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateMyDoomsDayClockUserMutationVariables = {
+  input: UpdateMyDoomsDayClockUserInput,
+  condition?: ModelMyDoomsDayClockUserConditionInput | null,
+};
+
+export type UpdateMyDoomsDayClockUserMutation = {
+  updateMyDoomsDayClockUser:  {
+    __typename: "MyDoomsDayClockUser",
+    id: string,
+    name: string,
+    prefecture: string,
+    doomsDay: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteMyDoomsDayClockUserMutationVariables = {
+  input: DeleteMyDoomsDayClockUserInput,
+  condition?: ModelMyDoomsDayClockUserConditionInput | null,
+};
+
+export type DeleteMyDoomsDayClockUserMutation = {
+  deleteMyDoomsDayClockUser:  {
+    __typename: "MyDoomsDayClockUser",
+    id: string,
+    name: string,
+    prefecture: string,
+    doomsDay: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetCovid19PositiveQueryVariables = {
   id: string,
 };
@@ -175,6 +263,44 @@ export type ListCovid19PositivesQuery = {
   } | null,
 };
 
+export type GetMyDoomsDayClockUserQueryVariables = {
+  id: string,
+};
+
+export type GetMyDoomsDayClockUserQuery = {
+  getMyDoomsDayClockUser:  {
+    __typename: "MyDoomsDayClockUser",
+    id: string,
+    name: string,
+    prefecture: string,
+    doomsDay: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListMyDoomsDayClockUsersQueryVariables = {
+  filter?: ModelMyDoomsDayClockUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListMyDoomsDayClockUsersQuery = {
+  listMyDoomsDayClockUsers:  {
+    __typename: "ModelMyDoomsDayClockUserConnection",
+    items:  Array< {
+      __typename: "MyDoomsDayClockUser",
+      id: string,
+      name: string,
+      prefecture: string,
+      doomsDay: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+  } | null,
+};
+
 export type OnCreateCovid19PositiveSubscription = {
   onCreateCovid19Positive:  {
     __typename: "Covid19Positive",
@@ -203,6 +329,42 @@ export type OnDeleteCovid19PositiveSubscription = {
     id: string,
     content: string,
     date: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateMyDoomsDayClockUserSubscription = {
+  onCreateMyDoomsDayClockUser:  {
+    __typename: "MyDoomsDayClockUser",
+    id: string,
+    name: string,
+    prefecture: string,
+    doomsDay: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateMyDoomsDayClockUserSubscription = {
+  onUpdateMyDoomsDayClockUser:  {
+    __typename: "MyDoomsDayClockUser",
+    id: string,
+    name: string,
+    prefecture: string,
+    doomsDay: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteMyDoomsDayClockUserSubscription = {
+  onDeleteMyDoomsDayClockUser:  {
+    __typename: "MyDoomsDayClockUser",
+    id: string,
+    name: string,
+    prefecture: string,
+    doomsDay: string,
     createdAt: string,
     updatedAt: string,
   } | null,

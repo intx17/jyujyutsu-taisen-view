@@ -35,3 +35,39 @@ export const onDeleteCovid19Positive = /* GraphQL */ `
     }
   }
 `;
+export const onCreateMyDoomsDayClockUser = /* GraphQL */ `
+  subscription OnCreateMyDoomsDayClockUser {
+    onCreateMyDoomsDayClockUser {
+      id
+      name
+      prefecture
+      doomsDay
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateMyDoomsDayClockUser = /* GraphQL */ `
+  subscription OnUpdateMyDoomsDayClockUser {
+    onUpdateMyDoomsDayClockUser {
+      id
+      name
+      prefecture
+      doomsDay
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteMyDoomsDayClockUser = /* GraphQL */ `
+  subscription OnDeleteMyDoomsDayClockUser {
+    onDeleteMyDoomsDayClockUser {
+      id
+      name
+      prefecture
+      doomsDay
+      createdAt
+      updatedAt
+    }
+  }
+`;

@@ -3,3 +3,10 @@ type Covid19Positive @model {
   content: AWSJSON!
   date: AWSDate!
 }
+
+type MyDoomsDayClockUser @model {
+  id: ID!
+  name: String!
+  prefecture: String!
+  doomsDay: AWSDate!
+}

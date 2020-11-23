@@ -35,3 +35,38 @@ export const listCovid19Positives = /* GraphQL */ `
     }
   }
 `;
+export const getMyDoomsDayClockUser = /* GraphQL */ `
+  query GetMyDoomsDayClockUser($id: ID!) {
+    getMyDoomsDayClockUser(id: $id) {
+      id
+      name
+      prefecture
+      doomsDay
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listMyDoomsDayClockUsers = /* GraphQL */ `
+  query ListMyDoomsDayClockUsers(
+    $filter: ModelMyDoomsDayClockUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMyDoomsDayClockUsers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        prefecture
+        doomsDay
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
