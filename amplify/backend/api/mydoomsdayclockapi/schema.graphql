@@ -1,0 +1,5 @@
+type Covid19Positive @model {
+  id: ID!
+  content: AWSJSON!
+  date: AWSDate!
+}

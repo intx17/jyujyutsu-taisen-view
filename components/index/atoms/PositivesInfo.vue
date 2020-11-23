@@ -8,12 +8,14 @@ import { Component, Prop, Vue } from "nuxt-property-decorator";
 import { AlertColor } from "@/src/enums/alertColor";
 
 @Component({})
-export default class Clock extends Vue {
+export default class PositivesInfo extends Vue {
+  @Prop({ type: String, required: true, default: 0 })
+  private prefecture!: string;
   @Prop({ type: Number, required: true, default: 0 })
-  private numberOfInfected!: number;
+  private countOfPositives!: number;
 
   private get message () {
-    return `temp${this.numberOfInfected}`
+    return `${this.prefecture}の新規感染者数: ${this.countOfPositives}`;
   }
 }
 </script>

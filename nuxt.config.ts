@@ -1,5 +1,4 @@
 require('dotenv').config()
-import { NuxtAxiosInstance } from '@nuxtjs/axios'
 
 export default {
   ssr: false,
@@ -19,13 +18,6 @@ export default {
     ]
   },
 
-  router: process.env.DEPLOY_ENV === 'GH_PAGES'
-    ? {
-      base: 'my-doomsday-clock-application'
-    }
-    : {}
-  ,
-
   /*
   ** Customize the progress-bar color
   */
@@ -36,12 +28,13 @@ export default {
   */
   css: [{
     src: '~assets/css/styles.css'
-    }],
+  }],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/amplify.js', ssr: false }
   ],
 
   /*
@@ -50,7 +43,6 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
   ],
@@ -65,17 +57,9 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    proxy: true
   },
 
-  proxy: {
-    '/api/': {
-      target: process.env.API_ROOT,
-      pathRewrite: {
-        '^/api/': '/'
-      }
-    }
-  },
+  proxy: {},
 
   /*
   ** Build configuration
@@ -89,10 +73,4 @@ export default {
   },
 
   buildModules: ['@nuxt/typescript-build']
-}
-
-declare module 'vue/types/vue' {
-  interface Vue {
-    $axios: NuxtAxiosInstance
-  }
 }
