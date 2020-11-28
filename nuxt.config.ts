@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 export default {
   ssr: false,
 
@@ -7,7 +5,7 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: 'my-doomsday-clock',
+    title: 'jyujyutsu-taisen',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

@@ -1,4 +1,4 @@
-# my-doomsday-clock
+# jyujyutsu-taisen
 
 > My superb Nuxt.js project
 

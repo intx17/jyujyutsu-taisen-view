@@ -1,7 +1,7 @@
 {
-  "name": "my-doomsday-clock-application",
+  "name": "jyujyutsu-taisen",
   "version": "1.0.0",
-  "description": "My superb Nuxt.js project",
+  "description": "",
   "author": "Tomohiro Yoshida",
   "private": true,
   "scripts": {
