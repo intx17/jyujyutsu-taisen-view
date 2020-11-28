@@ -24,9 +24,14 @@ export default {
   /*
   ** Global CSS
   */
-  css: [{
-    src: '~assets/css/styles.css'
-  }],
+  css: [
+    {
+      src: '~assets/css/styles.css'
+    },
+    {
+      src: './node_modules/nes.css/css/nes.min.css'
+    }
+  ],
 
   /*
   ** Plugins to load before mounting the App

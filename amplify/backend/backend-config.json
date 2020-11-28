@@ -1,6 +1,6 @@
 {
   "api": {
-    "mydoomsdayclockapi": {
+    "jyujyutsutaisenapi": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -15,13 +15,6 @@
           "additionalAuthenticationProviders": []
         }
       }
-    }
-  },
-  "hosting": {
-    "amplifyhosting": {
-      "service": "amplifyhosting",
-      "providerPlugin": "awscloudformation",
-      "type": "manual"
     }
   }
 }

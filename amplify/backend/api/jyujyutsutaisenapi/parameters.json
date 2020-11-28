@@ -1,5 +1,5 @@
 {
-    "AppSyncApiName": "mydoomsdayclockapi",
+    "AppSyncApiName": "jyujyutsutaisenapi",
     "DynamoDBBillingMode": "PAY_PER_REQUEST",
     "DynamoDBEnableServerSideEncryption": false
 }

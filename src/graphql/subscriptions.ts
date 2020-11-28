@@ -2,70 +2,427 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateCovid19Positive = /* GraphQL */ `
-  subscription OnCreateCovid19Positive {
-    onCreateCovid19Positive {
+export const onCreateInfectedData = /* GraphQL */ `
+  subscription OnCreateInfectedData {
+    onCreateInfectedData {
       id
       content
-      date
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateCovid19Positive = /* GraphQL */ `
-  subscription OnUpdateCovid19Positive {
-    onUpdateCovid19Positive {
+export const onUpdateInfectedData = /* GraphQL */ `
+  subscription OnUpdateInfectedData {
+    onUpdateInfectedData {
       id
       content
-      date
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteCovid19Positive = /* GraphQL */ `
-  subscription OnDeleteCovid19Positive {
-    onDeleteCovid19Positive {
+export const onDeleteInfectedData = /* GraphQL */ `
+  subscription OnDeleteInfectedData {
+    onDeleteInfectedData {
       id
       content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
+      id
+      name
+      hp
+      woeid
+      commands {
+        items {
+          id
+          name
+          description
+          attack
+          isOutdoor
+          inCommandList
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      battles {
+        items {
+          id
+          date
+          userHP
+          curseHP
+          inAreaExpansion
+          userID
+          curseID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
+      id
+      name
+      hp
+      woeid
+      commands {
+        items {
+          id
+          name
+          description
+          attack
+          isOutdoor
+          inCommandList
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      battles {
+        items {
+          id
+          date
+          userHP
+          curseHP
+          inAreaExpansion
+          userID
+          curseID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
+      id
+      name
+      hp
+      woeid
+      commands {
+        items {
+          id
+          name
+          description
+          attack
+          isOutdoor
+          inCommandList
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      battles {
+        items {
+          id
+          date
+          userHP
+          curseHP
+          inAreaExpansion
+          userID
+          curseID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateCommand = /* GraphQL */ `
+  subscription OnCreateCommand {
+    onCreateCommand {
+      id
+      name
+      description
+      attack
+      isOutdoor
+      inCommandList
+      userID
+      user {
+        id
+        name
+        hp
+        woeid
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCommand = /* GraphQL */ `
+  subscription OnUpdateCommand {
+    onUpdateCommand {
+      id
+      name
+      description
+      attack
+      isOutdoor
+      inCommandList
+      userID
+      user {
+        id
+        name
+        hp
+        woeid
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCommand = /* GraphQL */ `
+  subscription OnDeleteCommand {
+    onDeleteCommand {
+      id
+      name
+      description
+      attack
+      isOutdoor
+      inCommandList
+      userID
+      user {
+        id
+        name
+        hp
+        woeid
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateBattle = /* GraphQL */ `
+  subscription OnCreateBattle {
+    onCreateBattle {
+      id
       date
+      userHP
+      curseHP
+      inAreaExpansion
+      userID
+      user {
+        id
+        name
+        hp
+        woeid
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      curseID
+      curse {
+        id
+        name
+        date
+        minNegative
+        maxNegative
+        hp
+        attack
+        hitRate
+        imgSrc
+        trends
+        battleID
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onCreateMyDoomsDayClockUser = /* GraphQL */ `
-  subscription OnCreateMyDoomsDayClockUser {
-    onCreateMyDoomsDayClockUser {
+export const onUpdateBattle = /* GraphQL */ `
+  subscription OnUpdateBattle {
+    onUpdateBattle {
       id
-      name
-      prefecture
-      doomsDay
+      date
+      userHP
+      curseHP
+      inAreaExpansion
+      userID
+      user {
+        id
+        name
+        hp
+        woeid
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      curseID
+      curse {
+        id
+        name
+        date
+        minNegative
+        maxNegative
+        hp
+        attack
+        hitRate
+        imgSrc
+        trends
+        battleID
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateMyDoomsDayClockUser = /* GraphQL */ `
-  subscription OnUpdateMyDoomsDayClockUser {
-    onUpdateMyDoomsDayClockUser {
+export const onDeleteBattle = /* GraphQL */ `
+  subscription OnDeleteBattle {
+    onDeleteBattle {
       id
-      name
-      prefecture
-      doomsDay
+      date
+      userHP
+      curseHP
+      inAreaExpansion
+      userID
+      user {
+        id
+        name
+        hp
+        woeid
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      curseID
+      curse {
+        id
+        name
+        date
+        minNegative
+        maxNegative
+        hp
+        attack
+        hitRate
+        imgSrc
+        trends
+        battleID
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteMyDoomsDayClockUser = /* GraphQL */ `
-  subscription OnDeleteMyDoomsDayClockUser {
-    onDeleteMyDoomsDayClockUser {
+export const onCreateCurse = /* GraphQL */ `
+  subscription OnCreateCurse {
+    onCreateCurse {
       id
       name
-      prefecture
-      doomsDay
+      date
+      minNegative
+      maxNegative
+      hp
+      attack
+      hitRate
+      imgSrc
+      trends
+      battleID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCurse = /* GraphQL */ `
+  subscription OnUpdateCurse {
+    onUpdateCurse {
+      id
+      name
+      date
+      minNegative
+      maxNegative
+      hp
+      attack
+      hitRate
+      imgSrc
+      trends
+      battleID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCurse = /* GraphQL */ `
+  subscription OnDeleteCurse {
+    onDeleteCurse {
+      id
+      name
+      date
+      minNegative
+      maxNegative
+      hp
+      attack
+      hitRate
+      imgSrc
+      trends
+      battleID
       createdAt
       updatedAt
     }

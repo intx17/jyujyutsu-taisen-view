@@ -2,88 +2,472 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createCovid19Positive = /* GraphQL */ `
-  mutation CreateCovid19Positive(
-    $input: CreateCovid19PositiveInput!
-    $condition: ModelCovid19PositiveConditionInput
+export const createInfectedData = /* GraphQL */ `
+  mutation CreateInfectedData(
+    $input: CreateInfectedDataInput!
+    $condition: ModelInfectedDataConditionInput
   ) {
-    createCovid19Positive(input: $input, condition: $condition) {
+    createInfectedData(input: $input, condition: $condition) {
       id
       content
-      date
       createdAt
       updatedAt
     }
   }
 `;
-export const updateCovid19Positive = /* GraphQL */ `
-  mutation UpdateCovid19Positive(
-    $input: UpdateCovid19PositiveInput!
-    $condition: ModelCovid19PositiveConditionInput
+export const updateInfectedData = /* GraphQL */ `
+  mutation UpdateInfectedData(
+    $input: UpdateInfectedDataInput!
+    $condition: ModelInfectedDataConditionInput
   ) {
-    updateCovid19Positive(input: $input, condition: $condition) {
+    updateInfectedData(input: $input, condition: $condition) {
       id
       content
-      date
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteCovid19Positive = /* GraphQL */ `
-  mutation DeleteCovid19Positive(
-    $input: DeleteCovid19PositiveInput!
-    $condition: ModelCovid19PositiveConditionInput
+export const deleteInfectedData = /* GraphQL */ `
+  mutation DeleteInfectedData(
+    $input: DeleteInfectedDataInput!
+    $condition: ModelInfectedDataConditionInput
   ) {
-    deleteCovid19Positive(input: $input, condition: $condition) {
+    deleteInfectedData(input: $input, condition: $condition) {
       id
       content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      name
+      hp
+      woeid
+      commands {
+        items {
+          id
+          name
+          description
+          attack
+          isOutdoor
+          inCommandList
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      battles {
+        items {
+          id
+          date
+          userHP
+          curseHP
+          inAreaExpansion
+          userID
+          curseID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      name
+      hp
+      woeid
+      commands {
+        items {
+          id
+          name
+          description
+          attack
+          isOutdoor
+          inCommandList
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      battles {
+        items {
+          id
+          date
+          userHP
+          curseHP
+          inAreaExpansion
+          userID
+          curseID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      name
+      hp
+      woeid
+      commands {
+        items {
+          id
+          name
+          description
+          attack
+          isOutdoor
+          inCommandList
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      battles {
+        items {
+          id
+          date
+          userHP
+          curseHP
+          inAreaExpansion
+          userID
+          curseID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCommand = /* GraphQL */ `
+  mutation CreateCommand(
+    $input: CreateCommandInput!
+    $condition: ModelCommandConditionInput
+  ) {
+    createCommand(input: $input, condition: $condition) {
+      id
+      name
+      description
+      attack
+      isOutdoor
+      inCommandList
+      userID
+      user {
+        id
+        name
+        hp
+        woeid
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCommand = /* GraphQL */ `
+  mutation UpdateCommand(
+    $input: UpdateCommandInput!
+    $condition: ModelCommandConditionInput
+  ) {
+    updateCommand(input: $input, condition: $condition) {
+      id
+      name
+      description
+      attack
+      isOutdoor
+      inCommandList
+      userID
+      user {
+        id
+        name
+        hp
+        woeid
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCommand = /* GraphQL */ `
+  mutation DeleteCommand(
+    $input: DeleteCommandInput!
+    $condition: ModelCommandConditionInput
+  ) {
+    deleteCommand(input: $input, condition: $condition) {
+      id
+      name
+      description
+      attack
+      isOutdoor
+      inCommandList
+      userID
+      user {
+        id
+        name
+        hp
+        woeid
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createBattle = /* GraphQL */ `
+  mutation CreateBattle(
+    $input: CreateBattleInput!
+    $condition: ModelBattleConditionInput
+  ) {
+    createBattle(input: $input, condition: $condition) {
+      id
       date
+      userHP
+      curseHP
+      inAreaExpansion
+      userID
+      user {
+        id
+        name
+        hp
+        woeid
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      curseID
+      curse {
+        id
+        name
+        date
+        minNegative
+        maxNegative
+        hp
+        attack
+        hitRate
+        imgSrc
+        trends
+        battleID
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const createMyDoomsDayClockUser = /* GraphQL */ `
-  mutation CreateMyDoomsDayClockUser(
-    $input: CreateMyDoomsDayClockUserInput!
-    $condition: ModelMyDoomsDayClockUserConditionInput
+export const updateBattle = /* GraphQL */ `
+  mutation UpdateBattle(
+    $input: UpdateBattleInput!
+    $condition: ModelBattleConditionInput
   ) {
-    createMyDoomsDayClockUser(input: $input, condition: $condition) {
+    updateBattle(input: $input, condition: $condition) {
       id
-      name
-      prefecture
-      doomsDay
+      date
+      userHP
+      curseHP
+      inAreaExpansion
+      userID
+      user {
+        id
+        name
+        hp
+        woeid
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      curseID
+      curse {
+        id
+        name
+        date
+        minNegative
+        maxNegative
+        hp
+        attack
+        hitRate
+        imgSrc
+        trends
+        battleID
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const updateMyDoomsDayClockUser = /* GraphQL */ `
-  mutation UpdateMyDoomsDayClockUser(
-    $input: UpdateMyDoomsDayClockUserInput!
-    $condition: ModelMyDoomsDayClockUserConditionInput
+export const deleteBattle = /* GraphQL */ `
+  mutation DeleteBattle(
+    $input: DeleteBattleInput!
+    $condition: ModelBattleConditionInput
   ) {
-    updateMyDoomsDayClockUser(input: $input, condition: $condition) {
+    deleteBattle(input: $input, condition: $condition) {
       id
-      name
-      prefecture
-      doomsDay
+      date
+      userHP
+      curseHP
+      inAreaExpansion
+      userID
+      user {
+        id
+        name
+        hp
+        woeid
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      curseID
+      curse {
+        id
+        name
+        date
+        minNegative
+        maxNegative
+        hp
+        attack
+        hitRate
+        imgSrc
+        trends
+        battleID
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteMyDoomsDayClockUser = /* GraphQL */ `
-  mutation DeleteMyDoomsDayClockUser(
-    $input: DeleteMyDoomsDayClockUserInput!
-    $condition: ModelMyDoomsDayClockUserConditionInput
+export const createCurse = /* GraphQL */ `
+  mutation CreateCurse(
+    $input: CreateCurseInput!
+    $condition: ModelCurseConditionInput
   ) {
-    deleteMyDoomsDayClockUser(input: $input, condition: $condition) {
+    createCurse(input: $input, condition: $condition) {
       id
       name
-      prefecture
-      doomsDay
+      date
+      minNegative
+      maxNegative
+      hp
+      attack
+      hitRate
+      imgSrc
+      trends
+      battleID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCurse = /* GraphQL */ `
+  mutation UpdateCurse(
+    $input: UpdateCurseInput!
+    $condition: ModelCurseConditionInput
+  ) {
+    updateCurse(input: $input, condition: $condition) {
+      id
+      name
+      date
+      minNegative
+      maxNegative
+      hp
+      attack
+      hitRate
+      imgSrc
+      trends
+      battleID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCurse = /* GraphQL */ `
+  mutation DeleteCurse(
+    $input: DeleteCurseInput!
+    $condition: ModelCurseConditionInput
+  ) {
+    deleteCurse(input: $input, condition: $condition) {
+      id
+      name
+      date
+      minNegative
+      maxNegative
+      hp
+      attack
+      hitRate
+      imgSrc
+      trends
+      battleID
       createdAt
       updatedAt
     }
