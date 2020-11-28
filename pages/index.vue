@@ -1,6 +1,7 @@
 <template>
   <section class="container">
     <command-container />
+    <common-footer />
   </section>
 </template>
 
@@ -10,13 +11,15 @@ import { API, JS } from 'aws-amplify';
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 
 // components
-import CommandContainer from '~/components/index/molecules/CommandContainer.vue'
+import CommandContainer from '~/components/index/molecules/CommandContainer.vue';
+import CommonFooter from '~/components/common/molecules/CommonFooter.vue';
 
 // interfaces
 
 @Component({
   components: {
-    CommandContainer
+    CommandContainer,
+    CommonFooter
   },
   async asyncData ( context ) {
   //   try {
@@ -69,6 +72,7 @@ export default class Index extends Vue {
 
 <style scoped>
 .container {
+  background: #212529;
   font-family: 'Nu KinakoMochi Reg';
 }
 </style>
