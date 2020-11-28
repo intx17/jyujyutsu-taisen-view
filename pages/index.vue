@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <command-list />
+    <command-container />
   </section>
 </template>
 
@@ -10,13 +10,13 @@ import { API, JS } from 'aws-amplify';
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 
 // components
-import CommandList from '~/components/index/atoms/CommandList.vue'
+import CommandContainer from '~/components/index/molecules/CommandContainer.vue'
 
 // interfaces
 
 @Component({
   components: {
-    CommandList
+    CommandContainer
   },
   async asyncData ( context ) {
   //   try {
