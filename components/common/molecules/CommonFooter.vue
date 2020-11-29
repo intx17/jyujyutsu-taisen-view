@@ -6,6 +6,7 @@
         :key="index"
         :spanClass="link.spanClass"
         :text="link.text"
+        :url="link.url"
     />
     </div>
   </footer>
@@ -29,11 +30,13 @@ export default class CommonFooter extends Vue {
   private footerLinks: IFooterLink[] = [
     {
       spanClass: 'is-dark',
-      text: 'バトル'
+      text: 'バトル',
+      url: '/battle',
     },
     {
       spanClass: 'is-dark',
-      text: '設定'
+      text: '設定',
+      url: '/setting',
     },
   ];
 }

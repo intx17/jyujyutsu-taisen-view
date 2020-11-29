@@ -1,9 +1,9 @@
 <template>
-  <a href="#" class="nes-badge link">
+  <nuxt-link :to="url" class="nes-badge link">
     <span :class="spanClass">
       {{ text }}
     </span>
-  </a>
+  </nuxt-link>
 </template>
 
 <script lang="ts">
@@ -16,6 +16,9 @@ export default class FooterLink extends Vue {
 
   @Prop({ type: String, required: true, default: 'title' })
   private text!: string;
+
+   @Prop({ type: String, required: true, default: '#' })
+  private url!: string;
 }
 </script>
 
