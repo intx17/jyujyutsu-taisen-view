@@ -29,9 +29,9 @@ export const listInfectedDatas = /* GraphQL */ `
     }
   }
 `;
-export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
+export const getPlayer = /* GraphQL */ `
+  query GetPlayer($id: ID!) {
+    getPlayer(id: $id) {
       id
       name
       hp
@@ -44,7 +44,7 @@ export const getUser = /* GraphQL */ `
           attack
           isOutdoor
           inCommandList
-          userID
+          playerID
           createdAt
           updatedAt
         }
@@ -54,10 +54,10 @@ export const getUser = /* GraphQL */ `
         items {
           id
           date
-          userHP
+          playerHP
           curseHP
           inAreaExpansion
-          userID
+          playerID
           curseID
           createdAt
           updatedAt
@@ -69,13 +69,13 @@ export const getUser = /* GraphQL */ `
     }
   }
 `;
-export const listUsers = /* GraphQL */ `
-  query ListUsers(
-    $filter: ModelUserFilterInput
+export const listPlayers = /* GraphQL */ `
+  query ListPlayers(
+    $filter: ModelPlayerFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listPlayers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         name
@@ -103,8 +103,8 @@ export const getCommand = /* GraphQL */ `
       attack
       isOutdoor
       inCommandList
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp
@@ -137,8 +137,8 @@ export const listCommands = /* GraphQL */ `
         attack
         isOutdoor
         inCommandList
-        userID
-        user {
+        playerID
+        player {
           id
           name
           hp
@@ -158,11 +158,11 @@ export const getBattle = /* GraphQL */ `
     getBattle(id: $id) {
       id
       date
-      userHP
+      playerHP
       curseHP
       inAreaExpansion
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp
@@ -207,11 +207,11 @@ export const listBattles = /* GraphQL */ `
       items {
         id
         date
-        userHP
+        playerHP
         curseHP
         inAreaExpansion
-        userID
-        user {
+        playerID
+        player {
           id
           name
           hp

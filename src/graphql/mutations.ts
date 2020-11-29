@@ -41,12 +41,12 @@ export const deleteInfectedData = /* GraphQL */ `
     }
   }
 `;
-export const createUser = /* GraphQL */ `
-  mutation CreateUser(
-    $input: CreateUserInput!
-    $condition: ModelUserConditionInput
+export const createPlayer = /* GraphQL */ `
+  mutation CreatePlayer(
+    $input: CreatePlayerInput!
+    $condition: ModelPlayerConditionInput
   ) {
-    createUser(input: $input, condition: $condition) {
+    createPlayer(input: $input, condition: $condition) {
       id
       name
       hp
@@ -59,7 +59,7 @@ export const createUser = /* GraphQL */ `
           attack
           isOutdoor
           inCommandList
-          userID
+          playerID
           createdAt
           updatedAt
         }
@@ -69,10 +69,10 @@ export const createUser = /* GraphQL */ `
         items {
           id
           date
-          userHP
+          playerHP
           curseHP
           inAreaExpansion
-          userID
+          playerID
           curseID
           createdAt
           updatedAt
@@ -84,12 +84,12 @@ export const createUser = /* GraphQL */ `
     }
   }
 `;
-export const updateUser = /* GraphQL */ `
-  mutation UpdateUser(
-    $input: UpdateUserInput!
-    $condition: ModelUserConditionInput
+export const updatePlayer = /* GraphQL */ `
+  mutation UpdatePlayer(
+    $input: UpdatePlayerInput!
+    $condition: ModelPlayerConditionInput
   ) {
-    updateUser(input: $input, condition: $condition) {
+    updatePlayer(input: $input, condition: $condition) {
       id
       name
       hp
@@ -102,7 +102,7 @@ export const updateUser = /* GraphQL */ `
           attack
           isOutdoor
           inCommandList
-          userID
+          playerID
           createdAt
           updatedAt
         }
@@ -112,10 +112,10 @@ export const updateUser = /* GraphQL */ `
         items {
           id
           date
-          userHP
+          playerHP
           curseHP
           inAreaExpansion
-          userID
+          playerID
           curseID
           createdAt
           updatedAt
@@ -127,12 +127,12 @@ export const updateUser = /* GraphQL */ `
     }
   }
 `;
-export const deleteUser = /* GraphQL */ `
-  mutation DeleteUser(
-    $input: DeleteUserInput!
-    $condition: ModelUserConditionInput
+export const deletePlayer = /* GraphQL */ `
+  mutation DeletePlayer(
+    $input: DeletePlayerInput!
+    $condition: ModelPlayerConditionInput
   ) {
-    deleteUser(input: $input, condition: $condition) {
+    deletePlayer(input: $input, condition: $condition) {
       id
       name
       hp
@@ -145,7 +145,7 @@ export const deleteUser = /* GraphQL */ `
           attack
           isOutdoor
           inCommandList
-          userID
+          playerID
           createdAt
           updatedAt
         }
@@ -155,10 +155,10 @@ export const deleteUser = /* GraphQL */ `
         items {
           id
           date
-          userHP
+          playerHP
           curseHP
           inAreaExpansion
-          userID
+          playerID
           curseID
           createdAt
           updatedAt
@@ -182,8 +182,8 @@ export const createCommand = /* GraphQL */ `
       attack
       isOutdoor
       inCommandList
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp
@@ -214,8 +214,8 @@ export const updateCommand = /* GraphQL */ `
       attack
       isOutdoor
       inCommandList
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp
@@ -246,8 +246,8 @@ export const deleteCommand = /* GraphQL */ `
       attack
       isOutdoor
       inCommandList
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp
@@ -274,11 +274,11 @@ export const createBattle = /* GraphQL */ `
     createBattle(input: $input, condition: $condition) {
       id
       date
-      userHP
+      playerHP
       curseHP
       inAreaExpansion
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp
@@ -321,11 +321,11 @@ export const updateBattle = /* GraphQL */ `
     updateBattle(input: $input, condition: $condition) {
       id
       date
-      userHP
+      playerHP
       curseHP
       inAreaExpansion
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp
@@ -368,11 +368,11 @@ export const deleteBattle = /* GraphQL */ `
     deleteBattle(input: $input, condition: $condition) {
       id
       date
-      userHP
+      playerHP
       curseHP
       inAreaExpansion
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp

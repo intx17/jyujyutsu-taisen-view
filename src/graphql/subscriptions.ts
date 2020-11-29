@@ -32,9 +32,9 @@ export const onDeleteInfectedData = /* GraphQL */ `
     }
   }
 `;
-export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser {
-    onCreateUser {
+export const onCreatePlayer = /* GraphQL */ `
+  subscription OnCreatePlayer {
+    onCreatePlayer {
       id
       name
       hp
@@ -47,7 +47,7 @@ export const onCreateUser = /* GraphQL */ `
           attack
           isOutdoor
           inCommandList
-          userID
+          playerID
           createdAt
           updatedAt
         }
@@ -57,10 +57,10 @@ export const onCreateUser = /* GraphQL */ `
         items {
           id
           date
-          userHP
+          playerHP
           curseHP
           inAreaExpansion
-          userID
+          playerID
           curseID
           createdAt
           updatedAt
@@ -72,9 +72,9 @@ export const onCreateUser = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser {
-    onUpdateUser {
+export const onUpdatePlayer = /* GraphQL */ `
+  subscription OnUpdatePlayer {
+    onUpdatePlayer {
       id
       name
       hp
@@ -87,7 +87,7 @@ export const onUpdateUser = /* GraphQL */ `
           attack
           isOutdoor
           inCommandList
-          userID
+          playerID
           createdAt
           updatedAt
         }
@@ -97,10 +97,10 @@ export const onUpdateUser = /* GraphQL */ `
         items {
           id
           date
-          userHP
+          playerHP
           curseHP
           inAreaExpansion
-          userID
+          playerID
           curseID
           createdAt
           updatedAt
@@ -112,9 +112,9 @@ export const onUpdateUser = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser {
-    onDeleteUser {
+export const onDeletePlayer = /* GraphQL */ `
+  subscription OnDeletePlayer {
+    onDeletePlayer {
       id
       name
       hp
@@ -127,7 +127,7 @@ export const onDeleteUser = /* GraphQL */ `
           attack
           isOutdoor
           inCommandList
-          userID
+          playerID
           createdAt
           updatedAt
         }
@@ -137,10 +137,10 @@ export const onDeleteUser = /* GraphQL */ `
         items {
           id
           date
-          userHP
+          playerHP
           curseHP
           inAreaExpansion
-          userID
+          playerID
           curseID
           createdAt
           updatedAt
@@ -161,8 +161,8 @@ export const onCreateCommand = /* GraphQL */ `
       attack
       isOutdoor
       inCommandList
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp
@@ -190,8 +190,8 @@ export const onUpdateCommand = /* GraphQL */ `
       attack
       isOutdoor
       inCommandList
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp
@@ -219,8 +219,8 @@ export const onDeleteCommand = /* GraphQL */ `
       attack
       isOutdoor
       inCommandList
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp
@@ -244,11 +244,11 @@ export const onCreateBattle = /* GraphQL */ `
     onCreateBattle {
       id
       date
-      userHP
+      playerHP
       curseHP
       inAreaExpansion
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp
@@ -288,11 +288,11 @@ export const onUpdateBattle = /* GraphQL */ `
     onUpdateBattle {
       id
       date
-      userHP
+      playerHP
       curseHP
       inAreaExpansion
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp
@@ -332,11 +332,11 @@ export const onDeleteBattle = /* GraphQL */ `
     onDeleteBattle {
       id
       date
-      userHP
+      playerHP
       curseHP
       inAreaExpansion
-      userID
-      user {
+      playerID
+      player {
         id
         name
         hp

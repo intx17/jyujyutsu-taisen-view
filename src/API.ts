@@ -63,20 +63,20 @@ export type DeleteInfectedDataInput = {
   id?: string | null,
 };
 
-export type CreateUserInput = {
+export type CreatePlayerInput = {
   id?: string | null,
   name: string,
   hp: number,
   woeid: number,
 };
 
-export type ModelUserConditionInput = {
+export type ModelPlayerConditionInput = {
   name?: ModelStringInput | null,
   hp?: ModelIntInput | null,
   woeid?: ModelIntInput | null,
-  and?: Array< ModelUserConditionInput | null > | null,
-  or?: Array< ModelUserConditionInput | null > | null,
-  not?: ModelUserConditionInput | null,
+  and?: Array< ModelPlayerConditionInput | null > | null,
+  or?: Array< ModelPlayerConditionInput | null > | null,
+  not?: ModelPlayerConditionInput | null,
 };
 
 export type ModelIntInput = {
@@ -91,14 +91,14 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type UpdateUserInput = {
+export type UpdatePlayerInput = {
   id: string,
   name?: string | null,
   hp?: number | null,
   woeid?: number | null,
 };
 
-export type DeleteUserInput = {
+export type DeletePlayerInput = {
   id?: string | null,
 };
 
@@ -109,7 +109,7 @@ export type CreateCommandInput = {
   attack: number,
   isOutdoor: boolean,
   inCommandList: boolean,
-  userID: string,
+  playerID: string,
 };
 
 export type ModelCommandConditionInput = {
@@ -118,7 +118,7 @@ export type ModelCommandConditionInput = {
   attack?: ModelIntInput | null,
   isOutdoor?: ModelBooleanInput | null,
   inCommandList?: ModelBooleanInput | null,
-  userID?: ModelIDInput | null,
+  playerID?: ModelIDInput | null,
   and?: Array< ModelCommandConditionInput | null > | null,
   or?: Array< ModelCommandConditionInput | null > | null,
   not?: ModelCommandConditionInput | null,
@@ -154,7 +154,7 @@ export type UpdateCommandInput = {
   attack?: number | null,
   isOutdoor?: boolean | null,
   inCommandList?: boolean | null,
-  userID?: string | null,
+  playerID?: string | null,
 };
 
 export type DeleteCommandInput = {
@@ -164,19 +164,19 @@ export type DeleteCommandInput = {
 export type CreateBattleInput = {
   id?: string | null,
   date: string,
-  userHP: number,
+  playerHP: number,
   curseHP: number,
   inAreaExpansion: boolean,
-  userID: string,
+  playerID: string,
   curseID: string,
 };
 
 export type ModelBattleConditionInput = {
   date?: ModelStringInput | null,
-  userHP?: ModelIntInput | null,
+  playerHP?: ModelIntInput | null,
   curseHP?: ModelIntInput | null,
   inAreaExpansion?: ModelBooleanInput | null,
-  userID?: ModelIDInput | null,
+  playerID?: ModelIDInput | null,
   curseID?: ModelIDInput | null,
   and?: Array< ModelBattleConditionInput | null > | null,
   or?: Array< ModelBattleConditionInput | null > | null,
@@ -186,10 +186,10 @@ export type ModelBattleConditionInput = {
 export type UpdateBattleInput = {
   id: string,
   date?: string | null,
-  userHP?: number | null,
+  playerHP?: number | null,
   curseHP?: number | null,
   inAreaExpansion?: boolean | null,
-  userID?: string | null,
+  playerID?: string | null,
   curseID?: string | null,
 };
 
@@ -265,14 +265,14 @@ export type ModelInfectedDataFilterInput = {
   not?: ModelInfectedDataFilterInput | null,
 };
 
-export type ModelUserFilterInput = {
+export type ModelPlayerFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
   hp?: ModelIntInput | null,
   woeid?: ModelIntInput | null,
-  and?: Array< ModelUserFilterInput | null > | null,
-  or?: Array< ModelUserFilterInput | null > | null,
-  not?: ModelUserFilterInput | null,
+  and?: Array< ModelPlayerFilterInput | null > | null,
+  or?: Array< ModelPlayerFilterInput | null > | null,
+  not?: ModelPlayerFilterInput | null,
 };
 
 export type ModelCommandFilterInput = {
@@ -282,7 +282,7 @@ export type ModelCommandFilterInput = {
   attack?: ModelIntInput | null,
   isOutdoor?: ModelBooleanInput | null,
   inCommandList?: ModelBooleanInput | null,
-  userID?: ModelIDInput | null,
+  playerID?: ModelIDInput | null,
   and?: Array< ModelCommandFilterInput | null > | null,
   or?: Array< ModelCommandFilterInput | null > | null,
   not?: ModelCommandFilterInput | null,
@@ -291,10 +291,10 @@ export type ModelCommandFilterInput = {
 export type ModelBattleFilterInput = {
   id?: ModelIDInput | null,
   date?: ModelStringInput | null,
-  userHP?: ModelIntInput | null,
+  playerHP?: ModelIntInput | null,
   curseHP?: ModelIntInput | null,
   inAreaExpansion?: ModelBooleanInput | null,
-  userID?: ModelIDInput | null,
+  playerID?: ModelIDInput | null,
   curseID?: ModelIDInput | null,
   and?: Array< ModelBattleFilterInput | null > | null,
   or?: Array< ModelBattleFilterInput | null > | null,
@@ -363,14 +363,14 @@ export type DeleteInfectedDataMutation = {
   } | null,
 };
 
-export type CreateUserMutationVariables = {
-  input: CreateUserInput,
-  condition?: ModelUserConditionInput | null,
+export type CreatePlayerMutationVariables = {
+  input: CreatePlayerInput,
+  condition?: ModelPlayerConditionInput | null,
 };
 
-export type CreateUserMutation = {
-  createUser:  {
-    __typename: "User",
+export type CreatePlayerMutation = {
+  createPlayer:  {
+    __typename: "Player",
     id: string,
     name: string,
     hp: number,
@@ -385,7 +385,7 @@ export type CreateUserMutation = {
         attack: number,
         isOutdoor: boolean,
         inCommandList: boolean,
-        userID: string,
+        playerID: string,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -397,10 +397,10 @@ export type CreateUserMutation = {
         __typename: "Battle",
         id: string,
         date: string,
-        userHP: number,
+        playerHP: number,
         curseHP: number,
         inAreaExpansion: boolean,
-        userID: string,
+        playerID: string,
         curseID: string,
         createdAt: string,
         updatedAt: string,
@@ -412,14 +412,14 @@ export type CreateUserMutation = {
   } | null,
 };
 
-export type UpdateUserMutationVariables = {
-  input: UpdateUserInput,
-  condition?: ModelUserConditionInput | null,
+export type UpdatePlayerMutationVariables = {
+  input: UpdatePlayerInput,
+  condition?: ModelPlayerConditionInput | null,
 };
 
-export type UpdateUserMutation = {
-  updateUser:  {
-    __typename: "User",
+export type UpdatePlayerMutation = {
+  updatePlayer:  {
+    __typename: "Player",
     id: string,
     name: string,
     hp: number,
@@ -434,7 +434,7 @@ export type UpdateUserMutation = {
         attack: number,
         isOutdoor: boolean,
         inCommandList: boolean,
-        userID: string,
+        playerID: string,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -446,10 +446,10 @@ export type UpdateUserMutation = {
         __typename: "Battle",
         id: string,
         date: string,
-        userHP: number,
+        playerHP: number,
         curseHP: number,
         inAreaExpansion: boolean,
-        userID: string,
+        playerID: string,
         curseID: string,
         createdAt: string,
         updatedAt: string,
@@ -461,14 +461,14 @@ export type UpdateUserMutation = {
   } | null,
 };
 
-export type DeleteUserMutationVariables = {
-  input: DeleteUserInput,
-  condition?: ModelUserConditionInput | null,
+export type DeletePlayerMutationVariables = {
+  input: DeletePlayerInput,
+  condition?: ModelPlayerConditionInput | null,
 };
 
-export type DeleteUserMutation = {
-  deleteUser:  {
-    __typename: "User",
+export type DeletePlayerMutation = {
+  deletePlayer:  {
+    __typename: "Player",
     id: string,
     name: string,
     hp: number,
@@ -483,7 +483,7 @@ export type DeleteUserMutation = {
         attack: number,
         isOutdoor: boolean,
         inCommandList: boolean,
-        userID: string,
+        playerID: string,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -495,10 +495,10 @@ export type DeleteUserMutation = {
         __typename: "Battle",
         id: string,
         date: string,
-        userHP: number,
+        playerHP: number,
         curseHP: number,
         inAreaExpansion: boolean,
-        userID: string,
+        playerID: string,
         curseID: string,
         createdAt: string,
         updatedAt: string,
@@ -524,9 +524,9 @@ export type CreateCommandMutation = {
     attack: number,
     isOutdoor: boolean,
     inCommandList: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -561,9 +561,9 @@ export type UpdateCommandMutation = {
     attack: number,
     isOutdoor: boolean,
     inCommandList: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -598,9 +598,9 @@ export type DeleteCommandMutation = {
     attack: number,
     isOutdoor: boolean,
     inCommandList: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -631,12 +631,12 @@ export type CreateBattleMutation = {
     __typename: "Battle",
     id: string,
     date: string,
-    userHP: number,
+    playerHP: number,
     curseHP: number,
     inAreaExpansion: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -684,12 +684,12 @@ export type UpdateBattleMutation = {
     __typename: "Battle",
     id: string,
     date: string,
-    userHP: number,
+    playerHP: number,
     curseHP: number,
     inAreaExpansion: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -737,12 +737,12 @@ export type DeleteBattleMutation = {
     __typename: "Battle",
     id: string,
     date: string,
-    userHP: number,
+    playerHP: number,
     curseHP: number,
     inAreaExpansion: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -886,13 +886,13 @@ export type ListInfectedDatasQuery = {
   } | null,
 };
 
-export type GetUserQueryVariables = {
+export type GetPlayerQueryVariables = {
   id: string,
 };
 
-export type GetUserQuery = {
-  getUser:  {
-    __typename: "User",
+export type GetPlayerQuery = {
+  getPlayer:  {
+    __typename: "Player",
     id: string,
     name: string,
     hp: number,
@@ -907,7 +907,7 @@ export type GetUserQuery = {
         attack: number,
         isOutdoor: boolean,
         inCommandList: boolean,
-        userID: string,
+        playerID: string,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -919,10 +919,10 @@ export type GetUserQuery = {
         __typename: "Battle",
         id: string,
         date: string,
-        userHP: number,
+        playerHP: number,
         curseHP: number,
         inAreaExpansion: boolean,
-        userID: string,
+        playerID: string,
         curseID: string,
         createdAt: string,
         updatedAt: string,
@@ -934,17 +934,17 @@ export type GetUserQuery = {
   } | null,
 };
 
-export type ListUsersQueryVariables = {
-  filter?: ModelUserFilterInput | null,
+export type ListPlayersQueryVariables = {
+  filter?: ModelPlayerFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListUsersQuery = {
-  listUsers:  {
-    __typename: "ModelUserConnection",
+export type ListPlayersQuery = {
+  listPlayers:  {
+    __typename: "ModelPlayerConnection",
     items:  Array< {
-      __typename: "User",
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -977,9 +977,9 @@ export type GetCommandQuery = {
     attack: number,
     isOutdoor: boolean,
     inCommandList: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -1017,9 +1017,9 @@ export type ListCommandsQuery = {
       attack: number,
       isOutdoor: boolean,
       inCommandList: boolean,
-      userID: string,
-      user:  {
-        __typename: "User",
+      playerID: string,
+      player:  {
+        __typename: "Player",
         id: string,
         name: string,
         hp: number,
@@ -1043,12 +1043,12 @@ export type GetBattleQuery = {
     __typename: "Battle",
     id: string,
     date: string,
-    userHP: number,
+    playerHP: number,
     curseHP: number,
     inAreaExpansion: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -1099,12 +1099,12 @@ export type ListBattlesQuery = {
       __typename: "Battle",
       id: string,
       date: string,
-      userHP: number,
+      playerHP: number,
       curseHP: number,
       inAreaExpansion: boolean,
-      userID: string,
-      user:  {
-        __typename: "User",
+      playerID: string,
+      player:  {
+        __typename: "Player",
         id: string,
         name: string,
         hp: number,
@@ -1218,9 +1218,9 @@ export type OnDeleteInfectedDataSubscription = {
   } | null,
 };
 
-export type OnCreateUserSubscription = {
-  onCreateUser:  {
-    __typename: "User",
+export type OnCreatePlayerSubscription = {
+  onCreatePlayer:  {
+    __typename: "Player",
     id: string,
     name: string,
     hp: number,
@@ -1235,7 +1235,7 @@ export type OnCreateUserSubscription = {
         attack: number,
         isOutdoor: boolean,
         inCommandList: boolean,
-        userID: string,
+        playerID: string,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -1247,10 +1247,10 @@ export type OnCreateUserSubscription = {
         __typename: "Battle",
         id: string,
         date: string,
-        userHP: number,
+        playerHP: number,
         curseHP: number,
         inAreaExpansion: boolean,
-        userID: string,
+        playerID: string,
         curseID: string,
         createdAt: string,
         updatedAt: string,
@@ -1262,9 +1262,9 @@ export type OnCreateUserSubscription = {
   } | null,
 };
 
-export type OnUpdateUserSubscription = {
-  onUpdateUser:  {
-    __typename: "User",
+export type OnUpdatePlayerSubscription = {
+  onUpdatePlayer:  {
+    __typename: "Player",
     id: string,
     name: string,
     hp: number,
@@ -1279,7 +1279,7 @@ export type OnUpdateUserSubscription = {
         attack: number,
         isOutdoor: boolean,
         inCommandList: boolean,
-        userID: string,
+        playerID: string,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -1291,10 +1291,10 @@ export type OnUpdateUserSubscription = {
         __typename: "Battle",
         id: string,
         date: string,
-        userHP: number,
+        playerHP: number,
         curseHP: number,
         inAreaExpansion: boolean,
-        userID: string,
+        playerID: string,
         curseID: string,
         createdAt: string,
         updatedAt: string,
@@ -1306,9 +1306,9 @@ export type OnUpdateUserSubscription = {
   } | null,
 };
 
-export type OnDeleteUserSubscription = {
-  onDeleteUser:  {
-    __typename: "User",
+export type OnDeletePlayerSubscription = {
+  onDeletePlayer:  {
+    __typename: "Player",
     id: string,
     name: string,
     hp: number,
@@ -1323,7 +1323,7 @@ export type OnDeleteUserSubscription = {
         attack: number,
         isOutdoor: boolean,
         inCommandList: boolean,
-        userID: string,
+        playerID: string,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
@@ -1335,10 +1335,10 @@ export type OnDeleteUserSubscription = {
         __typename: "Battle",
         id: string,
         date: string,
-        userHP: number,
+        playerHP: number,
         curseHP: number,
         inAreaExpansion: boolean,
-        userID: string,
+        playerID: string,
         curseID: string,
         createdAt: string,
         updatedAt: string,
@@ -1359,9 +1359,9 @@ export type OnCreateCommandSubscription = {
     attack: number,
     isOutdoor: boolean,
     inCommandList: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -1391,9 +1391,9 @@ export type OnUpdateCommandSubscription = {
     attack: number,
     isOutdoor: boolean,
     inCommandList: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -1423,9 +1423,9 @@ export type OnDeleteCommandSubscription = {
     attack: number,
     isOutdoor: boolean,
     inCommandList: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -1451,12 +1451,12 @@ export type OnCreateBattleSubscription = {
     __typename: "Battle",
     id: string,
     date: string,
-    userHP: number,
+    playerHP: number,
     curseHP: number,
     inAreaExpansion: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -1499,12 +1499,12 @@ export type OnUpdateBattleSubscription = {
     __typename: "Battle",
     id: string,
     date: string,
-    userHP: number,
+    playerHP: number,
     curseHP: number,
     inAreaExpansion: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
@@ -1547,12 +1547,12 @@ export type OnDeleteBattleSubscription = {
     __typename: "Battle",
     id: string,
     date: string,
-    userHP: number,
+    playerHP: number,
     curseHP: number,
     inAreaExpansion: boolean,
-    userID: string,
-    user:  {
-      __typename: "User",
+    playerID: string,
+    player:  {
+      __typename: "Player",
       id: string,
       name: string,
       hp: number,
