@@ -17,6 +17,9 @@ import { Component, Prop, Vue } from "nuxt-property-decorator";
 import NewsHeader from '~/components/index/atoms/NewsHeader.vue';
 import CurseContainer from '~/components/index/organisms/CurseContainer.vue';
 import PlayerContainer from '~/components/index/organisms/PlayerContainer.vue';
+import { ListInfectedDatasQueryVariables } from '~/src/API';
+import { listInfectedDatas } from '~/src/graphql/queries';
+import { ListInfectedDatasResponse, ParsedInfectedData } from '~/src/graphql/domain/infectedData';
 
 // interfaces
 
@@ -28,54 +31,40 @@ import PlayerContainer from '~/components/index/organisms/PlayerContainer.vue';
     CurseContainer
   },
   async asyncData ( context ) {
-  //   try {
-  //     const prefecture: string = '東京都';
-  //     console.log(moment().format('YYYY-MM-DD'));
+    try {
+      const props = {
+        newsText: '',
+      }
+      const prefecture: string = '東京都';
+      console.log(moment().format('YYYY-MM-DD'));
 
-  //     const variables: ListCovid19PositivesQueryVariables = {
-  //       filter: {
-  //         date: {
-  //           eq: moment().format('YYYY-MM-DD'),
-  //         },
-  //       },
-  //     }
-  //     const positives: ListCovid19Response = await API.graphql({
-  //       query: listCovid19Positives,
-  //       variables
-  //     }) as ListCovid19Response
+      const variables: ListInfectedDatasQueryVariables = {
+        filter: {
+          date: {
+            eq: moment().format('YYYY-MM-DD'),
+          },
+        },
+      }
+      console.log(variables);
+      const infectedDatas: ListInfectedDatasResponse = await API.graphql({
+        query: listInfectedDatas,
+        // variables,
+      }) as ListInfectedDatasResponse
 
-  //     // TMP unix time
-  //     if (!positives.data.listCovid19Positives.items) {
-  //       window.alert('今日の陽性者数データが存在しません');
-  //     }
-  //     // TODO: リファクタ
-  //     const content: ParsedPositives = JSON.parse(JSON.parse(positives.data.listCovid19Positives.items[0].content))
-  //     const count: number = content.data47[prefecture] ?? 100000000
+      if (!infectedDatas.data.listInfectedDatas.items) {
+        props.newsText = '今日の陽性者数データが存在しません';
+      }
+      const content: ParsedInfectedData = JSON.parse(JSON.parse(infectedDatas.data.listInfectedDatas.items[0].content))
+      props.newsText = `${moment().format('MM月DD日')}の${prefecture}の感染者数は${content.data47[prefecture]}人です`;
 
-  //     const deadline = moment('2050-01-01');
-  //     return {
-  //       deadline,
-  //       prefecture,
-  //       countOfPositives: count
-  //     }
-  //   } catch (e) {
-  //     window.alert(e);
-  //   }
+      return props
+    } catch (e) {
+      console.error(JSON.stringify(e));
+    }
   }
 })
 export default class Index extends Vue {
-  private get newsText(): string {
-    return '10/15(木)の東京都の感染者は 500人 です.';
-  }
-  // private deadline!: Moment;
-  // private prefecture!: string;
-  // private countOfPositives!: number;
-
-  // get color (): AlertColor {
-  //   if (this.countOfPositives < 100) return AlertColor.Blue;
-  //   if (this.countOfPositives < 300) return AlertColor.Orange;
-  //   return AlertColor.Red;
-  // }
+  private newsText!: string;
 }
 </script>
 
