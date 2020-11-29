@@ -50,7 +50,7 @@ export default {
   ],
 
   manifest: {
-    name: '俺流終末時計',
+    name: '呪術対戦',
     lang: 'ja',
   },
 
