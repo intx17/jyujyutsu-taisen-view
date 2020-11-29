@@ -73,6 +73,7 @@ export default class Battle extends Vue {
 .container {
   display: flex;
   flex-direction: column;
+  font-family: 'Nu KinakoMochi Reg';
 }
 .index-curse-container {
   margin: 15px 5% 0px 5%;

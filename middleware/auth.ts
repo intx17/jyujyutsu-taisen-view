@@ -1,4 +1,5 @@
 import { Auth } from 'aws-amplify'
+const { AmplifyEventBus } = require('aws-amplify-vue');
 
 export default async () => {
   const userInfo = await Auth.currentUserInfo();
@@ -18,4 +19,16 @@ export default async () => {
     // サインイン画面(TOP)に戻す
     location.href = '/';
   }
+
+  // ログイン, ログアウト時
+  AmplifyEventBus.$on('authState', (info: any) => {
+    switch (info) {
+      case 'signedIn':
+        location.href = '/battle';
+        break
+      default:
+        location.href = '/';
+        break
+    }
+  });
 }

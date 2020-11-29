@@ -21,6 +21,7 @@ export default class NewsHeader extends Vue {
 <style scoped>
 .news-header {
   width: 100%;
+  height: 2rem;
   background: #212529;
   overflow: hidden;
   text-align: center;
@@ -31,9 +32,10 @@ export default class NewsHeader extends Vue {
   padding-left: 100%;
   white-space: nowrap;
   line-height: 1em;
-  animation: scrollNewsHeaderText 20s linear infinite;
+  animation: scrollNewsHeaderText 10s linear infinite;
 }
 .news-header-text {
+  line-height: 2rem;
   color: #fff;
 }
 

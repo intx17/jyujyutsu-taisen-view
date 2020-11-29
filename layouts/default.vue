@@ -20,8 +20,11 @@ export default {
   components: {
     CommonFooter
   },
-  async created () {
+  async beforeCreate () {
     const userInfo = await Auth.currentUserInfo();
+    if (!userInfo) {
+      return;
+    }
 
     const getPlayerVar: GetPlayerQueryVariables = {
       id: userInfo.id
@@ -58,7 +61,6 @@ body {
   flex-direction: column;
   align-items: flex-start;
   min-height: 100%;
-  font-family: 'Nu KinakoMochi Reg';
 }
 #__nuxt {
   min-width: 100%;

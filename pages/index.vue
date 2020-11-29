@@ -1,19 +1,27 @@
 <template>
   <section class="container">
-    <amplify-authenticator class="sign-in" />
-    <amplify-sign-out class="sign-out" />
+    <div v-if="isLoggedIn">
+    </div>
+    <div v-else>
+      <amplify-authenticator class="sign-in" />
+    </div>
   </section>
 </template>
 
 <script lang="ts">
-const { AmplifyEventBus } = require('aws-amplify-vue');
-import { Component, Prop, Vue } from "nuxt-property-decorator";
+import { Component, Vue } from "nuxt-property-decorator";
+import { Auth } from 'aws-amplify'
 
 @Component({
   layout: 'index',
   middleware: ['auth']
 })
 export default class Index extends Vue {
+  private isLoggedIn: boolean = false;
+  async created () {
+    const userInfo = await Auth.currentUserInfo();
+    this.isLoggedIn = !!userInfo;
+  }
 }
 </script>
 
@@ -25,12 +33,5 @@ export default class Index extends Vue {
 }
 .sign-in >>> .Form__formSection___3tqxz {
   min-width: 80%;
-}
-.sign-out {
-  display: flex;
-  flex-direction: column;
-}
-.sign-out >>> .Form__formField___2DWhT {
-  margin: 0 auto;
 }
 </style>
