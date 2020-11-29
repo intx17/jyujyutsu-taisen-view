@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import moment, { Moment } from 'moment';
-import { API, JS } from 'aws-amplify';
+import { API, graphqlOperation, JS } from 'aws-amplify';
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 
 // components
@@ -46,10 +46,11 @@ import { ListInfectedDatasResponse, ParsedInfectedData } from '~/src/graphql/dom
         },
       }
 
-      const infectedDatas: ListInfectedDatasResponse = await API.graphql({
-        query: listInfectedDatas,
-        variables,
-      }) as ListInfectedDatasResponse
+      const infectedDatas: ListInfectedDatasResponse = await API.graphql(
+        graphqlOperation(
+          listInfectedDatas,
+          variables,
+      )) as ListInfectedDatasResponse
 
       if (!infectedDatas.data.listInfectedDatas.items) {
         props.newsText = '今日の陽性者数データが存在しません';

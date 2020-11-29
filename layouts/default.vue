@@ -6,11 +6,40 @@
 </template>
 
 <script lang="ts">
+import { Auth, API, JS, graphqlOperation } from 'aws-amplify'
+import { GetPlayerQueryVariables, CreatePlayerMutationVariables } from '~/src/API';
+import { getPlayer } from '~/src/graphql/queries';
+import { createPlayer } from '~/src/graphql/mutations';
+import { JapaneseWoeid } from '~/src/enums/japanese-woeid';
+import { GetPlayerResponse } from '~/src/graphql/domain/player';
+
+// components
 import CommonFooter from '~/components/common/molecules/CommonFooter.vue';
 
 export default {
   components: {
     CommonFooter
+  },
+  async created () {
+    const userInfo = await Auth.currentUserInfo();
+
+    const getPlayerVar: GetPlayerQueryVariables = {
+      id: userInfo.id
+    };
+
+    const player = await API.graphql(graphqlOperation(getPlayer, getPlayerVar)) as GetPlayerResponse;
+
+    if (!player.data.getPlayer) {
+      const createPlayerVar: CreatePlayerMutationVariables = {
+        input: {
+          id: userInfo.id,
+          name: userInfo.username,
+          hp: 100,
+          woeid: JapaneseWoeid.Tokyo
+        }
+      }
+      await API.graphql(graphqlOperation(createPlayer, createPlayerVar))
+    }
   }
 }
 </script>
