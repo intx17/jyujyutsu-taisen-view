@@ -10,6 +10,9 @@
       :hp="curse.hp"
       :hpTextColor="hpTextColor"
     />
+    <battle-history
+      :battleHistories="battleHistories"
+    />
   </div>
 </template>
 
@@ -19,12 +22,14 @@ import { Component, Vue } from 'nuxt-property-decorator';
 // components
 import CurseImage from '~/components/index/atoms/CurseImage.vue';
 import HpBar from '~/components/index/atoms/HpBar.vue';
+import BattleHistory from '~/components/index/atoms/BattleHistory.vue';
 import { ICurse } from '~/src/components/index/organisms/curseContainer';
 
 @Component({
   components: {
     CurseImage,
-    HpBar
+    HpBar,
+    BattleHistory
   }
 })
 export default class CurseContainer extends Vue {
@@ -36,6 +41,12 @@ export default class CurseContainer extends Vue {
     hp: 50,
     imgSrc: '/img/beelzebub.png'
   }
+
+  private battleHistories = [
+      'test1',
+      'test2',
+      'test3',
+  ]
 }
 </script>
 
@@ -48,5 +59,7 @@ export default class CurseContainer extends Vue {
 .curse-name {
   display: flex;
   justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 </style>
