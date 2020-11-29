@@ -36,7 +36,6 @@ import { ListInfectedDatasResponse, ParsedInfectedData } from '~/src/graphql/dom
         newsText: '',
       }
       const prefecture: string = '東京都';
-      console.log(moment().format('YYYY-MM-DD'));
 
       const variables: ListInfectedDatasQueryVariables = {
         filter: {
@@ -45,10 +44,10 @@ import { ListInfectedDatasResponse, ParsedInfectedData } from '~/src/graphql/dom
           },
         },
       }
-      console.log(variables);
+
       const infectedDatas: ListInfectedDatasResponse = await API.graphql({
         query: listInfectedDatas,
-        // variables,
+        variables,
       }) as ListInfectedDatasResponse
 
       if (!infectedDatas.data.listInfectedDatas.items) {
