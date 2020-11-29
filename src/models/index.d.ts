@@ -7,19 +7,20 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 export declare class InfectedData {
   readonly id: string;
   readonly content: string;
+  readonly date: string;
   constructor(init: ModelInit<InfectedData>);
   static copyOf(source: InfectedData, mutator: (draft: MutableModel<InfectedData>) => MutableModel<InfectedData> | void): InfectedData;
 }
 
-export declare class User {
+export declare class Player {
   readonly id: string;
   readonly name: string;
   readonly hp: number;
   readonly woeid: number;
   readonly commands?: (Command | null)[];
   readonly battles?: (Battle | null)[];
-  constructor(init: ModelInit<User>);
-  static copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
+  constructor(init: ModelInit<Player>);
+  static copyOf(source: Player, mutator: (draft: MutableModel<Player>) => MutableModel<Player> | void): Player;
 }
 
 export declare class Command {
@@ -29,7 +30,7 @@ export declare class Command {
   readonly attack: number;
   readonly isOutdoor: boolean;
   readonly inCommandList: boolean;
-  readonly user?: User;
+  readonly player?: Player;
   constructor(init: ModelInit<Command>);
   static copyOf(source: Command, mutator: (draft: MutableModel<Command>) => MutableModel<Command> | void): Command;
 }
@@ -37,10 +38,10 @@ export declare class Command {
 export declare class Battle {
   readonly id: string;
   readonly date: string;
-  readonly userHP: number;
+  readonly playerHP: number;
   readonly curseHP: number;
   readonly inAreaExpansion: boolean;
-  readonly user?: User;
+  readonly player?: Player;
   readonly curseID: string;
   readonly curse?: Curse;
   constructor(init: ModelInit<Battle>);

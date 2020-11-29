@@ -7,6 +7,7 @@ export const getInfectedData = /* GraphQL */ `
     getInfectedData(id: $id) {
       id
       content
+      date
       createdAt
       updatedAt
     }
@@ -22,6 +23,7 @@ export const listInfectedDatas = /* GraphQL */ `
       items {
         id
         content
+        date
         createdAt
         updatedAt
       }

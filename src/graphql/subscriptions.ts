@@ -7,6 +7,7 @@ export const onCreateInfectedData = /* GraphQL */ `
     onCreateInfectedData {
       id
       content
+      date
       createdAt
       updatedAt
     }
@@ -17,6 +18,7 @@ export const onUpdateInfectedData = /* GraphQL */ `
     onUpdateInfectedData {
       id
       content
+      date
       createdAt
       updatedAt
     }
@@ -27,6 +29,7 @@ export const onDeleteInfectedData = /* GraphQL */ `
     onDeleteInfectedData {
       id
       content
+      date
       createdAt
       updatedAt
     }

@@ -10,6 +10,7 @@ export const createInfectedData = /* GraphQL */ `
     createInfectedData(input: $input, condition: $condition) {
       id
       content
+      date
       createdAt
       updatedAt
     }
@@ -23,6 +24,7 @@ export const updateInfectedData = /* GraphQL */ `
     updateInfectedData(input: $input, condition: $condition) {
       id
       content
+      date
       createdAt
       updatedAt
     }
@@ -36,6 +38,7 @@ export const deleteInfectedData = /* GraphQL */ `
     deleteInfectedData(input: $input, condition: $condition) {
       id
       content
+      date
       createdAt
       updatedAt
     }

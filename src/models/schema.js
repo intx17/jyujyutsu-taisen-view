@@ -16,6 +16,13 @@ export const schema = {
                     "type": "AWSJSON",
                     "isRequired": true,
                     "attributes": []
+                },
+                "date": {
+                    "name": "date",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": true,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -27,8 +34,8 @@ export const schema = {
                 }
             ]
         },
-        "User": {
-            "name": "User",
+        "Player": {
+            "name": "Player",
             "fields": {
                 "id": {
                     "name": "id",
@@ -69,7 +76,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "user"
+                        "associatedWith": "player"
                     }
                 },
                 "battles": {
@@ -83,12 +90,12 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "user"
+                        "associatedWith": "player"
                     }
                 }
             },
             "syncable": true,
-            "pluralName": "Users",
+            "pluralName": "Players",
             "attributes": [
                 {
                     "type": "model",
@@ -141,17 +148,17 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "user": {
-                    "name": "user",
+                "player": {
+                    "name": "player",
                     "isArray": false,
                     "type": {
-                        "model": "User"
+                        "model": "Player"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "userID"
+                        "targetName": "playerID"
                     }
                 }
             },
@@ -165,9 +172,9 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byUser",
+                        "name": "byPlayer",
                         "fields": [
-                            "userID"
+                            "playerID"
                         ]
                     }
                 }
@@ -190,8 +197,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "userHP": {
-                    "name": "userHP",
+                "playerHP": {
+                    "name": "playerHP",
                     "isArray": false,
                     "type": "Int",
                     "isRequired": true,
@@ -211,17 +218,17 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "user": {
-                    "name": "user",
+                "player": {
+                    "name": "player",
                     "isArray": false,
                     "type": {
-                        "model": "User"
+                        "model": "Player"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "userID"
+                        "targetName": "playerID"
                     }
                 },
                 "curseID": {
@@ -255,9 +262,9 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byUser",
+                        "name": "byPlayer",
                         "fields": [
-                            "userID"
+                            "playerID"
                         ]
                     }
                 }
@@ -365,5 +372,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "d39d07f0b3b408ae1da78a1f649e85c6"
+    "version": "2ea6f803ef30f13971ff07ce0ccedfd8"
 };

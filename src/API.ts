@@ -5,10 +5,12 @@
 export type CreateInfectedDataInput = {
   id?: string | null,
   content: string,
+  date: string,
 };
 
 export type ModelInfectedDataConditionInput = {
   content?: ModelStringInput | null,
+  date?: ModelStringInput | null,
   and?: Array< ModelInfectedDataConditionInput | null > | null,
   or?: Array< ModelInfectedDataConditionInput | null > | null,
   not?: ModelInfectedDataConditionInput | null,
@@ -57,6 +59,7 @@ export type ModelSizeInput = {
 export type UpdateInfectedDataInput = {
   id: string,
   content?: string | null,
+  date?: string | null,
 };
 
 export type DeleteInfectedDataInput = {
@@ -260,6 +263,7 @@ export type DeleteCurseInput = {
 export type ModelInfectedDataFilterInput = {
   id?: ModelIDInput | null,
   content?: ModelStringInput | null,
+  date?: ModelStringInput | null,
   and?: Array< ModelInfectedDataFilterInput | null > | null,
   or?: Array< ModelInfectedDataFilterInput | null > | null,
   not?: ModelInfectedDataFilterInput | null,
@@ -328,6 +332,7 @@ export type CreateInfectedDataMutation = {
     __typename: "InfectedData",
     id: string,
     content: string,
+    date: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -343,6 +348,7 @@ export type UpdateInfectedDataMutation = {
     __typename: "InfectedData",
     id: string,
     content: string,
+    date: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -358,6 +364,7 @@ export type DeleteInfectedDataMutation = {
     __typename: "InfectedData",
     id: string,
     content: string,
+    date: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -861,6 +868,7 @@ export type GetInfectedDataQuery = {
     __typename: "InfectedData",
     id: string,
     content: string,
+    date: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -879,6 +887,7 @@ export type ListInfectedDatasQuery = {
       __typename: "InfectedData",
       id: string,
       content: string,
+      date: string,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -1193,6 +1202,7 @@ export type OnCreateInfectedDataSubscription = {
     __typename: "InfectedData",
     id: string,
     content: string,
+    date: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1203,6 +1213,7 @@ export type OnUpdateInfectedDataSubscription = {
     __typename: "InfectedData",
     id: string,
     content: string,
+    date: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1213,6 +1224,7 @@ export type OnDeleteInfectedDataSubscription = {
     __typename: "InfectedData",
     id: string,
     content: string,
+    date: string,
     createdAt: string,
     updatedAt: string,
   } | null,
