@@ -1,4 +1,11 @@
 {
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "providerPlugin": "awscloudformation",
+      "type": "manual"
+    }
+  },
   "api": {
     "jyujyutsutaisenapi": {
       "service": "AppSync",
@@ -15,13 +22,6 @@
           "additionalAuthenticationProviders": []
         }
       }
-    }
-  },
-  "hosting": {
-    "amplifyhosting": {
-      "service": "amplifyhosting",
-      "type": "cicd",
-      "lastPushTimeStamp": "2020-11-29T09:12:04.097Z"
     }
   }
 }
