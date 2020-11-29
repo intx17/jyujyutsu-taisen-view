@@ -1,7 +1,7 @@
 <template>
   <section class="container">
-    <div class="enemy-container" />
-    <player-container class="player-container" />
+    <curse-container class="index-curse-container" />
+    <player-container class="index-player-container" />
   </section>
 </template>
 
@@ -11,6 +11,7 @@ import { API, JS } from 'aws-amplify';
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 
 // components
+import CurseContainer from '~/components/index/organisms/CurseContainer.vue';
 import PlayerContainer from '~/components/index/organisms/PlayerContainer.vue';
 
 // interfaces
@@ -19,6 +20,7 @@ import PlayerContainer from '~/components/index/organisms/PlayerContainer.vue';
   layout: 'default',
   components: {
     PlayerContainer,
+    CurseContainer
   },
   async asyncData ( context ) {
   //   try {
@@ -74,11 +76,10 @@ export default class Index extends Vue {
   display: flex;
   flex-direction: column;
 }
-.enemy-container {
-  height: 100px;
+.index-curse-container {
+  margin: 15px 5% 0px 5%;
 }
-
-.player-container {
-  margin: 0px 5%;
+.index-player-container {
+  margin: 15px 5% 0px 5%;
 }
 </style>

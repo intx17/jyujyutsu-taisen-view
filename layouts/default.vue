@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nuxt class="page-content" />
+    <nuxt />
     <common-footer class="common-footer" />
   </div>
 </template>
@@ -34,10 +34,7 @@ body {
 #__nuxt {
   min-width: 100%;
 }
-.page-content {
-  margin-bottom: 15px;
-}
 .common-footer {
-  /* margin-bottom: 10px; */
+  margin-top: 15px;
 }
 </style>
