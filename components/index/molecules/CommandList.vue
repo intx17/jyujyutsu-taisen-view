@@ -50,13 +50,6 @@ export default class CommandList extends Vue {
       isActive: false,
       isOutdoor: false,
     },
-    {
-      name: '攻撃4',
-      description: '色々と説明する色々と説明する',
-      attack: 40,
-      isActive: false,
-      isOutdoor: false,
-    },
   ];
 
   // method

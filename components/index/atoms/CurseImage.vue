@@ -15,8 +15,13 @@ export default class CurseImage extends Vue {
 </script>
 
 <style scoped>
+.curse-image-container {
+  display: flex;
+  justify-content: center;
+}
+
 .curse-image {
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
 }
 </style>

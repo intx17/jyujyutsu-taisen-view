@@ -1,5 +1,8 @@
 <template>
   <section class="container">
+    <news-header
+      :text="newsText"
+    />
     <curse-container class="index-curse-container" />
     <player-container class="index-player-container" />
   </section>
@@ -11,6 +14,7 @@ import { API, JS } from 'aws-amplify';
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 
 // components
+import NewsHeader from '~/components/index/atoms/NewsHeader.vue';
 import CurseContainer from '~/components/index/organisms/CurseContainer.vue';
 import PlayerContainer from '~/components/index/organisms/PlayerContainer.vue';
 
@@ -19,6 +23,7 @@ import PlayerContainer from '~/components/index/organisms/PlayerContainer.vue';
 @Component({
   layout: 'default',
   components: {
+    NewsHeader,
     PlayerContainer,
     CurseContainer
   },
@@ -59,6 +64,9 @@ import PlayerContainer from '~/components/index/organisms/PlayerContainer.vue';
   }
 })
 export default class Index extends Vue {
+  private get newsText(): string {
+    return '10/15(木)の東京都の感染者は 500人 です.';
+  }
   // private deadline!: Moment;
   // private prefecture!: string;
   // private countOfPositives!: number;
@@ -80,6 +88,6 @@ export default class Index extends Vue {
   margin: 15px 5% 0px 5%;
 }
 .index-player-container {
-  margin: 15px 5% 0px 5%;
+  margin: 20px 5% 0px 5%;
 }
 </style>

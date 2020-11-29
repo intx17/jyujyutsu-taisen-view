@@ -35,6 +35,6 @@ body {
   min-width: 100%;
 }
 .common-footer {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 </style>
