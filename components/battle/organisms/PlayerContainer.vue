@@ -11,9 +11,9 @@
 import { Component, Vue } from 'nuxt-property-decorator';
 
 // components
-import CommandList from '~/components/index/molecules/CommandList.vue';
-import AttackButton from '~/components/index/atoms/AttackButton.vue';
-import HpBar from '~/components/index/atoms/HpBar.vue';
+import CommandList from '~/components/battle/molecules/CommandList.vue';
+import AttackButton from '~/components/battle/atoms/AttackButton.vue';
+import HpBar from '~/components/battle/atoms/HpBar.vue';
 
 @Component({
   components: {

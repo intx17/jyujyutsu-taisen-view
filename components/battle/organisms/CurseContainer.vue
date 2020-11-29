@@ -21,11 +21,11 @@
 import { Component, Vue } from 'nuxt-property-decorator';
 
 // components
-import CurseImage from '~/components/index/atoms/CurseImage.vue';
-import CurseName from '~/components/index/atoms/CurseName.vue';
-import HpBar from '~/components/index/atoms/HpBar.vue';
-import BattleHistory from '~/components/index/atoms/BattleHistory.vue';
-import { ICurse } from '~/src/components/index/organisms/curseContainer';
+import CurseImage from '~/components/battle/atoms/CurseImage.vue';
+import CurseName from '~/components/battle/atoms/CurseName.vue';
+import HpBar from '~/components/battle/atoms/HpBar.vue';
+import BattleHistory from '~/components/battle/atoms/BattleHistory.vue';
+import { ICurse } from '~/src/components/battle/organisms/curseContainer';
 
 @Component({
   components: {

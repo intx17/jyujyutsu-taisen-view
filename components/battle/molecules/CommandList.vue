@@ -15,10 +15,10 @@
 import { Component, Vue } from "nuxt-property-decorator";
 
 // components
-import Command from '~/components/index/atoms/Command.vue';
+import Command from '~/components/battle/atoms/Command.vue';
 
 // interfaces
-import { ICommand } from '~/src/components/index/atoms/command';
+import { ICommand } from '~/src/components/battle/atoms/command';
 
 @Component({
   components: {
@@ -62,7 +62,6 @@ export default class CommandList extends Vue {
       });
       return;
     }
-    console.log(this.activeIndex)
 
     this.activeIndex = index;
 
@@ -71,7 +70,6 @@ export default class CommandList extends Vue {
       c.isActive = isActive;
       return c;
     })
-    console.log(this.commandList)
   }
 }
 </script>

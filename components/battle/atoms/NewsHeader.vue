@@ -1,11 +1,11 @@
 <template>
-  <div class="news-header-container">
+  <header class="news-header">
     <p class="news-header-scroll">
       <span class="news-header-text">
         {{ text }}
       </span>
     </p>
-  </div>
+  </header>
 </template>
 
 <script lang="ts">
@@ -19,7 +19,7 @@ export default class NewsHeader extends Vue {
 </script>
 
 <style scoped>
-.news-header-container {
+.news-header {
   width: 100%;
   background: #212529;
   overflow: hidden;

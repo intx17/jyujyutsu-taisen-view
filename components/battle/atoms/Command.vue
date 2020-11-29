@@ -19,7 +19,7 @@
 import { Component, Vue, Prop, PropSync, Emit } from "nuxt-property-decorator";
 
 // interfaces
-import { ICommand } from '~/src/components/index/atoms/command';
+import { ICommand } from '~/src/components/battle/atoms/command';
 
 @Component({})
 export default class CommandList extends Vue {

@@ -1,18 +1,13 @@
 <template>
   <div>
+    <header class="header">
+      <span class="header-text">JyuJyuTsu Taisen</span>
+    </header>
     <nuxt />
-    <common-footer class="common-footer" />
   </div>
 </template>
 
 <script lang="ts">
-import CommonFooter from '~/components/common/molecules/CommonFooter.vue';
-
-export default {
-  components: {
-    CommonFooter
-  }
-}
 </script>
 <style scoped>
 html {
@@ -27,14 +22,19 @@ html {
 body {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
   min-height: 100%;
+}
+.header {
+  height: 3rem;
+  background: #212529;
+  text-align: center;
+  line-height: 3rem;
+}
+.header-text {
   font-family: 'Nu KinakoMochi Reg';
-}
-#__nuxt {
-  min-width: 100%;
-}
-.common-footer {
-  margin-top: 20px;
+  font-weight: bold;
+  color: #fff;
 }
 </style>

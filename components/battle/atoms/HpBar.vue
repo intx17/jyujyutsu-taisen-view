@@ -19,8 +19,8 @@
 import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
 // components
-import CommandList from '~/components/index/molecules/CommandList.vue';
-import AttackButton from '~/components/index/atoms/AttackButton.vue';
+import CommandList from '~/components/battle/molecules/CommandList.vue';
+import AttackButton from '~/components/battle/atoms/AttackButton.vue';
 
 @Component({
   components: {
