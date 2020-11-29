@@ -6,7 +6,6 @@
       :spanClass="link.spanClass"
       :text="link.text"
     />
-    />
   </footer>
 </template>
 

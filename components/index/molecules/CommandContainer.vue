@@ -1,7 +1,8 @@
 <template>
-  <div class="nes-container is-rounded is-dark">
-    <p class="title">コマンド選択</p>
+  <div class="nes-container is-rounded">
+    <p class="title command-title">コマンド選択</p>
     <command-list />
+    <attack-button />
   </div>
 </template>
 
@@ -10,10 +11,12 @@ import { Component, Vue } from 'nuxt-property-decorator';
 
 // components
 import CommandList from '~/components/index/atoms/CommandList.vue';
+import AttackButton from '~/components/index/atoms/AttackButton.vue';
 
 @Component({
   components: {
-    CommandList
+    CommandList,
+    AttackButton,
   }
 })
 export default class CommandContainer extends Vue {
@@ -21,7 +24,30 @@ export default class CommandContainer extends Vue {
 </script>
 
 <style scoped>
-.nes-list.is-circle li.is-active::before {
-  box-shadow: 8px 2px, 10px 2px, 6px 4px, 8px 4px, 10px 4px, 12px 4px, 4px 6px, 6px 6px, 8px 6px, 10px 6px, 12px 6px, 14px 6px, 4px 8px, 6px 8px, 8px 8px, 10px 8px, 12px 8px, 14px 8px, 6px 10px, 8px 10px, 10px 10px, 12px 10px, 8px 12px, 10px 12px;
+.command-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* SP用既存スタイルの打ち消し */
+.nes-btn.is-error:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: #e76e55;
+}
+
+/* SP用既存スタイルの打ち消し */
+.nes-btn.is-error:hover::after {
+  box-shadow: inset -4px -4px #8c2022;
+}
+
+.nes-btn.is-error:active {
+  color: #fff;
+  text-decoration: none;
+  background-color: #ce372b;
+}
+
+.nes-btn.is-error:active::after {
+  box-shadow: inset -6px -6px #8c2022;
 }
 </style>

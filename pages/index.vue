@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <command-container />
+    <command-container class="command-container" />
     <common-footer />
   </section>
 </template>
@@ -72,7 +72,11 @@ export default class Index extends Vue {
 
 <style scoped>
 .container {
-  background: #212529;
+  /* background: #212529; */
   font-family: 'Nu KinakoMochi Reg';
+}
+
+.command-container {
+  margin: 0px 5%;
 }
 </style>

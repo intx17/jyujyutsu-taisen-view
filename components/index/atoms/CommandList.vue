@@ -41,11 +41,14 @@ export default class CommandList extends Vue {
 </script>
 
 <style scoped>
+.nes-list.is-circle li.is-active {
+  font-weight: bold;
+}
 .nes-list.is-circle li.is-active::before {
-  box-shadow: 8px 2px #fff, 10px 2px #fff, 6px 4px #fff, 8px 4px #fff, 10px 4px #fff, 12px 4px #fff, 4px 6px #fff, 6px 6px #fff, 8px 6px #fff, 10px 6px #fff, 12px 6px #fff, 14px 6px #fff, 4px 8px #fff, 6px 8px #fff, 8px 8px #fff, 10px 8px #fff, 12px 8px #fff, 14px 8px #fff, 6px 10px #fff, 8px 10px #fff, 10px 10px #fff, 12px 10px #fff, 8px 12px #fff, 10px 12px #fff;
-  /* box-shadow: 8px 2px, 10px 2px, 6px 4px, 8px 4px, 10px 4px, 12px 4px, 4px 6px, 6px 6px, 8px 6px, 10px 6px, 12px 6px, 14px 6px, 4px 8px, 6px 8px, 8px 8px, 10px 8px, 12px 8px, 14px 8px, 6px 10px, 8px 10px, 10px 10px, 12px 10px, 8px 12px, 10px 12px; */
+  /* box-shadow: 8px 2px #fff, 10px 2px #fff, 6px 4px #fff, 8px 4px #fff, 10px 4px #fff, 12px 4px #fff, 4px 6px #fff, 6px 6px #fff, 8px 6px #fff, 10px 6px #fff, 12px 6px #fff, 14px 6px #fff, 4px 8px #fff, 6px 8px #fff, 8px 8px #fff, 10px 8px #fff, 12px 8px #fff, 14px 8px #fff, 6px 10px #fff, 8px 10px #fff, 10px 10px #fff, 12px 10px #fff, 8px 12px #fff, 10px 12px #fff; */
+  box-shadow: 8px 2px, 10px 2px, 6px 4px, 8px 4px, 10px 4px, 12px 4px, 4px 6px, 6px 6px, 8px 6px, 10px 6px, 12px 6px, 14px 6px, 4px 8px, 6px 8px, 8px 8px, 10px 8px, 12px 8px, 14px 8px, 6px 10px, 8px 10px, 10px 10px, 12px 10px, 8px 12px, 10px 12px;
 }
-.nes-list.is-circle li::before {
-  box-shadow: 8px 2px #fff, 10px 2px #fff, 6px 4px #fff, 8px 4px #fff, 10px 4px #fff, 12px 4px #fff, 4px 6px #fff, 6px 6px #fff, 12px 6px #fff, 14px 6px #fff, 4px 8px #fff, 6px 8px #fff, 12px 8px #fff, 14px 8px #fff, 6px 10px #fff, 8px 10px #fff, 10px 10px #fff, 12px 10px #fff, 8px 12px #fff, 10px 12px #fff;
-}
+/* .nes-list.is-circle li::before { */
+  /* box-shadow: 8px 2px #fff, 10px 2px #fff, 6px 4px #fff, 8px 4px #fff, 10px 4px #fff, 12px 4px #fff, 4px 6px #fff, 6px 6px #fff, 12px 6px #fff, 14px 6px #fff, 4px 8px #fff, 6px 8px #fff, 12px 8px #fff, 14px 8px #fff, 6px 10px #fff, 8px 10px #fff, 10px 10px #fff, 12px 10px #fff, 8px 12px #fff, 10px 12px #fff; */
+/* } */
 </style>
