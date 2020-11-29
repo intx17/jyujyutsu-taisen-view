@@ -35,7 +35,7 @@ export default class CommandList extends Vue {
 <style scoped>
 .command-ballon {
   position: absolute;
-  top: -90px;
+  top: -110px;
   left: 20px;
 }
 

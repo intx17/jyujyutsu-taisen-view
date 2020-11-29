@@ -27,8 +27,12 @@ html {
 body {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   min-height: 100%;
   font-family: 'Nu KinakoMochi Reg';
+}
+#__nuxt {
+  min-width: 100%;
 }
 .page-content {
   margin-bottom: 15px;

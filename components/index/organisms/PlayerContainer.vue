@@ -1,6 +1,7 @@
 <template>
-  <div class="nes-container is-rounded">
-    <p class="title command-title">コマンド選択</p>
+  <div class="nes-container with-title is-rounded">
+    <p class="title player-container-title">プレイヤー</p>
+    <hp-bar :hp="hp" />
     <command-list />
     <attack-button />
   </div>
@@ -12,19 +13,22 @@ import { Component, Vue } from 'nuxt-property-decorator';
 // components
 import CommandList from '~/components/index/molecules/CommandList.vue';
 import AttackButton from '~/components/index/atoms/AttackButton.vue';
+import HpBar from '~/components/index/atoms/HpBar.vue';
 
 @Component({
   components: {
     CommandList,
     AttackButton,
+    HpBar
   }
 })
-export default class CommandContainer extends Vue {
+export default class PlayerContainer extends Vue {
+  private hp: number = 50;
 }
 </script>
 
 <style scoped>
-.command-title {
+.player-container-title {
   font-size: 1.1rem;
   font-weight: bold;
 }

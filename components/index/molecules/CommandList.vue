@@ -26,12 +26,12 @@ import { ICommand } from '~/src/components/index/atoms/command';
   }
 })
 export default class CommandList extends Vue {
-  private activeIndex = 0;
+  private activeIndex: number | null = null;
 
   private commandList: ICommand[] = [
     {
       name: '攻撃1',
-      description: '色々と説明する',
+      description: '色々と説明する色々と説明する',
       attack: 10,
       isActive: false,
       isOutdoor: true,
@@ -52,7 +52,7 @@ export default class CommandList extends Vue {
     },
     {
       name: '攻撃4',
-      description: '色々と説明する色々と説明する色々と説明する色々と説明する',
+      description: '色々と説明する色々と説明する',
       attack: 40,
       isActive: false,
       isOutdoor: false,
@@ -60,14 +60,17 @@ export default class CommandList extends Vue {
   ];
 
   // method
-  private created () {
-    this.commandList[0].isActive = true;
-  }
-
   private activateCommand (index: number): void {
     if (index === this.activeIndex) {
+      this.activeIndex = null;
+      this.commandList = this.commandList.map((c) => {
+        c.isActive = false;
+        return c
+      });
       return;
     }
+    console.log(this.activeIndex)
+
     this.activeIndex = index;
 
     this.commandList = this.commandList.map((c, i) => {
@@ -75,6 +78,7 @@ export default class CommandList extends Vue {
       c.isActive = isActive;
       return c;
     })
+    console.log(this.commandList)
   }
 }
 </script>
