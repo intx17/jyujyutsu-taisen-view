@@ -1,11 +1,13 @@
 <template>
-  <footer>
-    <footer-link
-      v-for="(link, index) in footerLinks"
-      :key="index"
-      :spanClass="link.spanClass"
-      :text="link.text"
+  <footer class="footer">
+    <div class="footer-link-container">
+      <footer-link
+        v-for="(link, index) in footerLinks"
+        :key="index"
+        :spanClass="link.spanClass"
+        :text="link.text"
     />
+    </div>
   </footer>
 </template>
 
@@ -26,11 +28,11 @@ import { IFooterLink } from '~/src/components/common/atoms/footerLink';
 export default class CommonFooter extends Vue {
   private footerLinks: IFooterLink[] = [
     {
-      spanClass: 'is-primary',
+      spanClass: 'is-dark',
       text: 'バトル'
     },
     {
-      spanClass: 'is-error',
+      spanClass: 'is-dark',
       text: '設定'
     },
   ];
@@ -38,7 +40,9 @@ export default class CommonFooter extends Vue {
 </script>
 
 <style scoped>
-footer {
-  margin: 0 auto;
+.footer-link-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 5%;
 }
 </style>

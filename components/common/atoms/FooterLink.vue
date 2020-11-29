@@ -1,5 +1,5 @@
 <template>
-  <a href="#" class="nes-badge">
+  <a href="#" class="nes-badge link">
     <span :class="spanClass">
       {{ text }}
     </span>
@@ -12,9 +12,15 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator';
 @Component({})
 export default class FooterLink extends Vue {
   @Prop({ type: String, required: true, default: 'is-dark' })
-  private spanClass!: string;
+  private spanClass?: string;
 
   @Prop({ type: String, required: true, default: 'title' })
   private text!: string;
 }
 </script>
+
+<style scoped>
+.link {
+  width: 45%;
+}
+</style>

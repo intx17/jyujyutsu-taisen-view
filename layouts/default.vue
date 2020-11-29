@@ -1,55 +1,39 @@
 <template>
   <div>
-    <nuxt />
+    <nuxt class="page-content" />
+    <common-footer class="common-footer" />
   </div>
 </template>
 
+<script lang="ts">
+import CommonFooter from '~/components/common/molecules/CommonFooter.vue';
+
+export default {
+  components: {
+    CommonFooter
+  }
+}
+</script>
 <style>
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  height: 100%;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
 }
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  font-family: 'Nu KinakoMochi Reg';
 }
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+.page-content {
+  margin-bottom: 15px;
 }
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.common-footer {
+  /* margin-bottom: 10px; */
 }
 </style>
