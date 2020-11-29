@@ -10,7 +10,7 @@
 import { Component, Vue } from 'nuxt-property-decorator';
 
 // components
-import CommandList from '~/components/index/atoms/CommandList.vue';
+import CommandList from '~/components/index/molecules/CommandList.vue';
 import AttackButton from '~/components/index/atoms/AttackButton.vue';
 
 @Component({

@@ -1,4 +1,4 @@
 export interface IFooterLink {
-  spanClass: string,
+  spanClass: string
   text: string
 }

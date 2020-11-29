@@ -11,7 +11,7 @@ import { API, JS } from 'aws-amplify';
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 
 // components
-import CommandContainer from '~/components/index/molecules/CommandContainer.vue';
+import CommandContainer from '~/components/index/organisms/CommandContainer.vue';
 import CommonFooter from '~/components/common/molecules/CommonFooter.vue';
 
 // interfaces
