@@ -19,35 +19,38 @@ import { JapaneseWoeid } from '~/src/enums/japanese-woeid';
 import { GetPlayerResponse } from '~/src/graphql/domain/player';
 const { AmplifyEventBus } = require('aws-amplify-vue');
 
+// store
+import { authStore } from '~/utils/storeAccessor';
+
 // components
 import CommonFooter from '~/components/common/molecules/CommonFooter.vue';
 
 export default {
-  data: () => ({
-    isLoggedIn: true
-  }),
   components: {
     CommonFooter
   },
-  async created () {
+  computed: {
+    isLoggedIn: () => authStore.loggedIn
+  },
+  async beforeCreate () {
     // ログイン, ログアウト時
     AmplifyEventBus.$on('authState', (info: any) => {
       switch (info) {
         case 'signedIn':
-          this.$data.isLoggedIn = true;
+          authStore.setIsLoggedIn(true);
           break
         default:
-          this.$data.isLoggedIn = false;
-          break
-          break
+          authStore.setIsLoggedIn(false);
+          break;
       }
     });
 
     const userInfo = await Auth.currentUserInfo();
     if (!userInfo) {
-      this.$data.isLoggedIn = false;
+      authStore.setIsLoggedIn(false);
       return;
     }
+    authStore.setIsLoggedIn(true);
 
     const getPlayerVar: GetPlayerQueryVariables = {
       id: userInfo.id

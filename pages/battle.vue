@@ -14,14 +14,12 @@ import { API, graphqlOperation, JS } from 'aws-amplify';
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 
 // components
-import NewsHeader from '~/components/battle/atoms/NewsHeader.vue';
+import NewsHeader from '~/components/battle/molecules/NewsHeader.vue';
 import CurseContainer from '~/components/battle/organisms/CurseContainer.vue';
 import PlayerContainer from '~/components/battle/organisms/PlayerContainer.vue';
 import { GetInfectedDataQueryVariables } from '~/src/API';
 import { getInfectedData } from '~/src/graphql/queries';
 import { GetInfectedDataResponse, ParsedInfectedData } from '~/src/graphql/domain/infectedData';
-
-// interfaces
 
 @Component({
   layout: 'default',
@@ -46,7 +44,6 @@ import { GetInfectedDataResponse, ParsedInfectedData } from '~/src/graphql/domai
           getInfectedData,
           variables,
       )) as GetInfectedDataResponse
-      console.log(infectedData);
 
       if (infectedData.data.getInfectedData.content) {
         const parsedInfectedData = JSON.parse(JSON.parse(infectedData.data.getInfectedData.content));
