@@ -3,8 +3,14 @@
     <news-header
       :text="newsText"
     />
-    <curse-container class="index-curse-container" />
-    <player-container class="index-player-container" />
+    <curse-container
+      class="index-curse-container"
+      :curse="curse"
+    />
+    <player-container
+      class="index-player-container"
+      @on-click-attack-button="playerAttack"
+    />
   </section>
 </template>
 
@@ -12,6 +18,8 @@
 import moment, { Moment } from 'moment';
 import { API, graphqlOperation, JS } from 'aws-amplify';
 import { Component, Prop, Vue } from "nuxt-property-decorator";
+import { ICurse } from '~/src/components/battle/organisms/curseContainer';
+import { curseStore } from '~/utils/storeAccessor';
 
 // components
 import NewsHeader from '~/components/battle/molecules/NewsHeader.vue';
@@ -30,9 +38,17 @@ import { GetInfectedDataResponse, ParsedInfectedData } from '~/src/graphql/domai
   },
   async asyncData ( context ) {
     try {
+      const curse: ICurse = {
+          name: 'ベルゼブブ',
+          hp: 50,
+          imgSrc: '/img/beelzebub.png',
+      }
+
       const props = {
         newsText: '',
+        curse
       }
+
       const now = moment();
       const prefecture: string = '東京都';
 
@@ -75,6 +91,16 @@ import { GetInfectedDataResponse, ParsedInfectedData } from '~/src/graphql/domai
 })
 export default class Battle extends Vue {
   private newsText!: string;
+  private curse!: ICurse;
+
+  // methods
+  private playerAttack () {
+    if (curseStore.shaking) {
+      return;
+    }
+    curseStore.setShaking(true);
+    setTimeout(() => curseStore.setShaking(false), 3000);
+  }
 }
 </script>
 

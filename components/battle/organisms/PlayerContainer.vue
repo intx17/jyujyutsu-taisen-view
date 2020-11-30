@@ -3,17 +3,21 @@
     <p class="title player-container-title">プレイヤー</p>
     <hp-bar :hp="hp" />
     <command-list />
-    <attack-button />
+    <attack-button
+      :enabled="activeCommand"
+      @on-click-attack-button="onClickAttackButton"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import { Component, Emit, Vue } from 'nuxt-property-decorator';
 
 // components
 import CommandList from '~/components/battle/molecules/CommandList.vue';
 import AttackButton from '~/components/battle/atoms/AttackButton.vue';
 import HpBar from '~/components/battle/atoms/HpBar.vue';
+import { playerStore } from '~/store';
 
 @Component({
   components: {
@@ -24,6 +28,15 @@ import HpBar from '~/components/battle/atoms/HpBar.vue';
 })
 export default class PlayerContainer extends Vue {
   private hp: number = 50;
+
+  private get activeCommand() {
+    return playerStore.activeCommand !== null;
+  }
+
+  // methods
+  @Emit()
+  onClickAttackButton () {
+  }
 }
 </script>
 

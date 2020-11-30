@@ -30,7 +30,7 @@ export default {
     CommonFooter
   },
   computed: {
-    isLoggedIn: () => authStore.loggedIn
+    isLoggedIn: () => authStore.isLoggedIn
   },
   async beforeCreate () {
     // ログイン, ログアウト時

@@ -2,6 +2,7 @@
   <div class="nes-container is-rounded is-dark">
     <curse-image
       :imgSrc="curse.imgSrc"
+      :shakeImage="curse.shakeImage"
     />
     <curse-name
       :name="curse.name"
@@ -18,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import { Component, Prop, PropSync, Vue } from 'nuxt-property-decorator';
 
 // components
 import CurseImage from '~/components/battle/atoms/CurseImage.vue';
@@ -36,15 +37,12 @@ import { ICurse } from '~/src/components/battle/organisms/curseContainer';
   }
 })
 export default class CurseContainer extends Vue {
+  @Prop({ type: Object, required: true, default: () => {} })
+  private curse!: ICurse
+
   private hp: number = 50;
   private readonly hpTextColor: string = '#fff';
   private isAreaExpansion: boolean = true;
-
-  private curse: ICurse = {
-    name: 'ベルゼブブ',
-    hp: 50,
-    imgSrc: '/img/beelzebub.png'
-  }
 
   private battleHistories = [
       'test1fwrefawfwrgergesgsgsegresgaeagaa',

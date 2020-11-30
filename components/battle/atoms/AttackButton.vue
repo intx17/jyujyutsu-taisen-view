@@ -1,14 +1,25 @@
 <template>
-  <button type="button" class="nes-btn is-error attack-btn">
+  <button
+    type="button"
+    :class="{ 'is-disabled': !enabled, 'is-error': enabled }"
+    class="nes-btn attack-btn"
+  >
     攻撃する
   </button>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
+import { Component, Emit, Prop, Vue } from "nuxt-property-decorator";
 
 @Component({})
 export default class AttackButton extends Vue {
+  @Prop({ type: Boolean, required: false, default: false})
+  private enabled?: boolean
+
+  // methods
+  @Emit()
+  onClickAttackButton () {
+  }
 }
 </script>
 

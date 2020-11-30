@@ -19,6 +19,7 @@ import Command from '~/components/battle/atoms/Command.vue';
 
 // interfaces
 import { ICommand } from '~/src/components/battle/atoms/command';
+import { playerStore } from '~/utils/storeAccessor';
 
 @Component({
   components: {
@@ -60,10 +61,15 @@ export default class CommandList extends Vue {
         c.isActive = false;
         return c
       });
+      playerStore.setActiveCommand(null);
       return;
     }
 
     this.activeIndex = index;
+    playerStore.setActiveCommand({
+      name: this.commandList[this.activeIndex].name,
+      attack: this.commandList[this.activeIndex].attack
+    });
 
     this.commandList = this.commandList.map((c, i) => {
       const isActive = i === index;
