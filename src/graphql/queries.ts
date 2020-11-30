@@ -3,11 +3,10 @@
 // this is an auto generated file. This will be overwritten
 
 export const getInfectedData = /* GraphQL */ `
-  query GetInfectedData($id: ID!) {
-    getInfectedData(id: $id) {
-      id
-      content
+  query GetInfectedData($date: AWSDate!) {
+    getInfectedData(date: $date) {
       date
+      content
       createdAt
       updatedAt
     }
@@ -15,15 +14,22 @@ export const getInfectedData = /* GraphQL */ `
 `;
 export const listInfectedDatas = /* GraphQL */ `
   query ListInfectedDatas(
+    $date: AWSDate
     $filter: ModelInfectedDataFilterInput
     $limit: Int
     $nextToken: String
+    $sortDirection: ModelSortDirection
   ) {
-    listInfectedDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listInfectedDatas(
+      date: $date
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
       items {
-        id
-        content
         date
+        content
         createdAt
         updatedAt
       }
@@ -36,7 +42,7 @@ export const getPlayer = /* GraphQL */ `
     getPlayer(id: $id) {
       id
       name
-      hp
+      maxHP
       woeid
       commands {
         items {
@@ -44,6 +50,7 @@ export const getPlayer = /* GraphQL */ `
           name
           description
           attack
+          criticalRate
           isOutdoor
           inCommandList
           playerID
@@ -58,7 +65,7 @@ export const getPlayer = /* GraphQL */ `
           date
           playerHP
           curseHP
-          inAreaExpansion
+          histories
           playerID
           curseID
           createdAt
@@ -81,7 +88,7 @@ export const listPlayers = /* GraphQL */ `
       items {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -96,6 +103,45 @@ export const listPlayers = /* GraphQL */ `
     }
   }
 `;
+export const getCurse = /* GraphQL */ `
+  query GetCurse($id: ID!) {
+    getCurse(id: $id) {
+      id
+      name
+      minNegative
+      maxNegative
+      maxHP
+      attack
+      hitRate
+      imgSrc
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCurses = /* GraphQL */ `
+  query ListCurses(
+    $filter: ModelCurseFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCurses(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        minNegative
+        maxNegative
+        maxHP
+        attack
+        hitRate
+        imgSrc
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getCommand = /* GraphQL */ `
   query GetCommand($id: ID!) {
     getCommand(id: $id) {
@@ -103,13 +149,14 @@ export const getCommand = /* GraphQL */ `
       name
       description
       attack
+      criticalRate
       isOutdoor
       inCommandList
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -137,13 +184,14 @@ export const listCommands = /* GraphQL */ `
         name
         description
         attack
+        criticalRate
         isOutdoor
         inCommandList
         playerID
         player {
           id
           name
-          hp
+          maxHP
           woeid
           createdAt
           updatedAt
@@ -162,12 +210,12 @@ export const getBattle = /* GraphQL */ `
       date
       playerHP
       curseHP
-      inAreaExpansion
+      histories
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -182,15 +230,12 @@ export const getBattle = /* GraphQL */ `
       curse {
         id
         name
-        date
         minNegative
         maxNegative
-        hp
+        maxHP
         attack
         hitRate
         imgSrc
-        trends
-        battleID
         createdAt
         updatedAt
       }
@@ -211,12 +256,12 @@ export const listBattles = /* GraphQL */ `
         date
         playerHP
         curseHP
-        inAreaExpansion
+        histories
         playerID
         player {
           id
           name
-          hp
+          maxHP
           woeid
           createdAt
           updatedAt
@@ -225,63 +270,15 @@ export const listBattles = /* GraphQL */ `
         curse {
           id
           name
-          date
           minNegative
           maxNegative
-          hp
+          maxHP
           attack
           hitRate
           imgSrc
-          trends
-          battleID
           createdAt
           updatedAt
         }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getCurse = /* GraphQL */ `
-  query GetCurse($id: ID!) {
-    getCurse(id: $id) {
-      id
-      name
-      date
-      minNegative
-      maxNegative
-      hp
-      attack
-      hitRate
-      imgSrc
-      trends
-      battleID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listCurses = /* GraphQL */ `
-  query ListCurses(
-    $filter: ModelCurseFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listCurses(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        date
-        minNegative
-        maxNegative
-        hp
-        attack
-        hitRate
-        imgSrc
-        trends
-        battleID
         createdAt
         updatedAt
       }

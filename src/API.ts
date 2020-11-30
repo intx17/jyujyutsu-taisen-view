@@ -3,14 +3,12 @@
 //  This file was automatically generated and should not be edited.
 
 export type CreateInfectedDataInput = {
-  id?: string | null,
-  content: string,
   date: string,
+  content: string,
 };
 
 export type ModelInfectedDataConditionInput = {
   content?: ModelStringInput | null,
-  date?: ModelStringInput | null,
   and?: Array< ModelInfectedDataConditionInput | null > | null,
   or?: Array< ModelInfectedDataConditionInput | null > | null,
   not?: ModelInfectedDataConditionInput | null,
@@ -57,25 +55,24 @@ export type ModelSizeInput = {
 };
 
 export type UpdateInfectedDataInput = {
-  id: string,
+  date: string,
   content?: string | null,
-  date?: string | null,
 };
 
 export type DeleteInfectedDataInput = {
-  id?: string | null,
+  date: string,
 };
 
 export type CreatePlayerInput = {
   id?: string | null,
   name: string,
-  hp: number,
+  maxHP: number,
   woeid: number,
 };
 
 export type ModelPlayerConditionInput = {
   name?: ModelStringInput | null,
-  hp?: ModelIntInput | null,
+  maxHP?: ModelIntInput | null,
   woeid?: ModelIntInput | null,
   and?: Array< ModelPlayerConditionInput | null > | null,
   or?: Array< ModelPlayerConditionInput | null > | null,
@@ -97,11 +94,62 @@ export type ModelIntInput = {
 export type UpdatePlayerInput = {
   id: string,
   name?: string | null,
-  hp?: number | null,
+  maxHP?: number | null,
   woeid?: number | null,
 };
 
 export type DeletePlayerInput = {
+  id?: string | null,
+};
+
+export type CreateCurseInput = {
+  id?: string | null,
+  name: string,
+  minNegative: number,
+  maxNegative: number,
+  maxHP: number,
+  attack: number,
+  hitRate: number,
+  imgSrc: string,
+};
+
+export type ModelCurseConditionInput = {
+  name?: ModelStringInput | null,
+  minNegative?: ModelIntInput | null,
+  maxNegative?: ModelIntInput | null,
+  maxHP?: ModelIntInput | null,
+  attack?: ModelIntInput | null,
+  hitRate?: ModelFloatInput | null,
+  imgSrc?: ModelStringInput | null,
+  and?: Array< ModelCurseConditionInput | null > | null,
+  or?: Array< ModelCurseConditionInput | null > | null,
+  not?: ModelCurseConditionInput | null,
+};
+
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type UpdateCurseInput = {
+  id: string,
+  name?: string | null,
+  minNegative?: number | null,
+  maxNegative?: number | null,
+  maxHP?: number | null,
+  attack?: number | null,
+  hitRate?: number | null,
+  imgSrc?: string | null,
+};
+
+export type DeleteCurseInput = {
   id?: string | null,
 };
 
@@ -110,6 +158,7 @@ export type CreateCommandInput = {
   name: string,
   description: string,
   attack: number,
+  criticalRate: number,
   isOutdoor: boolean,
   inCommandList: boolean,
   playerID: string,
@@ -119,6 +168,7 @@ export type ModelCommandConditionInput = {
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
   attack?: ModelIntInput | null,
+  criticalRate?: ModelFloatInput | null,
   isOutdoor?: ModelBooleanInput | null,
   inCommandList?: ModelBooleanInput | null,
   playerID?: ModelIDInput | null,
@@ -155,6 +205,7 @@ export type UpdateCommandInput = {
   name?: string | null,
   description?: string | null,
   attack?: number | null,
+  criticalRate?: number | null,
   isOutdoor?: boolean | null,
   inCommandList?: boolean | null,
   playerID?: string | null,
@@ -169,7 +220,7 @@ export type CreateBattleInput = {
   date: string,
   playerHP: number,
   curseHP: number,
-  inAreaExpansion: boolean,
+  histories?: string | null,
   playerID: string,
   curseID: string,
 };
@@ -178,7 +229,7 @@ export type ModelBattleConditionInput = {
   date?: ModelStringInput | null,
   playerHP?: ModelIntInput | null,
   curseHP?: ModelIntInput | null,
-  inAreaExpansion?: ModelBooleanInput | null,
+  histories?: ModelStringInput | null,
   playerID?: ModelIDInput | null,
   curseID?: ModelIDInput | null,
   and?: Array< ModelBattleConditionInput | null > | null,
@@ -191,7 +242,7 @@ export type UpdateBattleInput = {
   date?: string | null,
   playerHP?: number | null,
   curseHP?: number | null,
-  inAreaExpansion?: boolean | null,
+  histories?: string | null,
   playerID?: string | null,
   curseID?: string | null,
 };
@@ -200,83 +251,42 @@ export type DeleteBattleInput = {
   id?: string | null,
 };
 
-export type CreateCurseInput = {
-  id?: string | null,
-  name: string,
-  date: string,
-  minNegative: number,
-  maxNegative: number,
-  hp: number,
-  attack: number,
-  hitRate: number,
-  imgSrc: string,
-  trends: string,
-  battleID: string,
-};
-
-export type ModelCurseConditionInput = {
-  name?: ModelStringInput | null,
-  date?: ModelStringInput | null,
-  minNegative?: ModelIntInput | null,
-  maxNegative?: ModelIntInput | null,
-  hp?: ModelIntInput | null,
-  attack?: ModelIntInput | null,
-  hitRate?: ModelFloatInput | null,
-  imgSrc?: ModelStringInput | null,
-  trends?: ModelStringInput | null,
-  battleID?: ModelIDInput | null,
-  and?: Array< ModelCurseConditionInput | null > | null,
-  or?: Array< ModelCurseConditionInput | null > | null,
-  not?: ModelCurseConditionInput | null,
-};
-
-export type ModelFloatInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
-export type UpdateCurseInput = {
-  id: string,
-  name?: string | null,
-  date?: string | null,
-  minNegative?: number | null,
-  maxNegative?: number | null,
-  hp?: number | null,
-  attack?: number | null,
-  hitRate?: number | null,
-  imgSrc?: string | null,
-  trends?: string | null,
-  battleID?: string | null,
-};
-
-export type DeleteCurseInput = {
-  id?: string | null,
-};
-
 export type ModelInfectedDataFilterInput = {
-  id?: ModelIDInput | null,
-  content?: ModelStringInput | null,
   date?: ModelStringInput | null,
+  content?: ModelStringInput | null,
   and?: Array< ModelInfectedDataFilterInput | null > | null,
   or?: Array< ModelInfectedDataFilterInput | null > | null,
   not?: ModelInfectedDataFilterInput | null,
 };
 
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type ModelPlayerFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
-  hp?: ModelIntInput | null,
+  maxHP?: ModelIntInput | null,
   woeid?: ModelIntInput | null,
   and?: Array< ModelPlayerFilterInput | null > | null,
   or?: Array< ModelPlayerFilterInput | null > | null,
   not?: ModelPlayerFilterInput | null,
+};
+
+export type ModelCurseFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  minNegative?: ModelIntInput | null,
+  maxNegative?: ModelIntInput | null,
+  maxHP?: ModelIntInput | null,
+  attack?: ModelIntInput | null,
+  hitRate?: ModelFloatInput | null,
+  imgSrc?: ModelStringInput | null,
+  and?: Array< ModelCurseFilterInput | null > | null,
+  or?: Array< ModelCurseFilterInput | null > | null,
+  not?: ModelCurseFilterInput | null,
 };
 
 export type ModelCommandFilterInput = {
@@ -284,6 +294,7 @@ export type ModelCommandFilterInput = {
   name?: ModelStringInput | null,
   description?: ModelStringInput | null,
   attack?: ModelIntInput | null,
+  criticalRate?: ModelFloatInput | null,
   isOutdoor?: ModelBooleanInput | null,
   inCommandList?: ModelBooleanInput | null,
   playerID?: ModelIDInput | null,
@@ -297,29 +308,12 @@ export type ModelBattleFilterInput = {
   date?: ModelStringInput | null,
   playerHP?: ModelIntInput | null,
   curseHP?: ModelIntInput | null,
-  inAreaExpansion?: ModelBooleanInput | null,
+  histories?: ModelStringInput | null,
   playerID?: ModelIDInput | null,
   curseID?: ModelIDInput | null,
   and?: Array< ModelBattleFilterInput | null > | null,
   or?: Array< ModelBattleFilterInput | null > | null,
   not?: ModelBattleFilterInput | null,
-};
-
-export type ModelCurseFilterInput = {
-  id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  date?: ModelStringInput | null,
-  minNegative?: ModelIntInput | null,
-  maxNegative?: ModelIntInput | null,
-  hp?: ModelIntInput | null,
-  attack?: ModelIntInput | null,
-  hitRate?: ModelFloatInput | null,
-  imgSrc?: ModelStringInput | null,
-  trends?: ModelStringInput | null,
-  battleID?: ModelIDInput | null,
-  and?: Array< ModelCurseFilterInput | null > | null,
-  or?: Array< ModelCurseFilterInput | null > | null,
-  not?: ModelCurseFilterInput | null,
 };
 
 export type CreateInfectedDataMutationVariables = {
@@ -330,9 +324,8 @@ export type CreateInfectedDataMutationVariables = {
 export type CreateInfectedDataMutation = {
   createInfectedData:  {
     __typename: "InfectedData",
-    id: string,
-    content: string,
     date: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -346,9 +339,8 @@ export type UpdateInfectedDataMutationVariables = {
 export type UpdateInfectedDataMutation = {
   updateInfectedData:  {
     __typename: "InfectedData",
-    id: string,
-    content: string,
     date: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -362,9 +354,8 @@ export type DeleteInfectedDataMutationVariables = {
 export type DeleteInfectedDataMutation = {
   deleteInfectedData:  {
     __typename: "InfectedData",
-    id: string,
-    content: string,
     date: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -380,7 +371,7 @@ export type CreatePlayerMutation = {
     __typename: "Player",
     id: string,
     name: string,
-    hp: number,
+    maxHP: number,
     woeid: number,
     commands:  {
       __typename: "ModelCommandConnection",
@@ -390,6 +381,7 @@ export type CreatePlayerMutation = {
         name: string,
         description: string,
         attack: number,
+        criticalRate: number,
         isOutdoor: boolean,
         inCommandList: boolean,
         playerID: string,
@@ -406,7 +398,7 @@ export type CreatePlayerMutation = {
         date: string,
         playerHP: number,
         curseHP: number,
-        inAreaExpansion: boolean,
+        histories: string | null,
         playerID: string,
         curseID: string,
         createdAt: string,
@@ -429,7 +421,7 @@ export type UpdatePlayerMutation = {
     __typename: "Player",
     id: string,
     name: string,
-    hp: number,
+    maxHP: number,
     woeid: number,
     commands:  {
       __typename: "ModelCommandConnection",
@@ -439,6 +431,7 @@ export type UpdatePlayerMutation = {
         name: string,
         description: string,
         attack: number,
+        criticalRate: number,
         isOutdoor: boolean,
         inCommandList: boolean,
         playerID: string,
@@ -455,7 +448,7 @@ export type UpdatePlayerMutation = {
         date: string,
         playerHP: number,
         curseHP: number,
-        inAreaExpansion: boolean,
+        histories: string | null,
         playerID: string,
         curseID: string,
         createdAt: string,
@@ -478,7 +471,7 @@ export type DeletePlayerMutation = {
     __typename: "Player",
     id: string,
     name: string,
-    hp: number,
+    maxHP: number,
     woeid: number,
     commands:  {
       __typename: "ModelCommandConnection",
@@ -488,6 +481,7 @@ export type DeletePlayerMutation = {
         name: string,
         description: string,
         attack: number,
+        criticalRate: number,
         isOutdoor: boolean,
         inCommandList: boolean,
         playerID: string,
@@ -504,7 +498,7 @@ export type DeletePlayerMutation = {
         date: string,
         playerHP: number,
         curseHP: number,
-        inAreaExpansion: boolean,
+        histories: string | null,
         playerID: string,
         curseID: string,
         createdAt: string,
@@ -512,6 +506,69 @@ export type DeletePlayerMutation = {
       } | null > | null,
       nextToken: string | null,
     } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateCurseMutationVariables = {
+  input: CreateCurseInput,
+  condition?: ModelCurseConditionInput | null,
+};
+
+export type CreateCurseMutation = {
+  createCurse:  {
+    __typename: "Curse",
+    id: string,
+    name: string,
+    minNegative: number,
+    maxNegative: number,
+    maxHP: number,
+    attack: number,
+    hitRate: number,
+    imgSrc: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateCurseMutationVariables = {
+  input: UpdateCurseInput,
+  condition?: ModelCurseConditionInput | null,
+};
+
+export type UpdateCurseMutation = {
+  updateCurse:  {
+    __typename: "Curse",
+    id: string,
+    name: string,
+    minNegative: number,
+    maxNegative: number,
+    maxHP: number,
+    attack: number,
+    hitRate: number,
+    imgSrc: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteCurseMutationVariables = {
+  input: DeleteCurseInput,
+  condition?: ModelCurseConditionInput | null,
+};
+
+export type DeleteCurseMutation = {
+  deleteCurse:  {
+    __typename: "Curse",
+    id: string,
+    name: string,
+    minNegative: number,
+    maxNegative: number,
+    maxHP: number,
+    attack: number,
+    hitRate: number,
+    imgSrc: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -529,6 +586,7 @@ export type CreateCommandMutation = {
     name: string,
     description: string,
     attack: number,
+    criticalRate: number,
     isOutdoor: boolean,
     inCommandList: boolean,
     playerID: string,
@@ -536,7 +594,7 @@ export type CreateCommandMutation = {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -566,6 +624,7 @@ export type UpdateCommandMutation = {
     name: string,
     description: string,
     attack: number,
+    criticalRate: number,
     isOutdoor: boolean,
     inCommandList: boolean,
     playerID: string,
@@ -573,7 +632,7 @@ export type UpdateCommandMutation = {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -603,6 +662,7 @@ export type DeleteCommandMutation = {
     name: string,
     description: string,
     attack: number,
+    criticalRate: number,
     isOutdoor: boolean,
     inCommandList: boolean,
     playerID: string,
@@ -610,7 +670,7 @@ export type DeleteCommandMutation = {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -640,13 +700,13 @@ export type CreateBattleMutation = {
     date: string,
     playerHP: number,
     curseHP: number,
-    inAreaExpansion: boolean,
+    histories: string | null,
     playerID: string,
     player:  {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -664,15 +724,12 @@ export type CreateBattleMutation = {
       __typename: "Curse",
       id: string,
       name: string,
-      date: string,
       minNegative: number,
       maxNegative: number,
-      hp: number,
+      maxHP: number,
       attack: number,
       hitRate: number,
       imgSrc: string,
-      trends: string,
-      battleID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -693,13 +750,13 @@ export type UpdateBattleMutation = {
     date: string,
     playerHP: number,
     curseHP: number,
-    inAreaExpansion: boolean,
+    histories: string | null,
     playerID: string,
     player:  {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -717,15 +774,12 @@ export type UpdateBattleMutation = {
       __typename: "Curse",
       id: string,
       name: string,
-      date: string,
       minNegative: number,
       maxNegative: number,
-      hp: number,
+      maxHP: number,
       attack: number,
       hitRate: number,
       imgSrc: string,
-      trends: string,
-      battleID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -746,13 +800,13 @@ export type DeleteBattleMutation = {
     date: string,
     playerHP: number,
     curseHP: number,
-    inAreaExpansion: boolean,
+    histories: string | null,
     playerID: string,
     player:  {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -770,15 +824,12 @@ export type DeleteBattleMutation = {
       __typename: "Curse",
       id: string,
       name: string,
-      date: string,
       minNegative: number,
       maxNegative: number,
-      hp: number,
+      maxHP: number,
       attack: number,
       hitRate: number,
       imgSrc: string,
-      trends: string,
-      battleID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -787,97 +838,26 @@ export type DeleteBattleMutation = {
   } | null,
 };
 
-export type CreateCurseMutationVariables = {
-  input: CreateCurseInput,
-  condition?: ModelCurseConditionInput | null,
-};
-
-export type CreateCurseMutation = {
-  createCurse:  {
-    __typename: "Curse",
-    id: string,
-    name: string,
-    date: string,
-    minNegative: number,
-    maxNegative: number,
-    hp: number,
-    attack: number,
-    hitRate: number,
-    imgSrc: string,
-    trends: string,
-    battleID: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateCurseMutationVariables = {
-  input: UpdateCurseInput,
-  condition?: ModelCurseConditionInput | null,
-};
-
-export type UpdateCurseMutation = {
-  updateCurse:  {
-    __typename: "Curse",
-    id: string,
-    name: string,
-    date: string,
-    minNegative: number,
-    maxNegative: number,
-    hp: number,
-    attack: number,
-    hitRate: number,
-    imgSrc: string,
-    trends: string,
-    battleID: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteCurseMutationVariables = {
-  input: DeleteCurseInput,
-  condition?: ModelCurseConditionInput | null,
-};
-
-export type DeleteCurseMutation = {
-  deleteCurse:  {
-    __typename: "Curse",
-    id: string,
-    name: string,
-    date: string,
-    minNegative: number,
-    maxNegative: number,
-    hp: number,
-    attack: number,
-    hitRate: number,
-    imgSrc: string,
-    trends: string,
-    battleID: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
 export type GetInfectedDataQueryVariables = {
-  id: string,
+  date: string,
 };
 
 export type GetInfectedDataQuery = {
   getInfectedData:  {
     __typename: "InfectedData",
-    id: string,
-    content: string,
     date: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
 export type ListInfectedDatasQueryVariables = {
+  date?: string | null,
   filter?: ModelInfectedDataFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type ListInfectedDatasQuery = {
@@ -885,9 +865,8 @@ export type ListInfectedDatasQuery = {
     __typename: "ModelInfectedDataConnection",
     items:  Array< {
       __typename: "InfectedData",
-      id: string,
-      content: string,
       date: string,
+      content: string,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -904,7 +883,7 @@ export type GetPlayerQuery = {
     __typename: "Player",
     id: string,
     name: string,
-    hp: number,
+    maxHP: number,
     woeid: number,
     commands:  {
       __typename: "ModelCommandConnection",
@@ -914,6 +893,7 @@ export type GetPlayerQuery = {
         name: string,
         description: string,
         attack: number,
+        criticalRate: number,
         isOutdoor: boolean,
         inCommandList: boolean,
         playerID: string,
@@ -930,7 +910,7 @@ export type GetPlayerQuery = {
         date: string,
         playerHP: number,
         curseHP: number,
-        inAreaExpansion: boolean,
+        histories: string | null,
         playerID: string,
         curseID: string,
         createdAt: string,
@@ -956,7 +936,7 @@ export type ListPlayersQuery = {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -966,6 +946,52 @@ export type ListPlayersQuery = {
         __typename: "ModelBattleConnection",
         nextToken: string | null,
       } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+  } | null,
+};
+
+export type GetCurseQueryVariables = {
+  id: string,
+};
+
+export type GetCurseQuery = {
+  getCurse:  {
+    __typename: "Curse",
+    id: string,
+    name: string,
+    minNegative: number,
+    maxNegative: number,
+    maxHP: number,
+    attack: number,
+    hitRate: number,
+    imgSrc: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListCursesQueryVariables = {
+  filter?: ModelCurseFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListCursesQuery = {
+  listCurses:  {
+    __typename: "ModelCurseConnection",
+    items:  Array< {
+      __typename: "Curse",
+      id: string,
+      name: string,
+      minNegative: number,
+      maxNegative: number,
+      maxHP: number,
+      attack: number,
+      hitRate: number,
+      imgSrc: string,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -984,6 +1010,7 @@ export type GetCommandQuery = {
     name: string,
     description: string,
     attack: number,
+    criticalRate: number,
     isOutdoor: boolean,
     inCommandList: boolean,
     playerID: string,
@@ -991,7 +1018,7 @@ export type GetCommandQuery = {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -1024,6 +1051,7 @@ export type ListCommandsQuery = {
       name: string,
       description: string,
       attack: number,
+      criticalRate: number,
       isOutdoor: boolean,
       inCommandList: boolean,
       playerID: string,
@@ -1031,7 +1059,7 @@ export type ListCommandsQuery = {
         __typename: "Player",
         id: string,
         name: string,
-        hp: number,
+        maxHP: number,
         woeid: number,
         createdAt: string,
         updatedAt: string,
@@ -1054,13 +1082,13 @@ export type GetBattleQuery = {
     date: string,
     playerHP: number,
     curseHP: number,
-    inAreaExpansion: boolean,
+    histories: string | null,
     playerID: string,
     player:  {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -1078,15 +1106,12 @@ export type GetBattleQuery = {
       __typename: "Curse",
       id: string,
       name: string,
-      date: string,
       minNegative: number,
       maxNegative: number,
-      hp: number,
+      maxHP: number,
       attack: number,
       hitRate: number,
       imgSrc: string,
-      trends: string,
-      battleID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1110,13 +1135,13 @@ export type ListBattlesQuery = {
       date: string,
       playerHP: number,
       curseHP: number,
-      inAreaExpansion: boolean,
+      histories: string | null,
       playerID: string,
       player:  {
         __typename: "Player",
         id: string,
         name: string,
-        hp: number,
+        maxHP: number,
         woeid: number,
         createdAt: string,
         updatedAt: string,
@@ -1126,70 +1151,15 @@ export type ListBattlesQuery = {
         __typename: "Curse",
         id: string,
         name: string,
-        date: string,
         minNegative: number,
         maxNegative: number,
-        hp: number,
+        maxHP: number,
         attack: number,
         hitRate: number,
         imgSrc: string,
-        trends: string,
-        battleID: string,
         createdAt: string,
         updatedAt: string,
       } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken: string | null,
-  } | null,
-};
-
-export type GetCurseQueryVariables = {
-  id: string,
-};
-
-export type GetCurseQuery = {
-  getCurse:  {
-    __typename: "Curse",
-    id: string,
-    name: string,
-    date: string,
-    minNegative: number,
-    maxNegative: number,
-    hp: number,
-    attack: number,
-    hitRate: number,
-    imgSrc: string,
-    trends: string,
-    battleID: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListCursesQueryVariables = {
-  filter?: ModelCurseFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListCursesQuery = {
-  listCurses:  {
-    __typename: "ModelCurseConnection",
-    items:  Array< {
-      __typename: "Curse",
-      id: string,
-      name: string,
-      date: string,
-      minNegative: number,
-      maxNegative: number,
-      hp: number,
-      attack: number,
-      hitRate: number,
-      imgSrc: string,
-      trends: string,
-      battleID: string,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -1200,9 +1170,8 @@ export type ListCursesQuery = {
 export type OnCreateInfectedDataSubscription = {
   onCreateInfectedData:  {
     __typename: "InfectedData",
-    id: string,
-    content: string,
     date: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1211,9 +1180,8 @@ export type OnCreateInfectedDataSubscription = {
 export type OnUpdateInfectedDataSubscription = {
   onUpdateInfectedData:  {
     __typename: "InfectedData",
-    id: string,
-    content: string,
     date: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1222,9 +1190,8 @@ export type OnUpdateInfectedDataSubscription = {
 export type OnDeleteInfectedDataSubscription = {
   onDeleteInfectedData:  {
     __typename: "InfectedData",
-    id: string,
-    content: string,
     date: string,
+    content: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1235,7 +1202,7 @@ export type OnCreatePlayerSubscription = {
     __typename: "Player",
     id: string,
     name: string,
-    hp: number,
+    maxHP: number,
     woeid: number,
     commands:  {
       __typename: "ModelCommandConnection",
@@ -1245,6 +1212,7 @@ export type OnCreatePlayerSubscription = {
         name: string,
         description: string,
         attack: number,
+        criticalRate: number,
         isOutdoor: boolean,
         inCommandList: boolean,
         playerID: string,
@@ -1261,7 +1229,7 @@ export type OnCreatePlayerSubscription = {
         date: string,
         playerHP: number,
         curseHP: number,
-        inAreaExpansion: boolean,
+        histories: string | null,
         playerID: string,
         curseID: string,
         createdAt: string,
@@ -1279,7 +1247,7 @@ export type OnUpdatePlayerSubscription = {
     __typename: "Player",
     id: string,
     name: string,
-    hp: number,
+    maxHP: number,
     woeid: number,
     commands:  {
       __typename: "ModelCommandConnection",
@@ -1289,6 +1257,7 @@ export type OnUpdatePlayerSubscription = {
         name: string,
         description: string,
         attack: number,
+        criticalRate: number,
         isOutdoor: boolean,
         inCommandList: boolean,
         playerID: string,
@@ -1305,7 +1274,7 @@ export type OnUpdatePlayerSubscription = {
         date: string,
         playerHP: number,
         curseHP: number,
-        inAreaExpansion: boolean,
+        histories: string | null,
         playerID: string,
         curseID: string,
         createdAt: string,
@@ -1323,7 +1292,7 @@ export type OnDeletePlayerSubscription = {
     __typename: "Player",
     id: string,
     name: string,
-    hp: number,
+    maxHP: number,
     woeid: number,
     commands:  {
       __typename: "ModelCommandConnection",
@@ -1333,6 +1302,7 @@ export type OnDeletePlayerSubscription = {
         name: string,
         description: string,
         attack: number,
+        criticalRate: number,
         isOutdoor: boolean,
         inCommandList: boolean,
         playerID: string,
@@ -1349,7 +1319,7 @@ export type OnDeletePlayerSubscription = {
         date: string,
         playerHP: number,
         curseHP: number,
-        inAreaExpansion: boolean,
+        histories: string | null,
         playerID: string,
         curseID: string,
         createdAt: string,
@@ -1362,6 +1332,54 @@ export type OnDeletePlayerSubscription = {
   } | null,
 };
 
+export type OnCreateCurseSubscription = {
+  onCreateCurse:  {
+    __typename: "Curse",
+    id: string,
+    name: string,
+    minNegative: number,
+    maxNegative: number,
+    maxHP: number,
+    attack: number,
+    hitRate: number,
+    imgSrc: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateCurseSubscription = {
+  onUpdateCurse:  {
+    __typename: "Curse",
+    id: string,
+    name: string,
+    minNegative: number,
+    maxNegative: number,
+    maxHP: number,
+    attack: number,
+    hitRate: number,
+    imgSrc: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteCurseSubscription = {
+  onDeleteCurse:  {
+    __typename: "Curse",
+    id: string,
+    name: string,
+    minNegative: number,
+    maxNegative: number,
+    maxHP: number,
+    attack: number,
+    hitRate: number,
+    imgSrc: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type OnCreateCommandSubscription = {
   onCreateCommand:  {
     __typename: "Command",
@@ -1369,6 +1387,7 @@ export type OnCreateCommandSubscription = {
     name: string,
     description: string,
     attack: number,
+    criticalRate: number,
     isOutdoor: boolean,
     inCommandList: boolean,
     playerID: string,
@@ -1376,7 +1395,7 @@ export type OnCreateCommandSubscription = {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -1401,6 +1420,7 @@ export type OnUpdateCommandSubscription = {
     name: string,
     description: string,
     attack: number,
+    criticalRate: number,
     isOutdoor: boolean,
     inCommandList: boolean,
     playerID: string,
@@ -1408,7 +1428,7 @@ export type OnUpdateCommandSubscription = {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -1433,6 +1453,7 @@ export type OnDeleteCommandSubscription = {
     name: string,
     description: string,
     attack: number,
+    criticalRate: number,
     isOutdoor: boolean,
     inCommandList: boolean,
     playerID: string,
@@ -1440,7 +1461,7 @@ export type OnDeleteCommandSubscription = {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -1465,13 +1486,13 @@ export type OnCreateBattleSubscription = {
     date: string,
     playerHP: number,
     curseHP: number,
-    inAreaExpansion: boolean,
+    histories: string | null,
     playerID: string,
     player:  {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -1489,15 +1510,12 @@ export type OnCreateBattleSubscription = {
       __typename: "Curse",
       id: string,
       name: string,
-      date: string,
       minNegative: number,
       maxNegative: number,
-      hp: number,
+      maxHP: number,
       attack: number,
       hitRate: number,
       imgSrc: string,
-      trends: string,
-      battleID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1513,13 +1531,13 @@ export type OnUpdateBattleSubscription = {
     date: string,
     playerHP: number,
     curseHP: number,
-    inAreaExpansion: boolean,
+    histories: string | null,
     playerID: string,
     player:  {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -1537,15 +1555,12 @@ export type OnUpdateBattleSubscription = {
       __typename: "Curse",
       id: string,
       name: string,
-      date: string,
       minNegative: number,
       maxNegative: number,
-      hp: number,
+      maxHP: number,
       attack: number,
       hitRate: number,
       imgSrc: string,
-      trends: string,
-      battleID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
@@ -1561,13 +1576,13 @@ export type OnDeleteBattleSubscription = {
     date: string,
     playerHP: number,
     curseHP: number,
-    inAreaExpansion: boolean,
+    histories: string | null,
     playerID: string,
     player:  {
       __typename: "Player",
       id: string,
       name: string,
-      hp: number,
+      maxHP: number,
       woeid: number,
       commands:  {
         __typename: "ModelCommandConnection",
@@ -1585,75 +1600,15 @@ export type OnDeleteBattleSubscription = {
       __typename: "Curse",
       id: string,
       name: string,
-      date: string,
       minNegative: number,
       maxNegative: number,
-      hp: number,
+      maxHP: number,
       attack: number,
       hitRate: number,
       imgSrc: string,
-      trends: string,
-      battleID: string,
       createdAt: string,
       updatedAt: string,
     } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateCurseSubscription = {
-  onCreateCurse:  {
-    __typename: "Curse",
-    id: string,
-    name: string,
-    date: string,
-    minNegative: number,
-    maxNegative: number,
-    hp: number,
-    attack: number,
-    hitRate: number,
-    imgSrc: string,
-    trends: string,
-    battleID: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateCurseSubscription = {
-  onUpdateCurse:  {
-    __typename: "Curse",
-    id: string,
-    name: string,
-    date: string,
-    minNegative: number,
-    maxNegative: number,
-    hp: number,
-    attack: number,
-    hitRate: number,
-    imgSrc: string,
-    trends: string,
-    battleID: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteCurseSubscription = {
-  onDeleteCurse:  {
-    __typename: "Curse",
-    id: string,
-    name: string,
-    date: string,
-    minNegative: number,
-    maxNegative: number,
-    hp: number,
-    attack: number,
-    hitRate: number,
-    imgSrc: string,
-    trends: string,
-    battleID: string,
     createdAt: string,
     updatedAt: string,
   } | null,

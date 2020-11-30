@@ -5,9 +5,8 @@
 export const onCreateInfectedData = /* GraphQL */ `
   subscription OnCreateInfectedData {
     onCreateInfectedData {
-      id
-      content
       date
+      content
       createdAt
       updatedAt
     }
@@ -16,9 +15,8 @@ export const onCreateInfectedData = /* GraphQL */ `
 export const onUpdateInfectedData = /* GraphQL */ `
   subscription OnUpdateInfectedData {
     onUpdateInfectedData {
-      id
-      content
       date
+      content
       createdAt
       updatedAt
     }
@@ -27,9 +25,8 @@ export const onUpdateInfectedData = /* GraphQL */ `
 export const onDeleteInfectedData = /* GraphQL */ `
   subscription OnDeleteInfectedData {
     onDeleteInfectedData {
-      id
-      content
       date
+      content
       createdAt
       updatedAt
     }
@@ -40,7 +37,7 @@ export const onCreatePlayer = /* GraphQL */ `
     onCreatePlayer {
       id
       name
-      hp
+      maxHP
       woeid
       commands {
         items {
@@ -48,6 +45,7 @@ export const onCreatePlayer = /* GraphQL */ `
           name
           description
           attack
+          criticalRate
           isOutdoor
           inCommandList
           playerID
@@ -62,7 +60,7 @@ export const onCreatePlayer = /* GraphQL */ `
           date
           playerHP
           curseHP
-          inAreaExpansion
+          histories
           playerID
           curseID
           createdAt
@@ -80,7 +78,7 @@ export const onUpdatePlayer = /* GraphQL */ `
     onUpdatePlayer {
       id
       name
-      hp
+      maxHP
       woeid
       commands {
         items {
@@ -88,6 +86,7 @@ export const onUpdatePlayer = /* GraphQL */ `
           name
           description
           attack
+          criticalRate
           isOutdoor
           inCommandList
           playerID
@@ -102,7 +101,7 @@ export const onUpdatePlayer = /* GraphQL */ `
           date
           playerHP
           curseHP
-          inAreaExpansion
+          histories
           playerID
           curseID
           createdAt
@@ -120,7 +119,7 @@ export const onDeletePlayer = /* GraphQL */ `
     onDeletePlayer {
       id
       name
-      hp
+      maxHP
       woeid
       commands {
         items {
@@ -128,6 +127,7 @@ export const onDeletePlayer = /* GraphQL */ `
           name
           description
           attack
+          criticalRate
           isOutdoor
           inCommandList
           playerID
@@ -142,7 +142,7 @@ export const onDeletePlayer = /* GraphQL */ `
           date
           playerHP
           curseHP
-          inAreaExpansion
+          histories
           playerID
           curseID
           createdAt
@@ -155,6 +155,54 @@ export const onDeletePlayer = /* GraphQL */ `
     }
   }
 `;
+export const onCreateCurse = /* GraphQL */ `
+  subscription OnCreateCurse {
+    onCreateCurse {
+      id
+      name
+      minNegative
+      maxNegative
+      maxHP
+      attack
+      hitRate
+      imgSrc
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCurse = /* GraphQL */ `
+  subscription OnUpdateCurse {
+    onUpdateCurse {
+      id
+      name
+      minNegative
+      maxNegative
+      maxHP
+      attack
+      hitRate
+      imgSrc
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCurse = /* GraphQL */ `
+  subscription OnDeleteCurse {
+    onDeleteCurse {
+      id
+      name
+      minNegative
+      maxNegative
+      maxHP
+      attack
+      hitRate
+      imgSrc
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateCommand = /* GraphQL */ `
   subscription OnCreateCommand {
     onCreateCommand {
@@ -162,13 +210,14 @@ export const onCreateCommand = /* GraphQL */ `
       name
       description
       attack
+      criticalRate
       isOutdoor
       inCommandList
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -191,13 +240,14 @@ export const onUpdateCommand = /* GraphQL */ `
       name
       description
       attack
+      criticalRate
       isOutdoor
       inCommandList
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -220,13 +270,14 @@ export const onDeleteCommand = /* GraphQL */ `
       name
       description
       attack
+      criticalRate
       isOutdoor
       inCommandList
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -249,12 +300,12 @@ export const onCreateBattle = /* GraphQL */ `
       date
       playerHP
       curseHP
-      inAreaExpansion
+      histories
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -269,15 +320,12 @@ export const onCreateBattle = /* GraphQL */ `
       curse {
         id
         name
-        date
         minNegative
         maxNegative
-        hp
+        maxHP
         attack
         hitRate
         imgSrc
-        trends
-        battleID
         createdAt
         updatedAt
       }
@@ -293,12 +341,12 @@ export const onUpdateBattle = /* GraphQL */ `
       date
       playerHP
       curseHP
-      inAreaExpansion
+      histories
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -313,15 +361,12 @@ export const onUpdateBattle = /* GraphQL */ `
       curse {
         id
         name
-        date
         minNegative
         maxNegative
-        hp
+        maxHP
         attack
         hitRate
         imgSrc
-        trends
-        battleID
         createdAt
         updatedAt
       }
@@ -337,12 +382,12 @@ export const onDeleteBattle = /* GraphQL */ `
       date
       playerHP
       curseHP
-      inAreaExpansion
+      histories
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -357,75 +402,15 @@ export const onDeleteBattle = /* GraphQL */ `
       curse {
         id
         name
-        date
         minNegative
         maxNegative
-        hp
+        maxHP
         attack
         hitRate
         imgSrc
-        trends
-        battleID
         createdAt
         updatedAt
       }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateCurse = /* GraphQL */ `
-  subscription OnCreateCurse {
-    onCreateCurse {
-      id
-      name
-      date
-      minNegative
-      maxNegative
-      hp
-      attack
-      hitRate
-      imgSrc
-      trends
-      battleID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateCurse = /* GraphQL */ `
-  subscription OnUpdateCurse {
-    onUpdateCurse {
-      id
-      name
-      date
-      minNegative
-      maxNegative
-      hp
-      attack
-      hitRate
-      imgSrc
-      trends
-      battleID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteCurse = /* GraphQL */ `
-  subscription OnDeleteCurse {
-    onDeleteCurse {
-      id
-      name
-      date
-      minNegative
-      maxNegative
-      hp
-      attack
-      hitRate
-      imgSrc
-      trends
-      battleID
       createdAt
       updatedAt
     }

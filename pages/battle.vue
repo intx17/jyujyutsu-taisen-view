@@ -17,9 +17,9 @@ import { Component, Prop, Vue } from "nuxt-property-decorator";
 import NewsHeader from '~/components/battle/atoms/NewsHeader.vue';
 import CurseContainer from '~/components/battle/organisms/CurseContainer.vue';
 import PlayerContainer from '~/components/battle/organisms/PlayerContainer.vue';
-import { ListInfectedDatasQueryVariables } from '~/src/API';
-import { listInfectedDatas } from '~/src/graphql/queries';
-import { ListInfectedDatasResponse, ParsedInfectedData } from '~/src/graphql/domain/infectedData';
+import { GetInfectedDataQueryVariables } from '~/src/API';
+import { getInfectedData } from '~/src/graphql/queries';
+import { GetInfectedDataResponse, ParsedInfectedData } from '~/src/graphql/domain/infectedData';
 
 // interfaces
 
@@ -36,27 +36,40 @@ import { ListInfectedDatasResponse, ParsedInfectedData } from '~/src/graphql/dom
       const props = {
         newsText: '',
       }
+      const now = moment();
       const prefecture: string = '東京都';
 
-      const variables: ListInfectedDatasQueryVariables = {
-        filter: {
-          date: {
-            eq: moment().format('YYYY-MM-DD'),
-          },
-        },
-      }
-
-      const infectedDatas: ListInfectedDatasResponse = await API.graphql(
+      const variables: GetInfectedDataQueryVariables = {
+        date: now.format('YYYY-MM-DD'),
+      };
+      const infectedData: GetInfectedDataResponse = await API.graphql(
         graphqlOperation(
-          listInfectedDatas,
+          getInfectedData,
           variables,
-      )) as ListInfectedDatasResponse
+      )) as GetInfectedDataResponse
+      console.log(infectedData);
 
-      if (!infectedDatas.data.listInfectedDatas.items) {
-        props.newsText = '今日の陽性者数データが存在しません';
+      if (infectedData.data.getInfectedData.content) {
+        const parsedInfectedData = JSON.parse(JSON.parse(infectedData.data.getInfectedData.content));
+        props.newsText = `${prefecture}の感染者数は${parsedInfectedData.data47[prefecture]}人です`;
+      } else {
+        const yesterdayVariables: GetInfectedDataQueryVariables = {
+          date: now.add(-1, 'day').format('YYYY-MM-DD'),
+        };
+
+        const yesterdayInfectedData: GetInfectedDataResponse = await API.graphql(
+          graphqlOperation(
+            getInfectedData,
+            yesterdayVariables
+        )) as GetInfectedDataResponse
+
+        if (yesterdayInfectedData.data.getInfectedData.content) {
+          const parsedInfectedData = JSON.parse(JSON.parse(yesterdayInfectedData.data.getInfectedData.content));
+          props.newsText = `${prefecture}の感染者数は${parsedInfectedData.data47[prefecture]}人です`;
+        } else {
+          props.newsText = '感染者数データが存在しません';
+        }
       }
-      const content: ParsedInfectedData = JSON.parse(JSON.parse(infectedDatas.data.listInfectedDatas.items[0].content))
-      props.newsText = `${moment().format('MM月DD日')}の${prefecture}の感染者数は${content.data47[prefecture]}人です`;
 
       return props
     } catch (e) {

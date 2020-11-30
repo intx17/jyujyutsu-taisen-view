@@ -6,8 +6,8 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 export declare class InfectedData {
   readonly id: string;
-  readonly content: string;
   readonly date: string;
+  readonly content: string;
   constructor(init: ModelInit<InfectedData>);
   static copyOf(source: InfectedData, mutator: (draft: MutableModel<InfectedData>) => MutableModel<InfectedData> | void): InfectedData;
 }
@@ -28,6 +28,7 @@ export declare class Command {
   readonly name: string;
   readonly description: string;
   readonly attack: number;
+  readonly criticalRate: number;
   readonly isOutdoor: boolean;
   readonly inCommandList: boolean;
   readonly player?: Player;
@@ -40,7 +41,7 @@ export declare class Battle {
   readonly date: string;
   readonly playerHP: number;
   readonly curseHP: number;
-  readonly inAreaExpansion: boolean;
+  readonly histories?: string;
   readonly player?: Player;
   readonly curseID: string;
   readonly curse?: Curse;
@@ -51,7 +52,6 @@ export declare class Battle {
 export declare class Curse {
   readonly id: string;
   readonly name: string;
-  readonly date: string;
   readonly minNegative: number;
   readonly maxNegative: number;
   readonly hp: number;

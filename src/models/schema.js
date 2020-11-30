@@ -10,17 +10,17 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "content": {
-                    "name": "content",
-                    "isArray": false,
-                    "type": "AWSJSON",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "date": {
                     "name": "date",
                     "isArray": false,
                     "type": "AWSDate",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "content": {
+                    "name": "content",
+                    "isArray": false,
+                    "type": "AWSJSON",
                     "isRequired": true,
                     "attributes": []
                 }
@@ -31,6 +31,15 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "fields": [
+                            "id",
+                            "date"
+                        ]
+                    }
                 }
             ]
         },
@@ -134,6 +143,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "criticalRate": {
+                    "name": "criticalRate",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "isOutdoor": {
                     "name": "isOutdoor",
                     "isArray": false,
@@ -211,11 +227,11 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "inAreaExpansion": {
-                    "name": "inAreaExpansion",
+                "histories": {
+                    "name": "histories",
                     "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": true,
+                    "type": "AWSJSON",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "player": {
@@ -264,7 +280,8 @@ export const schema = {
                     "properties": {
                         "name": "byPlayer",
                         "fields": [
-                            "playerID"
+                            "playerID",
+                            "date"
                         ]
                     }
                 }
@@ -284,13 +301,6 @@ export const schema = {
                     "name": "name",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "date": {
-                    "name": "date",
-                    "isArray": false,
-                    "type": "AWSDate",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -372,5 +382,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "2ea6f803ef30f13971ff07ce0ccedfd8"
+    "version": "93f2e54ecca3ab0adae89ad4491712b0"
 };

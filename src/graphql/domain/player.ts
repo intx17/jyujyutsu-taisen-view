@@ -11,8 +11,6 @@ export interface Player {
 
 export interface GetPlayerResponse {
   data: {
-    getPlayer: {
-      items: Player[]
-    }
+    getPlayer: Player
   }
 }

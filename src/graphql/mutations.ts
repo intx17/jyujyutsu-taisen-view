@@ -8,9 +8,8 @@ export const createInfectedData = /* GraphQL */ `
     $condition: ModelInfectedDataConditionInput
   ) {
     createInfectedData(input: $input, condition: $condition) {
-      id
-      content
       date
+      content
       createdAt
       updatedAt
     }
@@ -22,9 +21,8 @@ export const updateInfectedData = /* GraphQL */ `
     $condition: ModelInfectedDataConditionInput
   ) {
     updateInfectedData(input: $input, condition: $condition) {
-      id
-      content
       date
+      content
       createdAt
       updatedAt
     }
@@ -36,9 +34,8 @@ export const deleteInfectedData = /* GraphQL */ `
     $condition: ModelInfectedDataConditionInput
   ) {
     deleteInfectedData(input: $input, condition: $condition) {
-      id
-      content
       date
+      content
       createdAt
       updatedAt
     }
@@ -52,7 +49,7 @@ export const createPlayer = /* GraphQL */ `
     createPlayer(input: $input, condition: $condition) {
       id
       name
-      hp
+      maxHP
       woeid
       commands {
         items {
@@ -60,6 +57,7 @@ export const createPlayer = /* GraphQL */ `
           name
           description
           attack
+          criticalRate
           isOutdoor
           inCommandList
           playerID
@@ -74,7 +72,7 @@ export const createPlayer = /* GraphQL */ `
           date
           playerHP
           curseHP
-          inAreaExpansion
+          histories
           playerID
           curseID
           createdAt
@@ -95,7 +93,7 @@ export const updatePlayer = /* GraphQL */ `
     updatePlayer(input: $input, condition: $condition) {
       id
       name
-      hp
+      maxHP
       woeid
       commands {
         items {
@@ -103,6 +101,7 @@ export const updatePlayer = /* GraphQL */ `
           name
           description
           attack
+          criticalRate
           isOutdoor
           inCommandList
           playerID
@@ -117,7 +116,7 @@ export const updatePlayer = /* GraphQL */ `
           date
           playerHP
           curseHP
-          inAreaExpansion
+          histories
           playerID
           curseID
           createdAt
@@ -138,7 +137,7 @@ export const deletePlayer = /* GraphQL */ `
     deletePlayer(input: $input, condition: $condition) {
       id
       name
-      hp
+      maxHP
       woeid
       commands {
         items {
@@ -146,6 +145,7 @@ export const deletePlayer = /* GraphQL */ `
           name
           description
           attack
+          criticalRate
           isOutdoor
           inCommandList
           playerID
@@ -160,7 +160,7 @@ export const deletePlayer = /* GraphQL */ `
           date
           playerHP
           curseHP
-          inAreaExpansion
+          histories
           playerID
           curseID
           createdAt
@@ -168,6 +168,63 @@ export const deletePlayer = /* GraphQL */ `
         }
         nextToken
       }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCurse = /* GraphQL */ `
+  mutation CreateCurse(
+    $input: CreateCurseInput!
+    $condition: ModelCurseConditionInput
+  ) {
+    createCurse(input: $input, condition: $condition) {
+      id
+      name
+      minNegative
+      maxNegative
+      maxHP
+      attack
+      hitRate
+      imgSrc
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCurse = /* GraphQL */ `
+  mutation UpdateCurse(
+    $input: UpdateCurseInput!
+    $condition: ModelCurseConditionInput
+  ) {
+    updateCurse(input: $input, condition: $condition) {
+      id
+      name
+      minNegative
+      maxNegative
+      maxHP
+      attack
+      hitRate
+      imgSrc
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCurse = /* GraphQL */ `
+  mutation DeleteCurse(
+    $input: DeleteCurseInput!
+    $condition: ModelCurseConditionInput
+  ) {
+    deleteCurse(input: $input, condition: $condition) {
+      id
+      name
+      minNegative
+      maxNegative
+      maxHP
+      attack
+      hitRate
+      imgSrc
       createdAt
       updatedAt
     }
@@ -183,13 +240,14 @@ export const createCommand = /* GraphQL */ `
       name
       description
       attack
+      criticalRate
       isOutdoor
       inCommandList
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -215,13 +273,14 @@ export const updateCommand = /* GraphQL */ `
       name
       description
       attack
+      criticalRate
       isOutdoor
       inCommandList
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -247,13 +306,14 @@ export const deleteCommand = /* GraphQL */ `
       name
       description
       attack
+      criticalRate
       isOutdoor
       inCommandList
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -279,12 +339,12 @@ export const createBattle = /* GraphQL */ `
       date
       playerHP
       curseHP
-      inAreaExpansion
+      histories
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -299,15 +359,12 @@ export const createBattle = /* GraphQL */ `
       curse {
         id
         name
-        date
         minNegative
         maxNegative
-        hp
+        maxHP
         attack
         hitRate
         imgSrc
-        trends
-        battleID
         createdAt
         updatedAt
       }
@@ -326,12 +383,12 @@ export const updateBattle = /* GraphQL */ `
       date
       playerHP
       curseHP
-      inAreaExpansion
+      histories
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -346,15 +403,12 @@ export const updateBattle = /* GraphQL */ `
       curse {
         id
         name
-        date
         minNegative
         maxNegative
-        hp
+        maxHP
         attack
         hitRate
         imgSrc
-        trends
-        battleID
         createdAt
         updatedAt
       }
@@ -373,12 +427,12 @@ export const deleteBattle = /* GraphQL */ `
       date
       playerHP
       curseHP
-      inAreaExpansion
+      histories
       playerID
       player {
         id
         name
-        hp
+        maxHP
         woeid
         commands {
           nextToken
@@ -393,84 +447,15 @@ export const deleteBattle = /* GraphQL */ `
       curse {
         id
         name
-        date
         minNegative
         maxNegative
-        hp
+        maxHP
         attack
         hitRate
         imgSrc
-        trends
-        battleID
         createdAt
         updatedAt
       }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createCurse = /* GraphQL */ `
-  mutation CreateCurse(
-    $input: CreateCurseInput!
-    $condition: ModelCurseConditionInput
-  ) {
-    createCurse(input: $input, condition: $condition) {
-      id
-      name
-      date
-      minNegative
-      maxNegative
-      hp
-      attack
-      hitRate
-      imgSrc
-      trends
-      battleID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateCurse = /* GraphQL */ `
-  mutation UpdateCurse(
-    $input: UpdateCurseInput!
-    $condition: ModelCurseConditionInput
-  ) {
-    updateCurse(input: $input, condition: $condition) {
-      id
-      name
-      date
-      minNegative
-      maxNegative
-      hp
-      attack
-      hitRate
-      imgSrc
-      trends
-      battleID
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteCurse = /* GraphQL */ `
-  mutation DeleteCurse(
-    $input: DeleteCurseInput!
-    $condition: ModelCurseConditionInput
-  ) {
-    deleteCurse(input: $input, condition: $condition) {
-      id
-      name
-      date
-      minNegative
-      maxNegative
-      hp
-      attack
-      hitRate
-      imgSrc
-      trends
-      battleID
       createdAt
       updatedAt
     }

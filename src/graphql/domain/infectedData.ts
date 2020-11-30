@@ -9,10 +9,8 @@ export interface ParsedInfectedData {
   data47: {[key: string]: number}
 }
 
-export interface ListInfectedDatasResponse {
+export interface GetInfectedDataResponse {
   data: {
-    listInfectedDatas: {
-      items: InfectedData[]
-    }
+    getInfectedData: InfectedData
   }
 }

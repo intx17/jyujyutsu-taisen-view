@@ -1,16 +1,26 @@
-type InfectedData @model {
-  id: ID!
-  content: AWSJSON!
+type InfectedData @model @key(fields: ["date"]) {
   date: AWSDate!
+  content: AWSJSON!
 }
 
 type Player @model {
   id: ID!
   name: String!
-  hp: Int!
+  maxHP: Int!
   woeid: Int!
   commands: [Command] @connection(keyName: "byPlayer", fields: ["id"])
   battles: [Battle] @connection(keyName: "byPlayer", fields: ["id"])
+}
+
+type Curse @model {
+  id: ID!
+  name: String!
+  minNegative: Int!
+  maxNegative: Int!
+  maxHP: Int!
+  attack: Int!
+  hitRate: Float!
+  imgSrc: String!
 }
 
 type Command @model @key(name: "byPlayer", fields: ["playerID"]) {
@@ -18,34 +28,24 @@ type Command @model @key(name: "byPlayer", fields: ["playerID"]) {
   name: String!
   description: String!
   attack: Int!
+  criticalRate: Float!
   isOutdoor: Boolean!
   inCommandList: Boolean!
   playerID: ID!
   player: Player @connection(fields: ["playerID"])
 }
 
-type Battle @model @key(name: "byPlayer", fields: ["playerID"]) {
+type Battle
+  @model
+  @key(name: "byPlayer", fields: ["playerID", "date"])
+{
   id: ID!
   date: AWSDate!
   playerHP: Int!
   curseHP: Int!
-  inAreaExpansion: Boolean!
+  histories: AWSJSON
   playerID: ID!
   player: Player @connection(fields: ["playerID"])
   curseID: ID!
   curse: Curse @connection(fields: ["curseID"])
-}
-
-type Curse @model @key(name: "byBattle", fields: ["battleID"]) {
-  id: ID!
-  name: String!
-  date: AWSDate!
-  minNegative: Int!
-  maxNegative: Int!
-  hp: Int!
-  attack: Int!
-  hitRate: Float!
-  imgSrc: String!
-  trends: AWSJSON!
-  battleID: ID!
 }

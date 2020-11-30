@@ -37,7 +37,7 @@ export default {
         input: {
           id: userInfo.id,
           name: userInfo.username,
-          hp: 100,
+          maxHP: 100,
           woeid: JapaneseWoeid.Tokyo
         }
       }
