@@ -3,6 +3,7 @@
     type="button"
     :class="{ 'is-disabled': !enabled, 'is-error': enabled }"
     class="nes-btn attack-btn"
+    @click="emitClickByEnabled"
   >
     攻撃する
   </button>
@@ -17,6 +18,12 @@ export default class AttackButton extends Vue {
   private enabled?: boolean
 
   // methods
+  private emitClickByEnabled () {
+    if (this.enabled) {
+      this.onClickAttackButton();
+    }
+  }
+
   @Emit()
   onClickAttackButton () {
   }
