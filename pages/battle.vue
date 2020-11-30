@@ -30,7 +30,6 @@ import { GetInfectedDataResponse, ParsedInfectedData } from '~/src/graphql/domai
     PlayerContainer,
     CurseContainer
   },
-  middleware: ['auth'],
   async asyncData ( context ) {
     try {
       const props = {

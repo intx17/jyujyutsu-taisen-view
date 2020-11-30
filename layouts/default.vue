@@ -1,7 +1,12 @@
 <template>
   <div>
-    <nuxt />
-    <common-footer class="common-footer" />
+    <div v-if="isLoggedIn">
+      <nuxt />
+      <common-footer class="common-footer" />
+    </div>
+    <div v-else>
+      <amplify-authenticator class="sign-in" />
+    </div>
   </div>
 </template>
 
@@ -12,17 +17,35 @@ import { getPlayer } from '~/src/graphql/queries';
 import { createPlayer } from '~/src/graphql/mutations';
 import { JapaneseWoeid } from '~/src/enums/japanese-woeid';
 import { GetPlayerResponse } from '~/src/graphql/domain/player';
+const { AmplifyEventBus } = require('aws-amplify-vue');
 
 // components
 import CommonFooter from '~/components/common/molecules/CommonFooter.vue';
 
 export default {
+  data: () => ({
+    isLoggedIn: true
+  }),
   components: {
     CommonFooter
   },
-  async beforeCreate () {
+  async created () {
+    // ログイン, ログアウト時
+    AmplifyEventBus.$on('authState', (info: any) => {
+      switch (info) {
+        case 'signedIn':
+          this.$data.isLoggedIn = true;
+          break
+        default:
+          this.$data.isLoggedIn = false;
+          break
+          break
+      }
+    });
+
     const userInfo = await Auth.currentUserInfo();
     if (!userInfo) {
+      this.$data.isLoggedIn = false;
       return;
     }
 
@@ -61,11 +84,21 @@ body {
   flex-direction: column;
   align-items: flex-start;
   min-height: 100%;
+  font-family: 'Nu KinakoMochi Reg';
 }
 #__nuxt {
   min-width: 100%;
 }
 .common-footer {
   margin-top: 20px;
+  font-family: 'Nu KinakoMochi Reg';
+}
+.sign-in {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sign-in >>> .Form__formSection___3tqxz {
+  min-width: 80%;
 }
 </style>
