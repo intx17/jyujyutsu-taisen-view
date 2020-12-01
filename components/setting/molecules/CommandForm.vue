@@ -1,9 +1,9 @@
 <template>
   <div
-    class="nes-container with-title is-centered command-form-container"
+    class="nes-container with-title is-centered is-rounded command-form-container"
   >
     <p class="title">コマンド設定</p>
-    <select-with-label
+    <select-with-button-and-label
       v-for="(count) in [1, 2, 3]"
       class="command-select"
       :key="count"
@@ -19,11 +19,11 @@
 import { Component, Vue } from "nuxt-property-decorator";
 
 // components
-import SelectWithLabel from "~/components/setting/atoms/SelectWithLabel.vue";
+import SelectWithButtonAndLabel from "~/components/setting/atoms/SelectWithButtonAndLabel.vue";
 
 @Component({
   components: {
-    SelectWithLabel,
+    SelectWithButtonAndLabel,
   },
 })
 export default class CommandForm extends Vue {
@@ -35,7 +35,7 @@ export default class CommandForm extends Vue {
 
 <style scoped>
 .command-form-container {
-  margin: 15px 5% 0px 5%;
+  margin: 20px 5% 0px 5%;
 }
 .command-select + .command-select {
   margin-top: 15px;
