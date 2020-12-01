@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { Component, PropSync, Vue } from 'nuxt-property-decorator';
+import { Component, PropSync, Vue, Watch } from 'nuxt-property-decorator';
 import { settingStore, playerStore } from '~/utils/storeAccessor';
 import { API, graphqlOperation } from 'aws-amplify'
 import { CreateCommandMutationVariables } from '~/src/API';
@@ -64,7 +64,20 @@ export default class CommonDialog extends Vue {
   }
 
   // methods
-  private created () {
+  @Watch('isOpen')
+  private onOpen () {
+    if (settingStore.commandDialog.mode === ModalMode.Create) {
+      this.name = '';
+      this.description = '';
+      this.attack = 0;
+      this.criticalRate = 0;
+      this.isOutdoor = false;
+      return;
+    }
+    this.loadStore();
+  }
+
+  private loadStore () {
     const dialog = settingStore.commandDialog;
 
     this.name = dialog.name;

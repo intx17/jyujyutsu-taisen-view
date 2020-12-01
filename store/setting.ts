@@ -49,7 +49,15 @@ export default class SettingStore extends VuexModule implements ISettingStore {
 
   @Action
   openCommandCreateDialog () {
-    const dialog: ICommandDialog = JSON.parse(JSON.stringify(this.commandDialog));
+    const dialog: ICommandDialog = {
+      isOpen: false,
+      mode: ModalMode.Create,
+      name: '',
+      description: '',
+      attack: 0,
+      criticalRate: 0,
+      isOutdoor: false
+    };
     dialog.isOpen = true;
     dialog.mode = ModalMode.Create;
     this.setCommandDialog(dialog);

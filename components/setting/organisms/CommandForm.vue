@@ -35,7 +35,7 @@ export default class CommandForm extends Vue {
 
   // methods
   private openDialog () {
-    settingStore.openCommandCreateDialog();
+    settingStore.openCommandUpdateDialog();
   }
 }
 </script>
