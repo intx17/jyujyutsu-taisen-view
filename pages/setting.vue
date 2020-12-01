@@ -1,14 +1,27 @@
 <template>
   <section class="container">
-    <amplify-sign-out class="sign-out" />
+    <setting-header />
+    <prefecture-form />
+    <command-form />
   </section>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
+import { Component, Vue } from 'nuxt-property-decorator';
+
+// components
+import SettingHeader from '~/components/setting/molecules/SettingHeader.vue';
+import PrefectureForm from '~/components/setting/molecules/PrefectureForm.vue';
+import CommandForm from '~/components/setting/molecules/CommandForm.vue';
+
 
 @Component({
   layout: 'default',
+  components: {
+    SettingHeader,
+    PrefectureForm,
+    CommandForm,
+  }
 })
 export default class Setting extends Vue {
 }
@@ -17,12 +30,8 @@ export default class Setting extends Vue {
 <style scoped>
 .container {
   font-family: 'Nu KinakoMochi Reg';
-};
-.sign-out {
-  display: flex;
-  flex-direction: column;
 }
-.sign-out >>> .Form__formField___2DWhT {
-  margin: 0 auto;
+.prefecture-setting-container {
+  margin: 15px 5% 0px 5%;
 }
 </style>
