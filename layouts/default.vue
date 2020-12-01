@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="isLoggedIn">
+    <div v-if="isLoggedIn" class="page-content">
       <nuxt />
       <common-footer class="common-footer" />
     </div>
@@ -72,9 +72,8 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
 html {
-  height: 100%;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -86,14 +85,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
   font-family: 'Nu KinakoMochi Reg';
 }
-#__nuxt {
-  min-width: 100%;
+div.page-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 100vw;
+  min-height: 100vh;
+
 }
 .common-footer {
-  margin-top: 20px;
+  margin-top: auto;
   font-family: 'Nu KinakoMochi Reg';
 }
 .sign-in {
