@@ -6,23 +6,23 @@
     <form method="dialog">
       <div class="nes-field">
         <label for="name">Name</label>
-        <input type="text" id="name" class="nes-input">
+        <input type="text" v-model="name" id="name" class="nes-input">
       </div>
       <div>
         <label for="description">Description</label>
-        <textarea id="description" class="nes-textarea"></textarea>
+        <textarea v-model="description" id="description" class="nes-textarea"></textarea>
       </div>
       <div class="nes-field">
         <label for="attack">Attack</label>
-        <input type="number" id="attack" class="nes-input">
+        <input type="number" v-model="attack" id="attack" class="nes-input" min="1" max="100">
       </div>
       <div class="nes-field">
         <label for="critical">Critical</label>
-        <input type="number" id="critical" class="nes-input">
+        <input type="number" v-model="criticalRate" id="critical" class="nes-input" min="1" max="100">
       </div>
       <div class="checkbox-container">
         <label>
-          <input type="checkbox" class="nes-checkbox" checked />
+          <input type="checkbox" v-model="isOutdoor" class="nes-checkbox" />
           <span>Outdoor Activity</span>
         </label>
       </div>
@@ -37,7 +37,11 @@
 
 <script lang="ts">
 import { Component, PropSync, Vue } from 'nuxt-property-decorator';
-import { settingStore } from '~/utils/storeAccessor';
+import { settingStore, playerStore } from '~/utils/storeAccessor';
+import { API, graphqlOperation } from 'aws-amplify'
+import { CreateCommandMutationVariables } from '~/src/API';
+import { createCommand } from '~/src/graphql/mutations';
+import { ModalMode } from '~/store/setting';
 
 // component
 import SuccessButton from '~/components/setting/atoms/SuccessButton.vue';
@@ -48,14 +52,53 @@ import SuccessButton from '~/components/setting/atoms/SuccessButton.vue';
   }
 })
 export default class CommonDialog extends Vue {
+  private name: string = '';
+  private description: string = '';
+  private attack: number = 0;
+  private criticalRate: number = 0;
+  private isOutdoor: boolean = false;
+
   // computed
   private get isOpen () {
     return settingStore.commandDialog.isOpen;
   }
 
   // methods
+  private created () {
+    const dialog = settingStore.commandDialog;
+
+    this.name = dialog.name;
+    this.description = dialog.description;
+    this.attack = dialog.attack;
+    this.criticalRate = dialog.criticalRate;
+    this.isOutdoor = dialog.isOutdoor;
+  }
+
   private closeDialog () {
     settingStore.closeCommandDialog();
+  }
+
+  private async finish () {
+    if (!playerStore.player) {
+      window.alert('ユーザーデータが存在しません。');
+      return;
+    }
+
+    if (settingStore.commandDialog.mode === ModalMode.Create) {
+      const createVar: CreateCommandMutationVariables = {
+        input: {
+          name: this.name,
+          description: this.description,
+          attack: this.attack,
+          criticalRate: this.criticalRate / 100,
+          isOutdoor: this.isOutdoor,
+          inCommandList: false,
+          playerID: playerStore.player.id
+        }
+      }
+      await API.graphql(graphqlOperation(createCommand, createVar));
+      settingStore.closeCommandDialog();
+    }
   }
 }
 </script>

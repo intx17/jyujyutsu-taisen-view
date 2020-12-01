@@ -1,7 +1,18 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 
+export enum ModalMode {
+  Create,
+  Update
+}
+
 interface ICommandDialog {
   isOpen: boolean
+  mode: ModalMode
+  name: string
+  description: string
+  attack: number
+  criticalRate: number
+  isOutdoor: boolean
 }
 
 interface ISettingStore {
@@ -15,7 +26,13 @@ interface ISettingStore {
 })
 export default class SettingStore extends VuexModule implements ISettingStore {
   commandDialog: ICommandDialog = {
-    isOpen: false
+    isOpen: false,
+    mode: ModalMode.Create,
+    name: '',
+    description: '',
+    attack: 0,
+    criticalRate: 0,
+    isOutdoor: false
   };
 
   @Mutation
@@ -27,6 +44,22 @@ export default class SettingStore extends VuexModule implements ISettingStore {
   openCommandDialog () {
     const dialog: ICommandDialog = JSON.parse(JSON.stringify(this.commandDialog));
     dialog.isOpen = true;
+    this.setCommandDialog(dialog);
+  }
+
+  @Action
+  openCommandCreateDialog () {
+    const dialog: ICommandDialog = JSON.parse(JSON.stringify(this.commandDialog));
+    dialog.isOpen = true;
+    dialog.mode = ModalMode.Create;
+    this.setCommandDialog(dialog);
+  }
+
+  @Action
+  openCommandUpdateDialog () {
+    const dialog: ICommandDialog = JSON.parse(JSON.stringify(this.commandDialog));
+    dialog.isOpen = true;
+    dialog.mode = ModalMode.Update;
     this.setCommandDialog(dialog);
   }
 
