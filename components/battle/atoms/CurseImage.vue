@@ -1,6 +1,7 @@
 <template>
   <p :class="{ 'shake-image': shakeImage }" class="curse-image-container">
     <img :src="imgSrc" class="curse-image"/>
+
   </p>
 </template>
 

@@ -2,7 +2,6 @@
   <div class="nes-container is-rounded is-dark">
     <curse-image
       :imgSrc="curse.imgSrc"
-      :shakeImage="curse.shakeImage"
     />
     <curse-name
       :name="curse.name"

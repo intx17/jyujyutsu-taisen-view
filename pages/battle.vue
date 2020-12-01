@@ -41,7 +41,7 @@ import { GetInfectedDataResponse, ParsedInfectedData } from '~/src/graphql/domai
       const curse: ICurse = {
           name: 'ベルゼブブ',
           hp: 50,
-          imgSrc: '/img/beelzebub.png',
+          imgSrc: '/img/curse/beelzebub.png',
       }
 
       const props = {

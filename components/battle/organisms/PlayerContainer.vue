@@ -2,7 +2,10 @@
   <div class="nes-container with-title is-rounded">
     <p class="title player-container-title">プレイヤー</p>
     <hp-bar :hp="hp" />
-    <command-list />
+    <command-list class="command-list" />
+    <p class="kokusen-image-container">
+      <img src="/img/kokusen_small.png" />
+    </p>
     <attack-button
       :enabled="activeCommand"
       @on-click-attack-button="onClickAttackButton"
@@ -66,5 +69,21 @@ export default class PlayerContainer extends Vue {
 
 .nes-btn.is-error:active::after {
   box-shadow: inset -6px -6px #8c2022;
+}
+
+.command-list {
+  position: relative;
+}
+
+.kokusen-image-container {
+  width: 120px;
+  height: 51px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 75px;
+  left: 110px;
 }
 </style>
