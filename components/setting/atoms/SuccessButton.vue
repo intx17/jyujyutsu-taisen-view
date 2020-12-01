@@ -3,9 +3,9 @@
     <button
       type="button"
       class="nes-btn is-success success-btn"
-      @click="onClickSaveButton"
+      @click="onClickButton"
     >
-      保存
+      {{ text }}
     </button>
   </div>
 </template>
@@ -14,10 +14,13 @@
 import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
 
 @Component({})
-export default class SaveButton extends Vue {
+export default class SuccessButton extends Vue {
+  @Prop({ type: String, required: true, default: '' })
+  private text!: string
+
   // methods
   @Emit()
-  private onClickSaveButton () {
+  private onClickButton () {
 
   }
 }

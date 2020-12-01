@@ -11,12 +11,14 @@
       :selectId="`command${count}`"
       :defaultOptionText="`▼コマンド${count}選択`"
       :options="commandOptions"
+      @on-click-button="openDialog"
     />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
+import { settingStore } from '~/utils/storeAccessor';
 
 // components
 import SelectWithButtonAndLabel from "~/components/setting/atoms/SelectWithButtonAndLabel.vue";
@@ -30,6 +32,11 @@ export default class CommandForm extends Vue {
   private commandOptions = [
     { value: "1", text: "北海道" },
   ];
+
+  // methods
+  private openDialog () {
+    settingStore.openCommandDialog();
+  }
 }
 </script>
 

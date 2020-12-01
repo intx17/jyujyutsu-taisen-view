@@ -5,9 +5,11 @@
       :prefectureValue.sync="prefectureValue"
     />
     <command-form />
-    <save-button
+    <command-dialog />
+    <success-button
       class="save-btn"
-      @on-click-save-button="save"
+      :text="'保存'"
+      @on-click-button="save"
     />
   </section>
 </template>
@@ -18,14 +20,15 @@ import { API, graphqlOperation } from 'aws-amplify'
 import { UpdatePlayerMutationVariables } from '~/src/API';
 import { updatePlayer } from '~/src/graphql/mutations';
 import { playerStore } from '~/utils/storeAccessor';
+import { prefectureOptions } from '~/src/components/setting/molecules/prefectureForm';
+import { JapaneseWoeid } from '~/src/enums/japanese-woeid';
 
 // components
 import SettingHeader from '~/components/setting/molecules/SettingHeader.vue';
 import PrefectureForm from '~/components/setting/molecules/PrefectureForm.vue';
-import CommandForm from '~/components/setting/molecules/CommandForm.vue';
-import SaveButton from '~/components/setting/atoms/SaveButton.vue';
-import { prefectureOptions } from '~/src/components/setting/molecules/prefectureForm';
-import { JapaneseWoeid } from '~/src/enums/japanese-woeid';
+import CommandForm from '~/components/setting/organisms/CommandForm.vue';
+import SuccessButton from '~/components/setting/atoms/SuccessButton.vue';
+import CommandDialog from '~/components/setting/organisms/CommandDialog.vue';
 
 @Component({
   layout: 'default',
@@ -34,7 +37,8 @@ import { JapaneseWoeid } from '~/src/enums/japanese-woeid';
     SettingHeader,
     PrefectureForm,
     CommandForm,
-    SaveButton,
+    SuccessButton,
+    CommandDialog,
   }
 })
 export default class Setting extends Vue {

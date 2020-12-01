@@ -17,13 +17,19 @@
           </option>
         </select>
       </div>
-      <button type="button" class="nes-btn edit-btn">編</button>
+      <button
+        type="button"
+        class="nes-btn edit-btn"
+        @click="onClickButton"
+      >
+        編
+      </button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, PropSync, Vue } from 'nuxt-property-decorator';
+import { Component, Emit, Prop, PropSync, Vue } from 'nuxt-property-decorator';
 
 // interfaces
 import { ISelectOption } from '~/src/components/setting/atoms/selectWithLabel';
@@ -44,6 +50,10 @@ export default class SelectWithButtonAndLabel extends Vue {
 
   @Prop({ type: Array, required: true, default: () => ([]) })
   private options!: ISelectOption[];
+
+  // methods
+  @Emit()
+  private onClickButton () {}
 }
 </script>
 
