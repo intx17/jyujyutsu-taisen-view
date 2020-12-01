@@ -19,7 +19,7 @@ import moment, { Moment } from 'moment';
 import { API, graphqlOperation, JS } from 'aws-amplify';
 import { Component, Prop, Vue } from "nuxt-property-decorator";
 import { ICurse } from '~/src/components/battle/organisms/curseContainer';
-import { curseStore } from '~/utils/storeAccessor';
+import { playerStore, curseStore } from '~/utils/storeAccessor';
 
 // components
 import NewsHeader from '~/components/battle/molecules/NewsHeader.vue';
@@ -31,6 +31,7 @@ import { GetInfectedDataResponse, ParsedInfectedData } from '~/src/graphql/domai
 
 @Component({
   layout: 'default',
+  middleware: ['auth'],
   components: {
     NewsHeader,
     PlayerContainer,
@@ -50,7 +51,11 @@ import { GetInfectedDataResponse, ParsedInfectedData } from '~/src/graphql/domai
       }
 
       const now = moment();
-      const prefecture: string = '東京都';
+      if (playerStore.player === null) {
+        window.alert('ユーザーデータが存在しません');
+        return;
+      }
+      const prefecture: string = playerStore.player.prefecture;
 
       const variables: GetInfectedDataQueryVariables = {
         date: now.format('YYYY-MM-DD'),

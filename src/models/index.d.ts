@@ -15,8 +15,9 @@ export declare class InfectedData {
 export declare class Player {
   readonly id: string;
   readonly name: string;
-  readonly hp: number;
+  readonly maxHP: number;
   readonly woeid: number;
+  readonly prefecture: string;
   readonly commands?: (Command | null)[];
   readonly battles?: (Battle | null)[];
   constructor(init: ModelInit<Player>);
@@ -54,12 +55,10 @@ export declare class Curse {
   readonly name: string;
   readonly minNegative: number;
   readonly maxNegative: number;
-  readonly hp: number;
+  readonly maxHP: number;
   readonly attack: number;
   readonly hitRate: number;
   readonly imgSrc: string;
-  readonly trends: string;
-  readonly battleID: string;
   constructor(init: ModelInit<Curse>);
   static copyOf(source: Curse, mutator: (draft: MutableModel<Curse>) => MutableModel<Curse> | void): Curse;
 }

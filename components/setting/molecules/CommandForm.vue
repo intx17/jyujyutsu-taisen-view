@@ -7,6 +7,7 @@
       v-for="(count) in [1, 2, 3]"
       class="command-select"
       :key="count"
+      :selectedValue="''"
       :selectId="`command${count}`"
       :defaultOptionText="`▼コマンド${count}選択`"
       :options="commandOptions"

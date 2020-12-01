@@ -55,7 +55,7 @@ export default class NewsHeader extends Vue {
   display: inline-block;
   white-space: nowrap;
   line-height: 1em;
-  animation: scrollNewsHeaderText 10s linear infinite;
+  animation: scrollNewsHeaderText 6s linear infinite;
 }
 .news-header-text {
   line-height: 2rem;

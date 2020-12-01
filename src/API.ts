@@ -68,12 +68,14 @@ export type CreatePlayerInput = {
   name: string,
   maxHP: number,
   woeid: number,
+  prefecture: string,
 };
 
 export type ModelPlayerConditionInput = {
   name?: ModelStringInput | null,
   maxHP?: ModelIntInput | null,
   woeid?: ModelIntInput | null,
+  prefecture?: ModelStringInput | null,
   and?: Array< ModelPlayerConditionInput | null > | null,
   or?: Array< ModelPlayerConditionInput | null > | null,
   not?: ModelPlayerConditionInput | null,
@@ -96,6 +98,7 @@ export type UpdatePlayerInput = {
   name?: string | null,
   maxHP?: number | null,
   woeid?: number | null,
+  prefecture?: string | null,
 };
 
 export type DeletePlayerInput = {
@@ -270,6 +273,7 @@ export type ModelPlayerFilterInput = {
   name?: ModelStringInput | null,
   maxHP?: ModelIntInput | null,
   woeid?: ModelIntInput | null,
+  prefecture?: ModelStringInput | null,
   and?: Array< ModelPlayerFilterInput | null > | null,
   or?: Array< ModelPlayerFilterInput | null > | null,
   not?: ModelPlayerFilterInput | null,
@@ -373,6 +377,7 @@ export type CreatePlayerMutation = {
     name: string,
     maxHP: number,
     woeid: number,
+    prefecture: string,
     commands:  {
       __typename: "ModelCommandConnection",
       items:  Array< {
@@ -423,6 +428,7 @@ export type UpdatePlayerMutation = {
     name: string,
     maxHP: number,
     woeid: number,
+    prefecture: string,
     commands:  {
       __typename: "ModelCommandConnection",
       items:  Array< {
@@ -473,6 +479,7 @@ export type DeletePlayerMutation = {
     name: string,
     maxHP: number,
     woeid: number,
+    prefecture: string,
     commands:  {
       __typename: "ModelCommandConnection",
       items:  Array< {
@@ -596,6 +603,7 @@ export type CreateCommandMutation = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -634,6 +642,7 @@ export type UpdateCommandMutation = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -672,6 +681,7 @@ export type DeleteCommandMutation = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -708,6 +718,7 @@ export type CreateBattleMutation = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -758,6 +769,7 @@ export type UpdateBattleMutation = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -808,6 +820,7 @@ export type DeleteBattleMutation = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -885,6 +898,7 @@ export type GetPlayerQuery = {
     name: string,
     maxHP: number,
     woeid: number,
+    prefecture: string,
     commands:  {
       __typename: "ModelCommandConnection",
       items:  Array< {
@@ -938,6 +952,7 @@ export type ListPlayersQuery = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -1020,6 +1035,7 @@ export type GetCommandQuery = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -1061,6 +1077,7 @@ export type ListCommandsQuery = {
         name: string,
         maxHP: number,
         woeid: number,
+        prefecture: string,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1090,6 +1107,7 @@ export type GetBattleQuery = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -1143,6 +1161,7 @@ export type ListBattlesQuery = {
         name: string,
         maxHP: number,
         woeid: number,
+        prefecture: string,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1204,6 +1223,7 @@ export type OnCreatePlayerSubscription = {
     name: string,
     maxHP: number,
     woeid: number,
+    prefecture: string,
     commands:  {
       __typename: "ModelCommandConnection",
       items:  Array< {
@@ -1249,6 +1269,7 @@ export type OnUpdatePlayerSubscription = {
     name: string,
     maxHP: number,
     woeid: number,
+    prefecture: string,
     commands:  {
       __typename: "ModelCommandConnection",
       items:  Array< {
@@ -1294,6 +1315,7 @@ export type OnDeletePlayerSubscription = {
     name: string,
     maxHP: number,
     woeid: number,
+    prefecture: string,
     commands:  {
       __typename: "ModelCommandConnection",
       items:  Array< {
@@ -1397,6 +1419,7 @@ export type OnCreateCommandSubscription = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -1430,6 +1453,7 @@ export type OnUpdateCommandSubscription = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -1463,6 +1487,7 @@ export type OnDeleteCommandSubscription = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -1494,6 +1519,7 @@ export type OnCreateBattleSubscription = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -1539,6 +1565,7 @@ export type OnUpdateBattleSubscription = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,
@@ -1584,6 +1611,7 @@ export type OnDeleteBattleSubscription = {
       name: string,
       maxHP: number,
       woeid: number,
+      prefecture: string,
       commands:  {
         __typename: "ModelCommandConnection",
         nextToken: string | null,

@@ -51,6 +51,7 @@ export const createPlayer = /* GraphQL */ `
       name
       maxHP
       woeid
+      prefecture
       commands {
         items {
           id
@@ -95,6 +96,7 @@ export const updatePlayer = /* GraphQL */ `
       name
       maxHP
       woeid
+      prefecture
       commands {
         items {
           id
@@ -139,6 +141,7 @@ export const deletePlayer = /* GraphQL */ `
       name
       maxHP
       woeid
+      prefecture
       commands {
         items {
           id
@@ -249,6 +252,7 @@ export const createCommand = /* GraphQL */ `
         name
         maxHP
         woeid
+        prefecture
         commands {
           nextToken
         }
@@ -282,6 +286,7 @@ export const updateCommand = /* GraphQL */ `
         name
         maxHP
         woeid
+        prefecture
         commands {
           nextToken
         }
@@ -315,6 +320,7 @@ export const deleteCommand = /* GraphQL */ `
         name
         maxHP
         woeid
+        prefecture
         commands {
           nextToken
         }
@@ -346,6 +352,7 @@ export const createBattle = /* GraphQL */ `
         name
         maxHP
         woeid
+        prefecture
         commands {
           nextToken
         }
@@ -390,6 +397,7 @@ export const updateBattle = /* GraphQL */ `
         name
         maxHP
         woeid
+        prefecture
         commands {
           nextToken
         }
@@ -434,6 +442,7 @@ export const deleteBattle = /* GraphQL */ `
         name
         maxHP
         woeid
+        prefecture
         commands {
           nextToken
         }

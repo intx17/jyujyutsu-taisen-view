@@ -8,6 +8,7 @@ type Player @model {
   name: String!
   maxHP: Int!
   woeid: Int!
+  prefecture: String!
   commands: [Command] @connection(keyName: "byPlayer", fields: ["id"])
   battles: [Battle] @connection(keyName: "byPlayer", fields: ["id"])
 }

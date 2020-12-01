@@ -1,11 +1,19 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
+import { JapaneseWoeid } from '~/src/enums/japanese-woeid';
 
 interface IPlayerStore {
+  player: IPlayer | null
   activeCommand: IPlayerStoreCommand | null
 }
 
+interface IPlayer {
+  id: string
+  hp: number
+  prefecture: string
+}
+
 export interface IPlayerStoreCommand {
-  name: string,
+  name: string
   attack: number
 }
 
@@ -15,7 +23,13 @@ export interface IPlayerStoreCommand {
   namespaced: true,
 })
 export default class PlayerStore extends VuexModule implements IPlayerStore {
+  player: IPlayer | null = null;
   activeCommand: IPlayerStoreCommand | null = null;
+
+  @Mutation
+  setPlayer(player: IPlayer | null) {
+    this.player = player;
+  }
 
   @Mutation
   setActiveCommand(command: IPlayerStoreCommand | null) {

@@ -5,6 +5,7 @@ export interface Player {
   name: string
   hp: number
   woeid: JapaneseWoeid
+  prefecture: string
   commands: any[]
   battles: any[]
 }

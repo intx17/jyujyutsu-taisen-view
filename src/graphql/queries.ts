@@ -44,6 +44,7 @@ export const getPlayer = /* GraphQL */ `
       name
       maxHP
       woeid
+      prefecture
       commands {
         items {
           id
@@ -90,6 +91,7 @@ export const listPlayers = /* GraphQL */ `
         name
         maxHP
         woeid
+        prefecture
         commands {
           nextToken
         }
@@ -158,6 +160,7 @@ export const getCommand = /* GraphQL */ `
         name
         maxHP
         woeid
+        prefecture
         commands {
           nextToken
         }
@@ -193,6 +196,7 @@ export const listCommands = /* GraphQL */ `
           name
           maxHP
           woeid
+          prefecture
           createdAt
           updatedAt
         }
@@ -217,6 +221,7 @@ export const getBattle = /* GraphQL */ `
         name
         maxHP
         woeid
+        prefecture
         commands {
           nextToken
         }
@@ -263,6 +268,7 @@ export const listBattles = /* GraphQL */ `
           name
           maxHP
           woeid
+          prefecture
           createdAt
           updatedAt
         }

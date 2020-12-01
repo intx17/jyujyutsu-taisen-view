@@ -36,7 +36,6 @@ export const schema = {
                     "type": "key",
                     "properties": {
                         "fields": [
-                            "id",
                             "date"
                         ]
                     }
@@ -60,8 +59,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "hp": {
-                    "name": "hp",
+                "maxHP": {
+                    "name": "maxHP",
                     "isArray": false,
                     "type": "Int",
                     "isRequired": true,
@@ -71,6 +70,13 @@ export const schema = {
                     "name": "woeid",
                     "isArray": false,
                     "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "prefecture": {
+                    "name": "prefecture",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -318,8 +324,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "hp": {
-                    "name": "hp",
+                "maxHP": {
+                    "name": "maxHP",
                     "isArray": false,
                     "type": "Int",
                     "isRequired": true,
@@ -345,20 +351,6 @@ export const schema = {
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
-                },
-                "trends": {
-                    "name": "trends",
-                    "isArray": false,
-                    "type": "AWSJSON",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "battleID": {
-                    "name": "battleID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -367,20 +359,11 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byBattle",
-                        "fields": [
-                            "battleID"
-                        ]
-                    }
                 }
             ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "93f2e54ecca3ab0adae89ad4491712b0"
+    "version": "2cb6da4b5109c42ba5ecfeadf56f25d5"
 };

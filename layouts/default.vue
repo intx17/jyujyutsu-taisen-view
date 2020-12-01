@@ -17,6 +17,7 @@ import { getPlayer } from '~/src/graphql/queries';
 import { createPlayer } from '~/src/graphql/mutations';
 import { JapaneseWoeid } from '~/src/enums/japanese-woeid';
 import { GetPlayerResponse } from '~/src/graphql/domain/player';
+import { playerStore } from '~/utils/storeAccessor';
 const { AmplifyEventBus } = require('aws-amplify-vue');
 
 // store
@@ -32,44 +33,6 @@ export default {
   computed: {
     isLoggedIn: () => authStore.isLoggedIn
   },
-  async beforeCreate () {
-    // ログイン, ログアウト時
-    AmplifyEventBus.$on('authState', (info: any) => {
-      switch (info) {
-        case 'signedIn':
-          authStore.setIsLoggedIn(true);
-          break
-        default:
-          authStore.setIsLoggedIn(false);
-          break;
-      }
-    });
-
-    const userInfo = await Auth.currentUserInfo();
-    if (!userInfo) {
-      authStore.setIsLoggedIn(false);
-      return;
-    }
-    authStore.setIsLoggedIn(true);
-
-    const getPlayerVar: GetPlayerQueryVariables = {
-      id: userInfo.id
-    };
-
-    const player = await API.graphql(graphqlOperation(getPlayer, getPlayerVar)) as GetPlayerResponse;
-
-    if (!player.data.getPlayer) {
-      const createPlayerVar: CreatePlayerMutationVariables = {
-        input: {
-          id: userInfo.id,
-          name: userInfo.username,
-          maxHP: 100,
-          woeid: JapaneseWoeid.Tokyo
-        }
-      }
-      await API.graphql(graphqlOperation(createPlayer, createPlayerVar))
-    }
-  }
 }
 </script>
 <style>

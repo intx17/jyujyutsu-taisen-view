@@ -1,14 +1,25 @@
 <template>
   <div class="success-btn-container">
-    <button type="button" class="nes-btn is-success success-btn">保存</button>
+    <button
+      type="button"
+      class="nes-btn is-success success-btn"
+      @click="onClickSaveButton"
+    >
+      保存
+    </button>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator';
+import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
 
 @Component({})
 export default class SaveButton extends Vue {
+  // methods
+  @Emit()
+  private onClickSaveButton () {
+
+  }
 }
 </script>
 
