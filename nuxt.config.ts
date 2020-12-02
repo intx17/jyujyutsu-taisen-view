@@ -67,6 +67,7 @@ export default {
   ** Build configuration
   */
   build: {
+    hardSource: true,
     /*
     ** You can extend webpack config here
     */
