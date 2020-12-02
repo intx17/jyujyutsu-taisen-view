@@ -31,5 +31,11 @@
       "dependsOn": [],
       "customAuth": false
     }
+  },
+  "storage": {
+    "jyujyutsutaisen": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }
