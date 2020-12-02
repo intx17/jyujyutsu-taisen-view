@@ -54,8 +54,8 @@ import SuccessButton from '~/components/setting/atoms/SuccessButton.vue';
 export default class CommonDialog extends Vue {
   private name: string = '';
   private description: string = '';
-  private attack: number = 0;
-  private criticalRate: number = 0;
+  private attack: string = '0';
+  private criticalRate: string = '0';
   private isOutdoor: boolean = false;
 
   // computed
@@ -69,8 +69,8 @@ export default class CommonDialog extends Vue {
     if (settingStore.commandDialog.mode === ModalMode.Create) {
       this.name = '';
       this.description = '';
-      this.attack = 0;
-      this.criticalRate = 0;
+      this.attack = '0';
+      this.criticalRate = '0';
       this.isOutdoor = false;
       return;
     }
@@ -82,13 +82,23 @@ export default class CommonDialog extends Vue {
 
     this.name = dialog.name;
     this.description = dialog.description;
-    this.attack = dialog.attack;
-    this.criticalRate = dialog.criticalRate;
+    this.attack = String(dialog.attack);
+    this.criticalRate = String(dialog.criticalRate);
     this.isOutdoor = dialog.isOutdoor;
   }
 
   private closeDialog () {
     settingStore.closeCommandDialog();
+  }
+
+  private isValidInputs () {
+    const attack = Number(this.attack);
+    const criticalRate = Number(this.criticalRate);
+
+    return !!this.name
+      && !!this.description
+      && (Number.isInteger(attack) && attack > 0)
+      && (Number.isInteger(criticalRate) && criticalRate > 0)
   }
 
   private async finish () {
@@ -97,13 +107,18 @@ export default class CommonDialog extends Vue {
       return;
     }
 
+    if (!this.isValidInputs) {
+      window.alert('invalid input was found.');
+      return;
+    }
+
     if (settingStore.commandDialog.mode === ModalMode.Create) {
       const createVar: CreateCommandMutationVariables = {
         input: {
           name: this.name,
           description: this.description,
-          attack: this.attack,
-          criticalRate: this.criticalRate / 100,
+          attack: Number(this.attack),
+          criticalRate: Number(this.criticalRate) / 100,
           isOutdoor: this.isOutdoor,
           inCommandList: false,
           playerID: playerStore.player.id
