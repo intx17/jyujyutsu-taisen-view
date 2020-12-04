@@ -31,7 +31,7 @@ type Command @model @key(name: "byPlayer", fields: ["playerID"]) {
   attack: Int!
   criticalRate: Float!
   isOutdoor: Boolean!
-  inCommandList: Boolean!
+  inSelectedCommandList: Boolean!
   playerID: ID!
   player: Player @connection(fields: ["playerID"])
 }
@@ -45,6 +45,7 @@ type Battle
   playerHP: Int!
   curseHP: Int!
   histories: AWSJSON
+  trends: AWSJSON!
   playerID: ID!
   player: Player @connection(fields: ["playerID"])
   curseID: ID!

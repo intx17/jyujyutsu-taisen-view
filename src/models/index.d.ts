@@ -31,7 +31,7 @@ export declare class Command {
   readonly attack: number;
   readonly criticalRate: number;
   readonly isOutdoor: boolean;
-  readonly inCommandList: boolean;
+  readonly inSelectedCommandList: boolean;
   readonly player?: Player;
   constructor(init: ModelInit<Command>);
   static copyOf(source: Command, mutator: (draft: MutableModel<Command>) => MutableModel<Command> | void): Command;
@@ -43,6 +43,7 @@ export declare class Battle {
   readonly playerHP: number;
   readonly curseHP: number;
   readonly histories?: string;
+  readonly trends: string;
   readonly player?: Player;
   readonly curseID: string;
   readonly curse?: Curse;

@@ -1207,7 +1207,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "inCommandList",
+          "name" : "inSelectedCommandList",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -1351,7 +1351,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "inCommandList",
+          "name" : "inSelectedCommandList",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -1881,6 +1881,21 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
+          "name" : "trends",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "AWSJSON",
+              "ofType" : null
+            }
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
           "name" : "playerID",
           "description" : null,
           "args" : [ ],
@@ -2245,6 +2260,15 @@
           "defaultValue" : null
         }, {
           "name" : "histories",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelStringInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "trends",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -3854,7 +3878,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "inCommandList",
+          "name" : "inSelectedCommandList",
           "description" : null,
           "type" : {
             "kind" : "NON_NULL",
@@ -3934,7 +3958,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "inCommandList",
+          "name" : "inSelectedCommandList",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -4054,7 +4078,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "inCommandList",
+          "name" : "inSelectedCommandList",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -4156,6 +4180,19 @@
           },
           "defaultValue" : null
         }, {
+          "name" : "trends",
+          "description" : null,
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "AWSJSON",
+              "ofType" : null
+            }
+          },
+          "defaultValue" : null
+        }, {
           "name" : "playerID",
           "description" : null,
           "type" : {
@@ -4219,6 +4256,15 @@
           "defaultValue" : null
         }, {
           "name" : "histories",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelStringInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "trends",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -4330,6 +4376,15 @@
           "defaultValue" : null
         }, {
           "name" : "histories",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "AWSJSON",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "trends",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -5385,23 +5440,6 @@
         "onFragment" : false,
         "onField" : false
       }, {
-        "name" : "deprecated",
-        "description" : null,
-        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
-        "args" : [ {
-          "name" : "reason",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "String",
-            "ofType" : null
-          },
-          "defaultValue" : "\"No longer supported\""
-        } ],
-        "onOperation" : false,
-        "onFragment" : false,
-        "onField" : false
-      }, {
         "name" : "aws_auth",
         "description" : "Directs the schema to enforce authorization on a field",
         "locations" : [ "FIELD_DEFINITION" ],
@@ -5418,6 +5456,23 @@
             }
           },
           "defaultValue" : null
+        } ],
+        "onOperation" : false,
+        "onFragment" : false,
+        "onField" : false
+      }, {
+        "name" : "deprecated",
+        "description" : null,
+        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
+        "args" : [ {
+          "name" : "reason",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "defaultValue" : "\"No longer supported\""
         } ],
         "onOperation" : false,
         "onFragment" : false,

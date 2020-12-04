@@ -60,7 +60,7 @@ export const createPlayer = /* GraphQL */ `
           attack
           criticalRate
           isOutdoor
-          inCommandList
+          inSelectedCommandList
           playerID
           createdAt
           updatedAt
@@ -74,6 +74,7 @@ export const createPlayer = /* GraphQL */ `
           playerHP
           curseHP
           histories
+          trends
           playerID
           curseID
           createdAt
@@ -105,7 +106,7 @@ export const updatePlayer = /* GraphQL */ `
           attack
           criticalRate
           isOutdoor
-          inCommandList
+          inSelectedCommandList
           playerID
           createdAt
           updatedAt
@@ -119,6 +120,7 @@ export const updatePlayer = /* GraphQL */ `
           playerHP
           curseHP
           histories
+          trends
           playerID
           curseID
           createdAt
@@ -150,7 +152,7 @@ export const deletePlayer = /* GraphQL */ `
           attack
           criticalRate
           isOutdoor
-          inCommandList
+          inSelectedCommandList
           playerID
           createdAt
           updatedAt
@@ -164,6 +166,7 @@ export const deletePlayer = /* GraphQL */ `
           playerHP
           curseHP
           histories
+          trends
           playerID
           curseID
           createdAt
@@ -245,7 +248,7 @@ export const createCommand = /* GraphQL */ `
       attack
       criticalRate
       isOutdoor
-      inCommandList
+      inSelectedCommandList
       playerID
       player {
         id
@@ -279,7 +282,7 @@ export const updateCommand = /* GraphQL */ `
       attack
       criticalRate
       isOutdoor
-      inCommandList
+      inSelectedCommandList
       playerID
       player {
         id
@@ -313,7 +316,7 @@ export const deleteCommand = /* GraphQL */ `
       attack
       criticalRate
       isOutdoor
-      inCommandList
+      inSelectedCommandList
       playerID
       player {
         id
@@ -346,6 +349,7 @@ export const createBattle = /* GraphQL */ `
       playerHP
       curseHP
       histories
+      trends
       playerID
       player {
         id
@@ -391,6 +395,7 @@ export const updateBattle = /* GraphQL */ `
       playerHP
       curseHP
       histories
+      trends
       playerID
       player {
         id
@@ -436,6 +441,7 @@ export const deleteBattle = /* GraphQL */ `
       playerHP
       curseHP
       histories
+      trends
       playerID
       player {
         id

@@ -163,8 +163,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "inCommandList": {
-                    "name": "inCommandList",
+                "inSelectedCommandList": {
+                    "name": "inSelectedCommandList",
                     "isArray": false,
                     "type": "Boolean",
                     "isRequired": true,
@@ -238,6 +238,13 @@ export const schema = {
                     "isArray": false,
                     "type": "AWSJSON",
                     "isRequired": false,
+                    "attributes": []
+                },
+                "trends": {
+                    "name": "trends",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "player": {
@@ -365,5 +372,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "2cb6da4b5109c42ba5ecfeadf56f25d5"
+    "version": "53168b273176b6732bd0e249f7edbf49"
 };

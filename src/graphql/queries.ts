@@ -53,7 +53,7 @@ export const getPlayer = /* GraphQL */ `
           attack
           criticalRate
           isOutdoor
-          inCommandList
+          inSelectedCommandList
           playerID
           createdAt
           updatedAt
@@ -67,6 +67,7 @@ export const getPlayer = /* GraphQL */ `
           playerHP
           curseHP
           histories
+          trends
           playerID
           curseID
           createdAt
@@ -153,7 +154,7 @@ export const getCommand = /* GraphQL */ `
       attack
       criticalRate
       isOutdoor
-      inCommandList
+      inSelectedCommandList
       playerID
       player {
         id
@@ -189,7 +190,7 @@ export const listCommands = /* GraphQL */ `
         attack
         criticalRate
         isOutdoor
-        inCommandList
+        inSelectedCommandList
         playerID
         player {
           id
@@ -215,6 +216,7 @@ export const getBattle = /* GraphQL */ `
       playerHP
       curseHP
       histories
+      trends
       playerID
       player {
         id
@@ -262,6 +264,7 @@ export const listBattles = /* GraphQL */ `
         playerHP
         curseHP
         histories
+        trends
         playerID
         player {
           id
