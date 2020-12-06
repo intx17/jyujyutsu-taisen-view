@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
-import { API, graphqlOperation } from 'aws-amplify'
+import { API, DataStore, graphqlOperation } from 'aws-amplify'
 import { UpdatePlayerMutationVariables } from '~/src/API';
 import { updatePlayer } from '~/src/graphql/mutations';
 import { playerStore } from '~/utils/storeAccessor';
@@ -29,6 +29,7 @@ import PrefectureForm from '~/components/setting/molecules/PrefectureForm.vue';
 import CommandForm from '~/components/setting/organisms/CommandForm.vue';
 import SuccessButton from '~/components/setting/atoms/SuccessButton.vue';
 import CommandDialog from '~/components/setting/organisms/CommandDialog.vue';
+import { Player } from '~/src/models';
 
 @Component({
   layout: 'default',
@@ -46,10 +47,10 @@ export default class Setting extends Vue {
 
   // methods
   private async save () {
-    const player = playerStore.player;
+    const playerInStore = playerStore.player;
 
     // ふつ〜起こり得ない
-    if (player === null) {
+    if (playerInStore === null) {
       window.alert('ユーザーが存在しません');
       return;
     }
@@ -58,6 +59,12 @@ export default class Setting extends Vue {
       .find(o => o.value === this.prefectureValue)?.text ?? '東京都';
 
     // update DB
+    const players = await DataStore.query(
+      Player, 
+      data => data.id('eq', playerInStore.id)
+    );
+    const player = players[0];
+    await DataStore.save(player, updated => updated)
     const updatePlayerVar: UpdatePlayerMutationVariables = {
       input: {
         id: player.id,

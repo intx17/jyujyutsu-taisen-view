@@ -53,11 +53,12 @@
 </template>
 
 <script lang="ts">
-import { Storage } from "aws-amplify";
+import { DataStore, Storage } from "aws-amplify";
 import { Component, Vue } from "nuxt-property-decorator";
 import { API, graphqlOperation } from 'aws-amplify';
 import { CreateCurseMutationVariables } from '~/src/API';
 import { createCurse } from '~/src/graphql/mutations';
+import { Curse } from "~/src/models";
 
 @Component({
   layout: "default",
@@ -133,24 +134,22 @@ export default class DebugCurse extends Vue {
   }
 
   async dbInsert () {
-    var mutationVar: CreateCurseMutationVariables = {
-      input: {
-        name: this.name,
-        minNegative: Number(this.minNegative),
-        maxNegative: Number(this.maxNegative),
-        maxHP: Number(this.maxHP),
-        attack: Number(this.attack),
-        hitRate: Number(this.hitRate) / 100,
-        imgSrc: `curse/${this.name}.png`
-      }
-    }
-    await API.graphql(graphqlOperation(createCurse, mutationVar));
+    const curse: Curse = new Curse({
+      name: this.name,
+      minNegative: Number(this.minNegative),
+      maxNegative: Number(this.maxNegative),
+      maxHP: Number(this.maxHP),
+      attack: Number(this.attack),
+      hitRate: Number(this.hitRate) / 100,
+      imgSrc: `curse/${this.name}.png`
+    });
+    await DataStore.save(curse);
   }
 
   async storageUpload () {
     await Storage.put(`curse/${this.name}.png`, this.file, {
-    level: 'protected', // レベルの宣言
-    contentType: 'image/png' // file形式
+      level: 'protected', // レベルの宣言
+      contentType: 'image/png' // file形式
     }).then(result => {
       console.log(result);
     }).catch(err => console.log(err));

@@ -54,8 +54,7 @@ export declare class Battle {
 export declare class Curse {
   readonly id: string;
   readonly name: string;
-  readonly minNegative: number;
-  readonly maxNegative: number;
+  readonly negative: number;
   readonly maxHP: number;
   readonly attack: number;
   readonly hitRate: number;

@@ -2017,22 +2017,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "minNegative",
-          "description" : null,
-          "args" : [ ],
-          "type" : {
-            "kind" : "NON_NULL",
-            "name" : null,
-            "ofType" : {
-              "kind" : "SCALAR",
-              "name" : "Int",
-              "ofType" : null
-            }
-          },
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        }, {
-          "name" : "maxNegative",
+          "name" : "negative",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -2516,16 +2501,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "minNegative",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "ModelIntInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "maxNegative",
+          "name" : "negative",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -3507,20 +3483,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "minNegative",
-          "description" : null,
-          "type" : {
-            "kind" : "NON_NULL",
-            "name" : null,
-            "ofType" : {
-              "kind" : "SCALAR",
-              "name" : "Int",
-              "ofType" : null
-            }
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "maxNegative",
+          "name" : "negative",
           "description" : null,
           "type" : {
             "kind" : "NON_NULL",
@@ -3603,16 +3566,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "minNegative",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "ModelIntInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "maxNegative",
+          "name" : "negative",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -3723,16 +3677,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "minNegative",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "Int",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "maxNegative",
+          "name" : "negative",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -5440,6 +5385,23 @@
         "onFragment" : false,
         "onField" : false
       }, {
+        "name" : "deprecated",
+        "description" : null,
+        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
+        "args" : [ {
+          "name" : "reason",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "defaultValue" : "\"No longer supported\""
+        } ],
+        "onOperation" : false,
+        "onFragment" : false,
+        "onField" : false
+      }, {
         "name" : "aws_auth",
         "description" : "Directs the schema to enforce authorization on a field",
         "locations" : [ "FIELD_DEFINITION" ],
@@ -5456,23 +5418,6 @@
             }
           },
           "defaultValue" : null
-        } ],
-        "onOperation" : false,
-        "onFragment" : false,
-        "onField" : false
-      }, {
-        "name" : "deprecated",
-        "description" : null,
-        "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
-        "args" : [ {
-          "name" : "reason",
-          "description" : null,
-          "type" : {
-            "kind" : "SCALAR",
-            "name" : "String",
-            "ofType" : null
-          },
-          "defaultValue" : "\"No longer supported\""
         } ],
         "onOperation" : false,
         "onFragment" : false,

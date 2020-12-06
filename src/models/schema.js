@@ -317,15 +317,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "minNegative": {
-                    "name": "minNegative",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "maxNegative": {
-                    "name": "maxNegative",
+                "negative": {
+                    "name": "negative",
                     "isArray": false,
                     "type": "Int",
                     "isRequired": true,
@@ -366,11 +359,20 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byNegative",
+                        "fields": [
+                            "negative"
+                        ]
+                    }
                 }
             ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "53168b273176b6732bd0e249f7edbf49"
+    "version": "dfc478ef9d7922c37ee01e240e7a9590"
 };
