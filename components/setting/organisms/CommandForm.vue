@@ -9,11 +9,11 @@
       v-for="(count) in [1, 2, 3]"
       :key="count"
       class="command-select"
-      :selected-value="''"
+      :selected-value.sync="selectedValues[count - 1]"
       :select-id="`command${count}`"
       :default-option-text="`▼コマンド${count}選択`"
       :options="commandOptions"
-      @on-click-button="openUpdateDialog"
+      @on-click-button="openUpdateDialog(count - 1)"
     />
     <button
       @click="openCreateDialog"
@@ -31,6 +31,7 @@ import { settingStore } from '~/utils/storeAccessor'
 import SelectWithButtonAndLabel from '~/components/setting/atoms/SelectWithButtonAndLabel.vue'
 import { ICommand } from '~/src/graphql/domain/command'
 import { ISelectOption } from '~/src/components/setting/atoms/selectWithLabel'
+import { ModalMode } from '~/store/setting'
 
 @Component({
   components: {
@@ -40,6 +41,8 @@ import { ISelectOption } from '~/src/components/setting/atoms/selectWithLabel'
 export default class CommandForm extends Vue {
   @Prop({ type: Array, required: true, default: () => ([]) })
   private commands!: ICommand[];
+
+  private selectedValues: string[] = ['', '', '']
 
   // computed
   private get commandOptions (): ISelectOption[] {
@@ -56,8 +59,20 @@ export default class CommandForm extends Vue {
     settingStore.openCommandCreateDialog()
   }
 
-  private openUpdateDialog () {
-    settingStore.openCommandUpdateDialog()
+  private openUpdateDialog (commandIndex: number) {
+    const selected: ICommand | undefined = this.commands.find(c => c.id === this.selectedValues[commandIndex])
+    if (!selected) {
+      window.alert('コマンドが見つかりません')
+      return
+    }
+    settingStore.setCommandDialog({
+      mode: ModalMode.Update,
+      commandId: selected.id,
+      isOpen: true,
+      ...selected,
+      criticalRate: selected.criticalRate * 100
+    })
+    // settingStore.openCommandUpdateDialog()
   }
 }
 </script>

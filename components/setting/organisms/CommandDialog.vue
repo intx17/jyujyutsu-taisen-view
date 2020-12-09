@@ -80,8 +80,8 @@ export default class CommonDialog extends Vue {
     if (settingStore.commandDialog.mode === ModalMode.Create) {
       this.name = ''
       this.description = ''
-      this.attack = '0'
-      this.criticalRate = '0'
+      this.attack = '50'
+      this.criticalRate = '20'
       this.isOutdoor = false
       return
     }
