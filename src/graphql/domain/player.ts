@@ -1,4 +1,4 @@
-import { JapaneseWoeid } from "~/src/enums/japanese-woeid";
+import { JapaneseWoeid } from '~/src/enums/japanese-woeid'
 
 export interface IPlayer {
   id: string

@@ -10,17 +10,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from "nuxt-property-decorator";
+import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator'
 
 @Component({})
 export default class AttackButton extends Vue {
-  @Prop({ type: Boolean, required: false, default: false})
+  @Prop({ type: Boolean, required: false, default: false })
   private enabled?: boolean
 
   // methods
   private emitClickByEnabled () {
     if (this.enabled) {
-      this.onClickAttackButton();
+      this.onClickAttackButton()
     }
   }
 

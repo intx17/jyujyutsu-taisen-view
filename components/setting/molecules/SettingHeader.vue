@@ -12,25 +12,25 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator';
-import { Auth } from 'aws-amplify';
-import { authStore } from '~/utils/storeAccessor';
+import { Component, Vue } from 'nuxt-property-decorator'
+import { Auth } from 'aws-amplify'
+import { authStore } from '~/utils/storeAccessor'
 
 // components
-import LogOutButton from '~/components/common/atoms/LogOutButton.vue';
+import LogOutButton from '~/components/common/atoms/LogOutButton.vue'
 
 @Component({
   components: {
-    LogOutButton,
+    LogOutButton
   }
 })
 export default class SettingHeader extends Vue {
   // methods
   private async signOut () {
     await Auth.signOut()
-      .catch((error) => console.log(error));
+      .catch(error => window.alert(error))
 
-    authStore.setIsLoggedIn(false);
+    authStore.setIsLoggedIn(false)
   }
 }
 </script>

@@ -11,19 +11,11 @@
 </template>
 
 <script lang="ts">
-import { Auth, API, JS, graphqlOperation } from 'aws-amplify'
-import { GetPlayerQueryVariables, CreatePlayerMutationVariables } from '~/src/API';
-import { getPlayer } from '~/src/graphql/queries';
-import { createPlayer } from '~/src/graphql/mutations';
-import { JapaneseWoeid } from '~/src/enums/japanese-woeid';
-import { playerStore } from '~/utils/storeAccessor';
-const { AmplifyEventBus } = require('aws-amplify-vue');
-
 // store
-import { authStore } from '~/utils/storeAccessor';
+import { authStore } from '~/utils/storeAccessor'
 
 // components
-import CommonFooter from '~/components/common/molecules/CommonFooter.vue';
+import CommonFooter from '~/components/common/molecules/CommonFooter.vue'
 
 export default {
   components: {
@@ -31,7 +23,7 @@ export default {
   },
   computed: {
     isLoggedIn: () => authStore.isLoggedIn
-  },
+  }
 }
 </script>
 <style>

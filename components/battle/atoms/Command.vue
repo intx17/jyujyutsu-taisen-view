@@ -16,14 +16,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, PropSync, Emit } from "nuxt-property-decorator";
+import { Component, Vue, PropSync, Emit } from 'nuxt-property-decorator'
 
 // interfaces
-import { ICommand } from '~/src/components/battle/atoms/command';
+import { ICommand } from '~/src/components/battle/atoms/command'
 
 @Component({})
 export default class CommandList extends Vue {
-  @PropSync('command', {type: Object, required: true, default: () => {} })
+  @PropSync('command', { type: Object, required: true, default: () => {} })
   private syncedCommand!: ICommand;
 
   // method

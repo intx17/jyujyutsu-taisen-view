@@ -1,5 +1,6 @@
 <template>
-  <p :class="curseNameContainerClasses"
+  <p
+    :class="curseNameContainerClasses"
     class="curse-name-container nes-text"
   >
     <span class="curse-name">
@@ -12,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator';
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 @Component({})
 export default class CurseName extends Vue {
@@ -23,7 +24,7 @@ export default class CurseName extends Vue {
   private isAreaExpansion!: boolean
 
   // computed
-  private get curseNameContainerClasses() {
+  private get curseNameContainerClasses () {
     return {
       'is-warning': this.isAreaExpansion
     }

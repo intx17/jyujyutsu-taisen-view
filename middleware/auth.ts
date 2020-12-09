@@ -1,65 +1,60 @@
 import { Auth } from 'aws-amplify'
-import { GetPlayerQueryVariables, CreatePlayerMutationVariables } from '~/src/API';
-import { JapaneseWoeid } from '~/src/enums/japanese-woeid';
-const { AmplifyEventBus } = require('aws-amplify-vue');
+import { Context } from '@nuxt/types'
+import { JapaneseWoeid } from '~/src/enums/japanese-woeid'
 
 // store
-import { authStore, playerStore } from '~/utils/storeAccessor';
-import { Context } from '@nuxt/types';
+import { authStore, playerStore } from '~/utils/storeAccessor'
+const { AmplifyEventBus } = require('aws-amplify-vue')
 
 export default async (context: Context) => {
-    // ログイン, ログアウト時
+  // ログイン, ログアウト時
   AmplifyEventBus.$on('authState', (info: any) => {
     switch (info) {
       case 'signedIn':
-        authStore.setIsLoggedIn(true);
+        authStore.setIsLoggedIn(true)
         break
       default:
-        authStore.setIsLoggedIn(false);
-        break;
+        authStore.setIsLoggedIn(false)
+        break
     }
-  });
+  })
 
   // ログイン認証情報取得
-  const userInfo = await Auth.currentUserInfo();
+  const userInfo = await Auth.currentUserInfo()
   if (!userInfo) {
-    authStore.setIsLoggedIn(false);
-    return;
+    authStore.setIsLoggedIn(false)
+    return
   }
-  authStore.setIsLoggedIn(true);
+  authStore.setIsLoggedIn(true)
 
   // ストア内プレイヤー情報取得
   if (playerStore.player !== null) {
-    return;
+    return
   }
 
-  const getPlayerVar: GetPlayerQueryVariables = {
-    id: userInfo.id
-  };
-
-  const fetchPlayerResult = await context.app.$fetchPlayer({ id: userInfo.id });
-  const player = fetchPlayerResult.player;
+  const fetchPlayerResult = await context.app.$fetchPlayer({ id: userInfo.id })
+  const player = fetchPlayerResult.player
 
   if (player) {
     playerStore.setPlayer({
       id: player.id,
       hp: 100,
-      prefecture: player.prefecture,
-    });
+      prefecture: player.prefecture
+    })
   } else {
     await context.app.$createPlayer({
-        id: userInfo.id,
-        name: userInfo.username,
-        maxHP: 100,
-        woeid: JapaneseWoeid.Tokyo,
-        prefecture: '東京都',
-      });
+      id: userInfo.id,
+      name: userInfo.username,
+      maxHP: 100,
+      woeid: JapaneseWoeid.Japan,
+      prefecture: '東京都'
+    })
 
     // リファクタ
     playerStore.setPlayer({
       id: userInfo.id,
       hp: 100,
       prefecture: '東京都'
-    });
+    })
   }
 }

@@ -1,7 +1,8 @@
 <template>
   <div id="battle-history-container">
     <ul class="nes-list is-circle battle-history-list">
-      <li v-for="(history, index) in battleHistories"
+      <li
+        v-for="(history, index) in battleHistories"
         :key="index"
       >
         <span class="history">
@@ -13,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from "nuxt-property-decorator";
+import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
 @Component({})
 export default class BattleHistory extends Vue {
@@ -21,13 +22,13 @@ export default class BattleHistory extends Vue {
   private battleHistories!: string[];
 
   // methods
-  private mounted() {
-    this.scrollToBottom();
+  private mounted () {
+    this.scrollToBottom()
   }
 
-  private scrollToBottom() {
-    let target = document.getElementById('battle-history-container')!;
-    target.scrollTop = target.scrollHeight;
+  private scrollToBottom () {
+    const target = document.getElementById('battle-history-container')!
+    target.scrollTop = target.scrollHeight
   }
 }
 </script>

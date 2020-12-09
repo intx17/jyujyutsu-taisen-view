@@ -15,18 +15,15 @@
 </template>
 
 <script lang="ts">
-import moment, { Moment } from 'moment';
-import { API, graphqlOperation, JS } from 'aws-amplify';
-import { Component, Prop, Vue } from "nuxt-property-decorator";
-import { ICurse } from '~/src/components/battle/organisms/curseContainer';
-import { playerStore, curseStore } from '~/utils/storeAccessor';
+import moment from 'moment'
+import { Component, Vue } from 'nuxt-property-decorator'
+import { ICurse } from '~/src/components/battle/organisms/curseContainer'
+import { playerStore, curseStore } from '~/utils/storeAccessor'
 
 // components
-import NewsHeader from '~/components/battle/molecules/NewsHeader.vue';
-import CurseContainer from '~/components/battle/organisms/CurseContainer.vue';
-import PlayerContainer from '~/components/battle/organisms/PlayerContainer.vue';
-import { GetInfectedDataQueryVariables } from '~/src/API';
-import { getInfectedData } from '~/src/graphql/queries';
+import NewsHeader from '~/components/battle/molecules/NewsHeader.vue'
+import CurseContainer from '~/components/battle/organisms/CurseContainer.vue'
+import PlayerContainer from '~/components/battle/organisms/PlayerContainer.vue'
 
 @Component({
   layout: 'default',
@@ -36,12 +33,12 @@ import { getInfectedData } from '~/src/graphql/queries';
     PlayerContainer,
     CurseContainer
   },
-  async asyncData ( context ) {
+  async asyncData (context) {
     try {
       const curse: ICurse = {
-          name: 'ベルゼブブ',
-          hp: 50,
-          imgSrc: '/img/curse/beelzebub.png',
+        name: 'ベルゼブブ',
+        hp: 50,
+        imgSrc: '/img/curse/beelzebub.png'
       }
 
       const props = {
@@ -49,38 +46,39 @@ import { getInfectedData } from '~/src/graphql/queries';
         curse
       }
 
-      const now = moment();
+      const now = moment()
       if (playerStore.player === null) {
-        window.alert('ユーザーデータが存在しません');
-        return;
+        window.alert('ユーザーデータが存在しません')
+        return
       }
-      const prefecture: string = playerStore.player.prefecture;
+      const prefecture: string = playerStore.player.prefecture
 
       const fetchInfectedDataResult = await context.app.$fetchInfectedData({
         date: now.format('YYYY-MM-DD')
-      });
-      const infectedData = fetchInfectedDataResult.infectedData;
+      })
+      const infectedData = fetchInfectedDataResult.infectedData
 
       if (infectedData) {
-        const parsedInfectedData = JSON.parse(JSON.parse(infectedData.content));
-        props.newsText = `${prefecture}の感染者数は${parsedInfectedData.data47[prefecture]}人です`;
+        const parsedInfectedData = JSON.parse(JSON.parse(infectedData.content))
+        props.newsText = `${prefecture}の感染者数は${parsedInfectedData.data47[prefecture]}人です`
       } else {
         const fetchYesterdayInfectedDataResult = await context.app.$fetchInfectedData({
-          date: now.add(-1, 'day').format('YYYY-MM-DD'),
-        });
-        const yesterdayInfectedData = fetchYesterdayInfectedDataResult.infectedData;
+          date: now.add(-1, 'day').format('YYYY-MM-DD')
+        })
+        const yesterdayInfectedData = fetchYesterdayInfectedDataResult.infectedData
 
         if (yesterdayInfectedData.content) {
-          const parsedInfectedData = JSON.parse(JSON.parse(yesterdayInfectedData.content));
-          props.newsText = `${prefecture}の感染者数は${parsedInfectedData.data47[prefecture]}人です`;
+          const parsedInfectedData = JSON.parse(JSON.parse(yesterdayInfectedData.content))
+          props.newsText = `${prefecture}の感染者数は${parsedInfectedData.data47[prefecture]}人です`
         } else {
-          props.newsText = '感染者数データが存在しません';
+          props.newsText = '感染者数データが存在しません'
         }
       }
 
       return props
     } catch (e) {
-      console.error(JSON.stringify(e));
+      // eslint-disable-next-line no-console
+      console.error(JSON.stringify(e))
     }
   }
 })
@@ -91,10 +89,10 @@ export default class Battle extends Vue {
   // methods
   private playerAttack () {
     if (curseStore.shaking) {
-      return;
+      return
     }
-    curseStore.setShaking(true);
-    setTimeout(() => curseStore.setShaking(false), 3000);
+    curseStore.setShaking(true)
+    setTimeout(() => curseStore.setShaking(false), 3000)
   }
 }
 </script>

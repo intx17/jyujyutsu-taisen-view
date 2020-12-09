@@ -1,28 +1,42 @@
 <template>
-  <dialog v-if="isOpen" class="nes-dialog is-rounded" id="command-dialog" open>
+  <dialog v-if="isOpen" id="command-dialog" class="nes-dialog is-rounded" open>
     <div class="icon-container" @click="closeDialog">
-      <i class="nes-icon close"></i>
+      <i class="nes-icon close" />
     </div>
     <form method="dialog">
       <div class="nes-field">
         <label for="name">名前</label>
-        <input type="text" v-model="name" id="name" class="nes-input">
+        <input id="name" v-model="name" type="text" class="nes-input">
       </div>
       <div>
         <label for="description">説明</label>
-        <textarea v-model="description" id="description" class="nes-textarea"></textarea>
+        <textarea id="description" v-model="description" class="nes-textarea" />
       </div>
       <div class="nes-field">
         <label for="attack">攻撃力</label>
-        <input type="number" v-model="attack" id="attack" class="nes-input" min="1" max="100">
+        <input
+          id="attack"
+          v-model="attack"
+          type="number"
+          class="nes-input"
+          min="1"
+          max="100"
+        >
       </div>
       <div class="nes-field">
         <label for="critical">クリティカル率</label>
-        <input type="number" v-model="criticalRate" id="critical" class="nes-input" min="1" max="100">
+        <input
+          id="critical"
+          v-model="criticalRate"
+          type="number"
+          class="nes-input"
+          min="1"
+          max="100"
+        >
       </div>
       <div class="checkbox-container">
         <label>
-          <input type="checkbox" v-model="isOutdoor" class="nes-checkbox" />
+          <input v-model="isOutdoor" type="checkbox" class="nes-checkbox">
           <span>野外活動</span>
         </label>
       </div>
@@ -36,19 +50,16 @@
 </template>
 
 <script lang="ts">
-import { Component, PropSync, Vue, Watch } from 'nuxt-property-decorator';
-import { settingStore, playerStore } from '~/utils/storeAccessor';
-import { API, graphqlOperation } from 'aws-amplify'
-import { CreateCommandMutationVariables } from '~/src/API';
-import { createCommand } from '~/src/graphql/mutations';
-import { ModalMode } from '~/store/setting';
+import { Component, Vue, Watch } from 'nuxt-property-decorator'
+import { settingStore, playerStore } from '~/utils/storeAccessor'
+import { ModalMode } from '~/store/setting'
 
 // component
-import SuccessButton from '~/components/setting/atoms/SuccessButton.vue';
+import SuccessButton from '~/components/setting/atoms/SuccessButton.vue'
 
 @Component({
   components: {
-    SuccessButton,
+    SuccessButton
   }
 })
 export default class CommonDialog extends Vue {
@@ -60,81 +71,81 @@ export default class CommonDialog extends Vue {
 
   // computed
   private get isOpen () {
-    return settingStore.commandDialog.isOpen;
+    return settingStore.commandDialog.isOpen
   }
 
   // methods
   @Watch('isOpen')
   private onOpen () {
     if (settingStore.commandDialog.mode === ModalMode.Create) {
-      this.name = '';
-      this.description = '';
-      this.attack = '0';
-      this.criticalRate = '0';
-      this.isOutdoor = false;
-      return;
+      this.name = ''
+      this.description = ''
+      this.attack = '0'
+      this.criticalRate = '0'
+      this.isOutdoor = false
+      return
     }
-    this.loadStore();
+    this.loadStore()
   }
 
   private loadStore () {
-    const dialog = settingStore.commandDialog;
+    const dialog = settingStore.commandDialog
 
-    this.name = dialog.name;
-    this.description = dialog.description;
-    this.attack = String(dialog.attack);
-    this.criticalRate = String(dialog.criticalRate);
-    this.isOutdoor = dialog.isOutdoor;
+    this.name = dialog.name
+    this.description = dialog.description
+    this.attack = String(dialog.attack)
+    this.criticalRate = String(dialog.criticalRate)
+    this.isOutdoor = dialog.isOutdoor
   }
 
   private closeDialog () {
-    settingStore.closeCommandDialog();
+    settingStore.closeCommandDialog()
   }
 
   private isValidInputs () {
-    const attack = Number(this.attack);
-    const criticalRate = Number(this.criticalRate);
+    const attack = Number(this.attack)
+    const criticalRate = Number(this.criticalRate)
 
-    return !!this.name
-      && !!this.description
-      && (Number.isInteger(attack) && attack > 0)
-      && (Number.isInteger(criticalRate) && criticalRate > 0)
+    return !!this.name &&
+      !!this.description &&
+      (Number.isInteger(attack) && attack > 0) &&
+      (Number.isInteger(criticalRate) && criticalRate > 0)
   }
 
   private async finish () {
     if (!playerStore.player) {
-      window.alert('ユーザーデータが存在しません。');
-      return;
+      window.alert('ユーザーデータが存在しません。')
+      return
     }
 
     if (!this.isValidInputs) {
-      window.alert('invalid input was found.');
-      return;
+      window.alert('invalid input was found.')
+      return
     }
 
     if (settingStore.commandDialog.mode === ModalMode.Create) {
       await this.$createCommand({
-          name: this.name,
-          description: this.description,
-          attack: Number(this.attack),
-          criticalRate: Number(this.criticalRate) / 100,
-          isOutdoor: this.isOutdoor,
-         inSelectedCommandList: false,
-          playerID: playerStore.player.id
-        });
+        name: this.name,
+        description: this.description,
+        attack: Number(this.attack),
+        criticalRate: Number(this.criticalRate) / 100,
+        isOutdoor: this.isOutdoor,
+        inSelectedCommandList: false,
+        playerID: playerStore.player.id
+      })
     } else {
       await this.$updateCommand({
-          id: settingStore.commandDialog.commandId!,
-          name: this.name,
-          description: this.description,
-          attack: Number(this.attack),
-          criticalRate: Number(this.criticalRate) / 100,
-          isOutdoor: this.isOutdoor,
-         inSelectedCommandList: false,
+        id: settingStore.commandDialog.commandId!,
+        name: this.name,
+        description: this.description,
+        attack: Number(this.attack),
+        criticalRate: Number(this.criticalRate) / 100,
+        isOutdoor: this.isOutdoor,
+        inSelectedCommandList: false
       })
     }
 
-    settingStore.closeCommandDialog();
+    settingStore.closeCommandDialog()
   }
 }
 </script>

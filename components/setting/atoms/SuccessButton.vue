@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
+import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator'
 
 @Component({})
 export default class SuccessButton extends Vue {

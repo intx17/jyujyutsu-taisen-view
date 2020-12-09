@@ -9,18 +9,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
-import { Auth } from 'aws-amplify';
-import { authStore } from '~/utils/storeAccessor';
+import { Component, Vue } from 'nuxt-property-decorator'
+import { Auth } from 'aws-amplify'
+import { authStore } from '~/utils/storeAccessor'
 
 @Component({})
 export default class LogOutButton extends Vue {
   // methods
   private async signOut () {
     await Auth.signOut()
-      .catch((error) => console.log(error));
+      .catch(error => window.alert(error))
 
-    authStore.setIsLoggedIn(false);
+    authStore.setIsLoggedIn(false)
   }
 }
 </script>

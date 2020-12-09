@@ -7,13 +7,13 @@ interface IAuthStore {
 @Module({
   name: 'auth',
   stateFactory: true,
-  namespaced: true,
+  namespaced: true
 })
 export default class AuthStore extends VuexModule implements IAuthStore {
   isLoggedIn: boolean = false;
 
   @Mutation
-  setIsLoggedIn(loggedIn: boolean) {
-    this.isLoggedIn = loggedIn;
+  setIsLoggedIn (loggedIn: boolean) {
+    this.isLoggedIn = loggedIn
   }
 }

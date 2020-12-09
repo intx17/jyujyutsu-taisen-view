@@ -1,34 +1,11 @@
-import { Plugin } from '@nuxt/types';
-import { API, graphqlOperation } from "aws-amplify";
-import { CreatePlayerMutationVariables, GetPlayerQueryVariables, UpdatePlayerMutationVariables } from '~/src/API';
-import { JapaneseWoeid } from "~/src/enums/japanese-woeid";
-import { IPlayer } from "~/src/graphql/domain/player";
-import * as queries from '~/src/graphql/queries';
-import * as mutations from '~/src/graphql/mutations';
-
-declare module 'vue/types/vue' {
-  interface Vue {
-    $fetchPlayer(input: FetchPlayerInput): Promise<FetchPlayerResult>
-    $createPlayer(input: CreatePlayerInput): Promise<void>
-    $updatePlayer(input: UpdatePlayerInput): Promise<void>
-  }
-}
-
-declare module '@nuxt/types' {
-  interface NuxtAppOptions {
-    $fetchPlayer(input: FetchPlayerInput): Promise<FetchPlayerResult>
-    $createPlayer(input: CreatePlayerInput): Promise<void>
-    $updatePlayer(input: UpdatePlayerInput): Promise<void>
-  }
-}
-
-declare module 'vuex/types/index' {
-  interface Store<S> {
-    $fetchPlayer(input: FetchPlayerInput): Promise<FetchPlayerResult>
-    $createPlayer(input: CreatePlayerInput): Promise<void>
-    $updatePlayer(input: UpdatePlayerInput): Promise<void>
-  }
-}
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Plugin } from '@nuxt/types'
+import { API, graphqlOperation } from 'aws-amplify'
+import { CreatePlayerMutationVariables, GetPlayerQueryVariables, UpdatePlayerMutationVariables } from '~/src/API'
+import { JapaneseWoeid } from '~/src/enums/japanese-woeid'
+import { IPlayer } from '~/src/graphql/domain/player'
+import * as queries from '~/src/graphql/queries'
+import * as mutations from '~/src/graphql/mutations'
 
 interface GetPlayerResponse {
   data: {
@@ -57,37 +34,61 @@ interface UpdatePlayerInput {
     prefecture: string
 }
 
-async function fetchPlayer(input: FetchPlayerInput): Promise<FetchPlayerResult> {
-    const getPlayerVar: GetPlayerQueryVariables = {
-        id: input.id
-    };
+async function fetchPlayer (input: FetchPlayerInput): Promise<FetchPlayerResult> {
+  const getPlayerVar: GetPlayerQueryVariables = {
+    id: input.id
+  }
 
-    const response = await API.graphql(graphqlOperation(queries.getPlayer, getPlayerVar)) as GetPlayerResponse;
-    const player = response.data.getPlayer;
-    
-    return {
-        player
-    }
+  const response = await API.graphql(graphqlOperation(queries.getPlayer, getPlayerVar)) as GetPlayerResponse
+  const player = response.data.getPlayer
+
+  return {
+    player
+  }
 }
 
-async function createPlayer(input: CreatePlayerInput): Promise<void> {
-    const createPlayerVar: CreatePlayerMutationVariables = {
-        input
-    }
-    await API.graphql(graphqlOperation(mutations.createPlayer, createPlayerVar));
-}
-
-async function updatePlayer(input: UpdatePlayerInput): Promise<void> {
-   const updatePlayerVar: UpdatePlayerMutationVariables = {
+async function createPlayer (input: CreatePlayerInput): Promise<void> {
+  const createPlayerVar: CreatePlayerMutationVariables = {
     input
   }
-    await API.graphql(graphqlOperation(mutations.updatePlayer, updatePlayerVar));
+  await API.graphql(graphqlOperation(mutations.createPlayer, createPlayerVar))
 }
 
-const playerDataAccessPlugin: Plugin = (context, inject) => {
-    inject('fetchPlayer', fetchPlayer)
-    inject('createPlayer', createPlayer)
-    inject('updatePlayer', updatePlayer)
+async function updatePlayer (input: UpdatePlayerInput): Promise<void> {
+  const updatePlayerVar: UpdatePlayerMutationVariables = {
+    input
+  }
+  await API.graphql(graphqlOperation(mutations.updatePlayer, updatePlayerVar))
 }
 
-export default playerDataAccessPlugin;
+const playerDataAccessPlugin: Plugin = (_, inject) => {
+  inject('fetchPlayer', fetchPlayer)
+  inject('createPlayer', createPlayer)
+  inject('updatePlayer', updatePlayer)
+}
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $fetchPlayer(input: FetchPlayerInput): Promise<FetchPlayerResult>
+    $createPlayer(input: CreatePlayerInput): Promise<void>
+    $updatePlayer(input: UpdatePlayerInput): Promise<void>
+  }
+}
+
+declare module '@nuxt/types' {
+  interface NuxtAppOptions {
+    $fetchPlayer(input: FetchPlayerInput): Promise<FetchPlayerResult>
+    $createPlayer(input: CreatePlayerInput): Promise<void>
+    $updatePlayer(input: UpdatePlayerInput): Promise<void>
+  }
+}
+declare module 'vuex/types/index' {
+  // eslint-disable-next-line no-unused-vars
+  interface Store<S> {
+    $fetchPlayer(input: FetchPlayerInput): Promise<FetchPlayerResult>
+    $createPlayer(input: CreatePlayerInput): Promise<void>
+    $updatePlayer(input: UpdatePlayerInput): Promise<void>
+  }
+}
+
+export default playerDataAccessPlugin

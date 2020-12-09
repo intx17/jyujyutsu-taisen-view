@@ -3,27 +3,27 @@
     <form>
       <div>
         <label for="name">name</label>
-        <input type="text" v-model="name" id="name" />
+        <input id="name" v-model="name" type="text">
       </div>
       <div>
         <label for="min-negative">NEGATIVE</label>
-        <input type="number" v-model="negative" id="min-negative" />
+        <input id="min-negative" v-model="negative" type="number">
       </div>
       <div>
         <label for="max-hp">MAX HP</label>
-        <input type="number" v-model="maxHP" id="max-hp" />
+        <input id="max-hp" v-model="maxHP" type="number">
       </div>
       <div>
         <label for="attack">ATTACK</label>
-        <input type="number" v-model="attack" id="attack" />
+        <input id="attack" v-model="attack" type="number">
       </div>
       <div>
         <label for="hitRate">HIT RATE</label>
-        <input type="number" v-model="hitRate" id="hitRate" />
+        <input id="hitRate" v-model="hitRate" type="number">
       </div>
       <div>
         <label class="upload-content-space user-photo default">
-          <input ref="file" class="file-button" type="file" @change="upload" />
+          <input ref="file" class="file-button" type="file" @change="upload">
           UPLOAD
         </label>
 
@@ -34,14 +34,16 @@
               class="file-button"
               type="file"
               @change="upload"
-            />
+            >
             <div>
-              <img class="user-photo-image" :src="imgSrc" />
+              <img class="user-photo-image" :src="imgSrc">
             </div>
           </label>
         </div>
         <div v-if="isValidInputs">
-          <button type="button" @click="save">SAVE</button>
+          <button type="button" @click="save">
+            SAVE
+          </button>
         </div>
       </div>
     </form>
@@ -49,19 +51,17 @@
 </template>
 
 <script lang="ts">
-import { DataStore, Storage } from "aws-amplify";
-import { Component, Vue } from "nuxt-property-decorator";
-import { API, graphqlOperation } from 'aws-amplify';
-import { CreateCurseMutationVariables } from '~/src/API';
-import { createCurse } from '~/src/graphql/mutations';
-import { Curse } from "~/src/models";
+import { DataStore, Storage } from 'aws-amplify'
+import { Component, Vue } from 'nuxt-property-decorator'
+
+import { Curse } from '~/src/models'
 
 @Component({
-  layout: "default",
-  middleware: ["auth"],
+  layout: 'default',
+  middleware: ['auth']
 })
 export default class DebugCurse extends Vue {
-  private name: string = "curseName";
+  private name: string = 'curseName';
   private negative: string = '1000';
   private maxHP: string = '100';
   private attack: string = '10';
@@ -71,59 +71,59 @@ export default class DebugCurse extends Vue {
 
   // methods
   private get isValidInputs (): boolean {
-    const negative = Math.floor(Number(this.negative));
-    const maxHP = Math.floor(Number(this.maxHP));
-    const attack = Math.floor(Number(this.attack));
-    const hitRate = Number(this.hitRate);
+    const negative = Math.floor(Number(this.negative))
+    const maxHP = Math.floor(Number(this.maxHP))
+    const attack = Math.floor(Number(this.attack))
+    const hitRate = Number(this.hitRate)
 
-    const result = !!this.name
-      && (Number.isInteger(negative) && negative > 0)
-      && (Number.isInteger(maxHP) && maxHP > 0)
-      && (Number.isInteger(attack) && attack > 0)
-      && (Number.isInteger(hitRate) && hitRate > 0 && hitRate <= 100)
-      && !!this.imgSrc
-      && !!this.file
+    const result = !!this.name &&
+      (Number.isInteger(negative) && negative > 0) &&
+      (Number.isInteger(maxHP) && maxHP > 0) &&
+      (Number.isInteger(attack) && attack > 0) &&
+      (Number.isInteger(hitRate) && hitRate > 0 && hitRate <= 100) &&
+      !!this.imgSrc &&
+      !!this.file
 
-    return result;
+    return result
   }
 
   // methods
-  async upload(event: any) {
-    const files = event.target.files || event.dataTransfer.files;
-    const file = files[0];
+  async upload (event: any) {
+    const files = event.target.files || event.dataTransfer.files
+    const file = files[0]
 
     if (this.checkFile(file)) {
-      this.file = file;
-      const picture: any = await this.getBase64(file);
-      this.imgSrc = picture;
+      this.file = file
+      const picture: any = await this.getBase64(file)
+      this.imgSrc = picture
     }
   }
 
-  getBase64(file: any) {
+  getBase64 (file: any) {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => resolve(reader.result)
+      reader.onerror = error => reject(error)
+    })
   }
 
-  checkFile(file: any) {
-    let result = true;
-    const SIZE_LIMIT = 5000000; // 5MB
+  checkFile (file: any) {
+    let result = true
+    const SIZE_LIMIT = 5000000 // 5MB
     // キャンセルしたら処理中断
     if (!file) {
-      result = false;
+      result = false
     }
     // jpeg か png 関連ファイル以外は受付けない
-    if (file.type !== "image/jpeg" && file.type !== "image/png") {
-      result = false;
+    if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
+      result = false
     }
     // 上限サイズより大きければ受付けない
     if (file.size > SIZE_LIMIT) {
-      result = false;
+      result = false
     }
-    return result;
+    return result
   }
 
   async dbInsert () {
@@ -134,26 +134,24 @@ export default class DebugCurse extends Vue {
       attack: Number(this.attack),
       hitRate: Number(this.hitRate) / 100,
       imgSrc: `curse/${this.name}.png`
-    });
-    await DataStore.save(curse);
+    })
+    await DataStore.save(curse)
   }
 
   async storageUpload () {
     await Storage.put(`curse/${this.name}.png`, this.file, {
       level: 'protected', // レベルの宣言
       contentType: 'image/png' // file形式
-    }).then(result => {
-      console.log(result);
-    }).catch(err => console.log(err));
+    }).catch(err => window.alert(err))
   }
 
   async save () {
     if (!this.isValidInputs) {
-      window.alert('invalid input founds');
-      return;
+      window.alert('invalid input founds')
+      return
     }
-    await this.dbInsert();
-    await this.storageUpload();
+    await this.dbInsert()
+    await this.storageUpload()
   }
 }
 </script>

@@ -7,13 +7,13 @@ interface ICurseStore {
 @Module({
   name: 'curse',
   stateFactory: true,
-  namespaced: true,
+  namespaced: true
 })
 export default class CurseStore extends VuexModule implements ICurseStore {
   shaking: boolean = false;
 
   @Mutation
-  setShaking(isShaking: boolean) {
-    this.shaking = isShaking;
+  setShaking (isShaking: boolean) {
+    this.shaking = isShaking
   }
 }

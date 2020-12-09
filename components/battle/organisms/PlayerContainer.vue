@@ -1,10 +1,12 @@
 <template>
   <div class="nes-container with-title is-rounded">
-    <p class="title player-container-title">プレイヤー</p>
+    <p class="title player-container-title">
+      プレイヤー
+    </p>
     <hp-bar :hp="hp" />
     <command-list class="command-list" />
     <p class="kokusen-image-container">
-      <img src="/img/kokusen_small.png" />
+      <img src="/img/kokusen_small.png">
     </p>
     <attack-button
       :enabled="activeCommand"
@@ -14,13 +16,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Vue } from 'nuxt-property-decorator';
+import { Component, Emit, Vue } from 'nuxt-property-decorator'
 
 // components
-import CommandList from '~/components/battle/molecules/CommandList.vue';
-import AttackButton from '~/components/battle/atoms/AttackButton.vue';
-import HpBar from '~/components/battle/atoms/HpBar.vue';
-import { playerStore } from '~/store';
+import CommandList from '~/components/battle/molecules/CommandList.vue'
+import AttackButton from '~/components/battle/atoms/AttackButton.vue'
+import HpBar from '~/components/battle/atoms/HpBar.vue'
+import { playerStore } from '~/store'
 
 @Component({
   components: {
@@ -32,8 +34,8 @@ import { playerStore } from '~/store';
 export default class PlayerContainer extends Vue {
   private hp: number = 50;
 
-  private get activeCommand() {
-    return playerStore.activeCommand !== null;
+  private get activeCommand () {
+    return playerStore.activeCommand !== null
   }
 
   // methods

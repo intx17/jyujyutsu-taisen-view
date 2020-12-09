@@ -16,16 +16,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator';
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 // components
-import CommandList from '~/components/battle/molecules/CommandList.vue';
-import AttackButton from '~/components/battle/atoms/AttackButton.vue';
+import CommandList from '~/components/battle/molecules/CommandList.vue'
+import AttackButton from '~/components/battle/atoms/AttackButton.vue'
 
 @Component({
   components: {
     CommandList,
-    AttackButton,
+    AttackButton
   }
 })
 export default class HpBar extends Vue {
@@ -36,18 +36,18 @@ export default class HpBar extends Vue {
   private hpTextColor?: string
 
   // computed
-  private get hpTextStyles() {
+  private get hpTextStyles () {
     return {
       color: this.hpTextColor
     }
   }
 
-  private get progressBarColorClass() {
+  private get progressBarColorClass () {
     return {
-      'is-primary': 50 < this.hp,
-      'is-success': 30 < this.hp && this.hp <= 50,
-      'is-warning': 10 < this.hp && this.hp <= 30,
-      'is-error': this.hp <= 10,
+      'is-primary': this.hp > 50,
+      'is-success': this.hp > 30 && this.hp <= 50,
+      'is-warning': this.hp > 10 && this.hp <= 30,
+      'is-error': this.hp <= 10
     }
   }
 }

@@ -1,13 +1,12 @@
 <template>
   <p :class="{ 'shake-image': shakeImage }" class="curse-image-container">
-    <img :src="imgSrc" class="curse-image"/>
-
+    <img :src="imgSrc" class="curse-image">
   </p>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator';
-import { curseStore } from '~/utils/storeAccessor';
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { curseStore } from '~/utils/storeAccessor'
 
 @Component({})
 export default class CurseImage extends Vue {
@@ -15,7 +14,7 @@ export default class CurseImage extends Vue {
   private imgSrc!: string
 
   private get shakeImage () {
-    return curseStore.shaking;
+    return curseStore.shaking
   }
 }
 </script>

@@ -2,7 +2,7 @@
   <section class="container">
     <setting-header />
     <prefecture-form
-      :prefectureValue.sync="prefectureValue"
+      :prefecture-value.sync="prefectureValue"
     />
     <command-form
       :commands="commands"
@@ -17,23 +17,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
-import { API, DataStore, graphqlOperation } from 'aws-amplify'
-import { UpdatePlayerMutationVariables } from '~/src/API';
-import { updatePlayer } from '~/src/graphql/mutations';
-import { playerStore } from '~/utils/storeAccessor';
-import { prefectureOptions } from '~/src/components/setting/molecules/prefectureForm';
-import { JapaneseWoeid } from '~/src/enums/japanese-woeid';
+import { Component, Vue } from 'nuxt-property-decorator'
+import { Context } from '@nuxt/types'
+import { playerStore } from '~/utils/storeAccessor'
+import { prefectureOptions } from '~/src/components/setting/molecules/prefectureForm'
 
 // components
-import SettingHeader from '~/components/setting/molecules/SettingHeader.vue';
-import PrefectureForm from '~/components/setting/molecules/PrefectureForm.vue';
-import CommandForm from '~/components/setting/organisms/CommandForm.vue';
-import SuccessButton from '~/components/setting/atoms/SuccessButton.vue';
-import CommandDialog from '~/components/setting/organisms/CommandDialog.vue';
-import { Player } from '~/src/models';
-import { Context } from '@nuxt/types';
-import { ICommand } from '~/src/graphql/domain/command';
+import SettingHeader from '~/components/setting/molecules/SettingHeader.vue'
+import PrefectureForm from '~/components/setting/molecules/PrefectureForm.vue'
+import CommandForm from '~/components/setting/organisms/CommandForm.vue'
+import SuccessButton from '~/components/setting/atoms/SuccessButton.vue'
+import CommandDialog from '~/components/setting/organisms/CommandDialog.vue'
+import { ICommand } from '~/src/graphql/domain/command'
 
 @Component({
   layout: 'default',
@@ -43,17 +38,17 @@ import { ICommand } from '~/src/graphql/domain/command';
     PrefectureForm,
     CommandForm,
     SuccessButton,
-    CommandDialog,
+    CommandDialog
   },
-  async asyncData(context: Context) {
-     if (playerStore.player === null) {
-        window.alert('ユーザーデータが存在しません');
-        return;
-      }
+  async asyncData (context: Context) {
+    if (playerStore.player === null) {
+      window.alert('ユーザーデータが存在しません')
+      return
+    }
 
     const listPlayerCommandsResult = await context.app.$listPlayerCommands({
       playerID: playerStore.player.id
-    });
+    })
 
     return {
       commands: listPlayerCommandsResult.commands
@@ -66,29 +61,29 @@ export default class Setting extends Vue {
 
   // methods
   private async save () {
-    const playerInStore = playerStore.player;
+    const playerInStore = playerStore.player
 
     // ふつ〜起こり得ない
     if (playerInStore === null) {
-      window.alert('ユーザーが存在しません');
-      return;
+      window.alert('ユーザーが存在しません')
+      return
     }
 
     const prefecture: string = prefectureOptions
-      .find(o => o.value === this.prefectureValue)?.text ?? '東京都';
+      .find(o => o.value === this.prefectureValue)?.text ?? '東京都'
 
     // update DB
     await this.$updatePlayer({
       id: playerInStore.id,
       prefecture
-    });
+    })
 
     // update store
     playerStore.setPlayer({
       id: playerInStore.id,
       hp: playerInStore.hp,
       prefecture
-    });
+    })
   }
 }
 </script>

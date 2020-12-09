@@ -4,11 +4,12 @@
       {{ labelText }}
     </label>
     <div class="nes-select">
-      <select required :id="selectId" v-model="syncedSelectedValue">
+      <select :id="selectId" v-model="syncedSelectedValue" required>
         <option v-if="!!defaultOptionText" value="" disabled selected hidden>
           {{ defaultOptionText }}
         </option>
-        <option v-for="(opt, index) in options"
+        <option
+          v-for="(opt, index) in options"
           :key="index"
           :value="opt.value"
         >
@@ -20,10 +21,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, PropSync, Vue } from 'nuxt-property-decorator';
+import { Component, Prop, PropSync, Vue } from 'nuxt-property-decorator'
 
 // interfaces
-import { ISelectOption } from '~/src/components/setting/atoms/selectWithLabel';
+import { ISelectOption } from '~/src/components/setting/atoms/selectWithLabel'
 
 @Component({})
 export default class SelectWithLabel extends Vue {

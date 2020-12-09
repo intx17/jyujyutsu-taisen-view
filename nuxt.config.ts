@@ -42,7 +42,7 @@ export default {
     { src: '~/plugins/dataaccess.ts', ssr: false },
     { src: '~/plugins/dataaccess/player.ts', ssr: false },
     { src: '~/plugins/dataaccess/infectedData.ts', ssr: false },
-    { src: '~/plugins/dataaccess/command.ts', ssr: false },
+    { src: '~/plugins/dataaccess/command.ts', ssr: false }
   ],
 
   /*
@@ -51,12 +51,12 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
+    '@nuxtjs/pwa'
   ],
 
   manifest: {
     name: '呪術対戦',
-    lang: 'ja',
+    lang: 'ja'
   },
 
   /*
@@ -76,7 +76,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend(config: any, ctx: any) {
+    extend (_: any, __: any) {
     }
   },
 

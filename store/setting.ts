@@ -23,7 +23,7 @@ interface ISettingStore {
 @Module({
   name: 'setting',
   stateFactory: true,
-  namespaced: true,
+  namespaced: true
 })
 export default class SettingStore extends VuexModule implements ISettingStore {
   commandDialog: ICommandDialog = {
@@ -38,15 +38,15 @@ export default class SettingStore extends VuexModule implements ISettingStore {
   };
 
   @Mutation
-  setCommandDialog(dialog: ICommandDialog) {
-    this.commandDialog = dialog;
+  setCommandDialog (dialog: ICommandDialog) {
+    this.commandDialog = dialog
   }
 
   @Action
   openCommandDialog () {
-    const dialog: ICommandDialog = JSON.parse(JSON.stringify(this.commandDialog));
-    dialog.isOpen = true;
-    this.setCommandDialog(dialog);
+    const dialog: ICommandDialog = JSON.parse(JSON.stringify(this.commandDialog))
+    dialog.isOpen = true
+    this.setCommandDialog(dialog)
   }
 
   @Action
@@ -60,24 +60,24 @@ export default class SettingStore extends VuexModule implements ISettingStore {
       attack: 0,
       criticalRate: 0,
       isOutdoor: false
-    };
-    dialog.isOpen = true;
-    dialog.mode = ModalMode.Create;
-    this.setCommandDialog(dialog);
+    }
+    dialog.isOpen = true
+    dialog.mode = ModalMode.Create
+    this.setCommandDialog(dialog)
   }
 
   @Action
   openCommandUpdateDialog () {
-    const dialog: ICommandDialog = JSON.parse(JSON.stringify(this.commandDialog));
-    dialog.isOpen = true;
-    dialog.mode = ModalMode.Update;
-    this.setCommandDialog(dialog);
+    const dialog: ICommandDialog = JSON.parse(JSON.stringify(this.commandDialog))
+    dialog.isOpen = true
+    dialog.mode = ModalMode.Update
+    this.setCommandDialog(dialog)
   }
 
   @Action
   closeCommandDialog () {
-    const dialog: ICommandDialog = JSON.parse(JSON.stringify(this.commandDialog));
-    dialog.isOpen = false;
-    this.setCommandDialog(dialog);
+    const dialog: ICommandDialog = JSON.parse(JSON.stringify(this.commandDialog))
+    dialog.isOpen = false
+    this.setCommandDialog(dialog)
   }
 }

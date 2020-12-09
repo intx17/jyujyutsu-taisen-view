@@ -2,14 +2,16 @@
   <div
     class="nes-container with-title is-centered is-rounded command-form-container"
   >
-    <p class="title">コマンド設定</p>
+    <p class="title">
+      コマンド設定
+    </p>
     <select-with-button-and-label
       v-for="(count) in [1, 2, 3]"
-      class="command-select"
       :key="count"
-      :selectedValue="''"
-      :selectId="`command${count}`"
-      :defaultOptionText="`▼コマンド${count}選択`"
+      class="command-select"
+      :selected-value="''"
+      :select-id="`command${count}`"
+      :default-option-text="`▼コマンド${count}選択`"
       :options="commandOptions"
       @on-click-button="openUpdateDialog"
     />
@@ -22,26 +24,26 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "nuxt-property-decorator";
-import { settingStore } from '~/utils/storeAccessor';
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { settingStore } from '~/utils/storeAccessor'
 
 // components
-import SelectWithButtonAndLabel from "~/components/setting/atoms/SelectWithButtonAndLabel.vue";
-import { ICommand } from "~/src/graphql/domain/command";
-import { ISelectOption } from "~/src/components/setting/atoms/selectWithLabel";
+import SelectWithButtonAndLabel from '~/components/setting/atoms/SelectWithButtonAndLabel.vue'
+import { ICommand } from '~/src/graphql/domain/command'
+import { ISelectOption } from '~/src/components/setting/atoms/selectWithLabel'
 
 @Component({
   components: {
-    SelectWithButtonAndLabel,
-  },
+    SelectWithButtonAndLabel
+  }
 })
 export default class CommandForm extends Vue {
-  @Prop({ type: Array, required: true, default: () => ([])})
+  @Prop({ type: Array, required: true, default: () => ([]) })
   private commands!: ICommand[];
 
   // computed
   private get commandOptions (): ISelectOption[] {
-    return this.commands.map(c => {
+    return this.commands.map((c) => {
       return {
         value: c.id,
         text: c.name
@@ -51,11 +53,11 @@ export default class CommandForm extends Vue {
 
   // methods
   private openCreateDialog () {
-    settingStore.openCommandCreateDialog();
+    settingStore.openCommandCreateDialog()
   }
 
   private openUpdateDialog () {
-    settingStore.openCommandUpdateDialog();
+    settingStore.openCommandUpdateDialog()
   }
 }
 </script>

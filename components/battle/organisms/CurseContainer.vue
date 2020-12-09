@@ -1,31 +1,31 @@
 <template>
   <div class="nes-container is-rounded is-dark">
     <curse-image
-      :imgSrc="curse.imgSrc"
+      :img-src="curse.imgSrc"
     />
     <curse-name
       :name="curse.name"
-      :isAreaExpansion="isAreaExpansion"
+      :is-area-expansion="isAreaExpansion"
     />
     <hp-bar
       :hp="curse.hp"
-      :hpTextColor="hpTextColor"
+      :hp-text-color="hpTextColor"
     />
     <battle-history
-      :battleHistories="battleHistories"
+      :battle-histories="battleHistories"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, PropSync, Vue } from 'nuxt-property-decorator';
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 // components
-import CurseImage from '~/components/battle/atoms/CurseImage.vue';
-import CurseName from '~/components/battle/atoms/CurseName.vue';
-import HpBar from '~/components/battle/atoms/HpBar.vue';
-import BattleHistory from '~/components/battle/atoms/BattleHistory.vue';
-import { ICurse } from '~/src/components/battle/organisms/curseContainer';
+import CurseImage from '~/components/battle/atoms/CurseImage.vue'
+import CurseName from '~/components/battle/atoms/CurseName.vue'
+import HpBar from '~/components/battle/atoms/HpBar.vue'
+import BattleHistory from '~/components/battle/atoms/BattleHistory.vue'
+import { ICurse } from '~/src/components/battle/organisms/curseContainer'
 
 @Component({
   components: {
@@ -44,12 +44,12 @@ export default class CurseContainer extends Vue {
   private isAreaExpansion: boolean = true;
 
   private battleHistories = [
-      'test1fwrefawfwrgergesgsgsegresgaeagaa',
-      'test2',
-      'test3',
-      'test4',
-      'test5',
-      'test6',
+    'test1fwrefawfwrgergesgsgsegresgaeagaa',
+    'test2',
+    'test3',
+    'test4',
+    'test5',
+    'test6'
   ]
 }
 </script>
