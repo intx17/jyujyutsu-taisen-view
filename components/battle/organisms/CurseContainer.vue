@@ -27,7 +27,7 @@ import CurseName from '~/components/battle/atoms/CurseName.vue'
 import HpBar from '~/components/battle/atoms/HpBar.vue'
 import BattleHistory from '~/components/battle/atoms/BattleHistory.vue'
 import { ICurse } from '~/src/components/battle/organisms/curseContainer'
-import { curseStore } from '~/store'
+import { battleStore, curseStore } from '~/store'
 
 @Component({
   components: {
@@ -54,11 +54,11 @@ export default class CurseContainer extends Vue {
   ]
 
   private get hp (): number {
-    return curseStore.curse.hp
+    return battleStore.battleInProgress?.curseHP ?? 0
   }
 
   private get maxHP (): number {
-    return curseStore.curse.maxHP
+    return curseStore.curse?.maxHP ?? 0
   }
 }
 </script>

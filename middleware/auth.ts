@@ -3,7 +3,7 @@ import { Context } from '@nuxt/types'
 import { JapaneseWoeid } from '~/src/enums/japanese-woeid'
 
 // store
-import { authStore, playerStore } from '~/utils/storeAccessor'
+import { authStore, battleStore, curseStore, playerStore } from '~/utils/storeAccessor'
 const { AmplifyEventBus } = require('aws-amplify-vue')
 
 export default async (context: Context) => {
@@ -36,25 +36,48 @@ export default async (context: Context) => {
   const player = fetchPlayerResult.player
 
   if (player) {
-    playerStore.setPlayer({
-      id: player.id,
-      hp: 100,
-      prefecture: player.prefecture
-    })
+    playerStore.setPlayer(player)
+    console.log(player)
+    const battleInProgress = player.battles.items.find(b => b.inProgress) ?? null
+    battleStore.setBattleInProgress(battleInProgress)
+    console.log(battleInProgress)
+    const playerSelectedCommands = player.commands.items.filter(c => c.inSelectedCommandList)
+    playerStore.setSelectedCommands(playerSelectedCommands)
+    console.log(playerSelectedCommands)
+
+    if (battleInProgress) {
+      const fetchCurseResult = await context.app.$fetchCurse({
+        id: battleInProgress.curseID
+      })
+      const curse = fetchCurseResult.curse
+      curseStore.setCurse(curse)
+      console.log(curse)
+    }
   } else {
-    await context.app.$createPlayer({
+    const player = {
       id: userInfo.id,
       name: userInfo.username,
       maxHP: 100,
       woeid: JapaneseWoeid.Japan,
       prefecture: '東京都'
-    })
+    }
+    await context.app.$createPlayer(player)
 
     // リファクタ
     playerStore.setPlayer({
       id: userInfo.id,
-      hp: 100,
-      prefecture: '東京都'
+      name: userInfo.user,
+      maxHP: 100,
+      prefecture: '東京都',
+      woeid: JapaneseWoeid.Japan,
+      commands: {
+        items: []
+      },
+      battles: {
+        items: []
+      }
     })
+
+    // TODO: 新規参入者の最初の敵を作る
   }
 }

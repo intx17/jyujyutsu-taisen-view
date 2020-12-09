@@ -53,7 +53,6 @@ import { ICommand } from '~/src/graphql/domain/command'
         window.alert('ユーザーデータが存在しません')
         return
       }
-      const playerID: string = playerStore.player.id
       const prefecture: string = playerStore.player.prefecture
 
       const fetchInfectedDataResult = await context.app.$fetchInfectedData({
@@ -76,25 +75,6 @@ import { ICommand } from '~/src/graphql/domain/command'
         } else {
           props.newsText = '感染者数データが存在しません'
         }
-      }
-
-      // commands
-      const listPlayerSelectedCommandsResult = await context.app.$listPlayerSelectedCommands({
-        playerID
-      })
-      const commands = listPlayerSelectedCommandsResult.commands
-      playerStore.setSelectedCommands(commands)
-
-      // battle
-      const fetchInProgressBattleResult = await context.app.$fetchInProgressBattle({
-        playerID
-      })
-      const battleInProgress = fetchInProgressBattleResult.battle
-      if (battleInProgress) {
-        playerStore.setPlayerHP(battleInProgress.playerHP)
-        playerStore.setPlayerMaxHP(battleInProgress.playerMaxHP)
-        curseStore.setCurseHP(battleInProgress.curseHP)
-        curseStore.setCurseMaxHP(battleInProgress.curseMaxHP)
       }
 
       return props

@@ -19,7 +19,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Context } from '@nuxt/types'
 import { playerStore } from '~/utils/storeAccessor'
 import { prefectureOptions } from '~/src/components/setting/molecules/prefectureForm'
 
@@ -30,6 +29,7 @@ import CommandForm from '~/components/setting/organisms/CommandForm.vue'
 import SuccessButton from '~/components/setting/atoms/SuccessButton.vue'
 import CommandDialog from '~/components/setting/organisms/CommandDialog.vue'
 import { ICommand } from '~/src/graphql/domain/command'
+import { IPlayer } from '~/src/graphql/domain/player'
 
 @Component({
   layout: 'default',
@@ -41,17 +41,13 @@ import { ICommand } from '~/src/graphql/domain/command'
     SuccessButton,
     CommandDialog
   },
-  async asyncData (context: Context) {
+  asyncData () {
     if (playerStore.player === null) {
       window.alert('ユーザーデータが存在しません')
       return
     }
 
-    const listPlayerCommandsResult = await context.app.$listPlayerCommands({
-      playerID: playerStore.player.id
-    })
-
-    const commands = listPlayerCommandsResult.commands
+    const commands = playerStore.selectedCommands
     const selectedCommandIds: string[] = ['', '', '']
 
     let selectedCount = 0
@@ -103,11 +99,9 @@ export default class Setting extends Vue {
     })
 
     // update store
-    playerStore.setPlayer({
-      id: playerInStore.id,
-      hp: playerInStore.hp,
-      prefecture
-    })
+    const copiedPlayer: IPlayer = JSON.parse(JSON.stringify(playerInStore))
+    copiedPlayer.prefecture = prefecture
+    playerStore.setPlayer(copiedPlayer)
   }
 }
 </script>

@@ -1,11 +1,19 @@
+import { IBattle } from './battle'
+import { ICommand } from './command'
 import { JapaneseWoeid } from '~/src/enums/japanese-woeid'
 
+interface IPlayerBattles {
+  items: IBattle[]
+}
+interface IPlayerCommands {
+  items: ICommand[]
+}
 export interface IPlayer {
   id: string
   name: string
-  hp: number
+  maxHP: number
   woeid: JapaneseWoeid
   prefecture: string
-  commands: any[]
-  battles: any[]
+  commands: IPlayerCommands
+  battles: IPlayerBattles
 }

@@ -1,12 +1,6 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
 import { ICommand } from '~/src/graphql/domain/command'
-
-interface IPlayer {
-  id: string
-  hp: number
-  maxHP: number
-  prefecture: string
-}
+import { IPlayer } from '~/src/graphql/domain/player'
 
 interface IPlayerStore {
   player: IPlayer | null
@@ -27,13 +21,6 @@ export default class PlayerStore extends VuexModule implements IPlayerStore {
   @Mutation
   setPlayer (player: IPlayer | null) {
     this.player = player
-  }
-
-  @Mutation
-  setPlayerHP (hp: number) {
-    const copied: IPlayer = JSON.parse(JSON.stringify(this.player))
-    copied.hp = hp
-    this.player = copied
   }
 
   @Mutation

@@ -25,7 +25,7 @@ import { Component, Emit, Vue } from 'nuxt-property-decorator'
 import CommandList from '~/components/battle/molecules/CommandList.vue'
 import AttackButton from '~/components/battle/atoms/AttackButton.vue'
 import HpBar from '~/components/battle/atoms/HpBar.vue'
-import { playerStore } from '~/store'
+import { battleStore, playerStore } from '~/store'
 
 @Component({
   components: {
@@ -36,7 +36,7 @@ import { playerStore } from '~/store'
 })
 export default class PlayerContainer extends Vue {
   private get hp () {
-    return playerStore.player?.hp ?? 0
+    return battleStore.battleInProgress?.playerHP ?? 0
   }
 
   private get maxHP () {

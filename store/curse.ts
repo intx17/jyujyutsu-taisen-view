@@ -1,44 +1,23 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
+import { ICurse } from '~/src/graphql/domain/curse'
 
-interface ICurse {
-  hp: number
-  maxHP: number
-}
 interface ICurseStore {
-  curse: ICurse
+  curse: ICurse | null
   shaking: boolean
 }
-
 @Module({
   name: 'curse',
   stateFactory: true,
   namespaced: true
 })
 export default class CurseStore extends VuexModule implements ICurseStore {
-  curse: ICurse = {
-    hp: 0,
-    maxHP: 100
-  }
+  curse: ICurse | null = null
 
   shaking: boolean = false
 
   @Mutation
   setCurse (curse: ICurse) {
     this.curse = curse
-  }
-
-  @Mutation
-  setCurseHP (hp: number) {
-    const copied: ICurse = JSON.parse(JSON.stringify(this.curse))
-    copied.hp = hp
-    this.curse = copied
-  }
-
-  @Mutation
-  setCurseMaxHP (hp: number) {
-    const copied: ICurse = JSON.parse(JSON.stringify(this.curse))
-    copied.maxHP = hp
-    this.curse = copied
   }
 
   @Mutation
