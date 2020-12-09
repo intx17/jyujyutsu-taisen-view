@@ -9,9 +9,3 @@ export interface Player {
   commands: any[]
   battles: any[]
 }
-
-export interface GetPlayerResponse {
-  data: {
-    getPlayer: Player
-  }
-}

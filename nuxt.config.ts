@@ -39,7 +39,9 @@ export default {
   */
   plugins: [
     { src: '~/plugins/amplify.js', ssr: false },
-    { src: '~/plugins/dataaccess.ts', ssr: false }
+    { src: '~/plugins/dataaccess.ts', ssr: false },
+    { src: '~/plugins/dataaccess/player.ts', ssr: false },
+    { src: '~/plugins/dataaccess/infectedData.ts', ssr: false },
   ],
 
   /*

@@ -16,7 +16,6 @@ import { GetPlayerQueryVariables, CreatePlayerMutationVariables } from '~/src/AP
 import { getPlayer } from '~/src/graphql/queries';
 import { createPlayer } from '~/src/graphql/mutations';
 import { JapaneseWoeid } from '~/src/enums/japanese-woeid';
-import { GetPlayerResponse } from '~/src/graphql/domain/player';
 import { playerStore } from '~/utils/storeAccessor';
 const { AmplifyEventBus } = require('aws-amplify-vue');
 

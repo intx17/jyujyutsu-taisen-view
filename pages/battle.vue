@@ -27,7 +27,7 @@ import CurseContainer from '~/components/battle/organisms/CurseContainer.vue';
 import PlayerContainer from '~/components/battle/organisms/PlayerContainer.vue';
 import { GetInfectedDataQueryVariables } from '~/src/API';
 import { getInfectedData } from '~/src/graphql/queries';
-import { GetInfectedDataResponse, ParsedInfectedData } from '~/src/graphql/domain/infectedData';
+import { ParsedInfectedData } from '~/src/graphql/domain/infectedData';
 
 @Component({
   layout: 'default',
@@ -57,31 +57,22 @@ import { GetInfectedDataResponse, ParsedInfectedData } from '~/src/graphql/domai
       }
       const prefecture: string = playerStore.player.prefecture;
 
-      const variables: GetInfectedDataQueryVariables = {
-        date: now.format('YYYY-MM-DD'),
-      };
-      const infectedData: GetInfectedDataResponse = await API.graphql(
-        graphqlOperation(
-          getInfectedData,
-          variables,
-      )) as GetInfectedDataResponse
+      const fetchInfectedDataResult = await context.app.$fetchInfectedData({
+        date: now.format('YYYY-MM-DD')
+      });
+      const infectedData = fetchInfectedDataResult.infectedData;
 
-      if (infectedData.data.getInfectedData.content) {
-        const parsedInfectedData = JSON.parse(JSON.parse(infectedData.data.getInfectedData.content));
+      if (infectedData) {
+        const parsedInfectedData = JSON.parse(JSON.parse(infectedData.content));
         props.newsText = `${prefecture}の感染者数は${parsedInfectedData.data47[prefecture]}人です`;
       } else {
-        const yesterdayVariables: GetInfectedDataQueryVariables = {
+        const fetchYesterdayInfectedDataResult = await context.app.$fetchInfectedData({
           date: now.add(-1, 'day').format('YYYY-MM-DD'),
-        };
+        });
+        const yesterdayInfectedData = fetchYesterdayInfectedDataResult.infectedData;
 
-        const yesterdayInfectedData: GetInfectedDataResponse = await API.graphql(
-          graphqlOperation(
-            getInfectedData,
-            yesterdayVariables
-        )) as GetInfectedDataResponse
-
-        if (yesterdayInfectedData.data.getInfectedData.content) {
-          const parsedInfectedData = JSON.parse(JSON.parse(yesterdayInfectedData.data.getInfectedData.content));
+        if (yesterdayInfectedData.content) {
+          const parsedInfectedData = JSON.parse(JSON.parse(yesterdayInfectedData.content));
           props.newsText = `${prefecture}の感染者数は${parsedInfectedData.data47[prefecture]}人です`;
         } else {
           props.newsText = '感染者数データが存在しません';

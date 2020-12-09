@@ -1,20 +1,12 @@
 import { Plugin } from '@nuxt/types';
 import { API, DataStore, graphqlOperation } from "aws-amplify";
-import { CreateCurseMutationVariables, CreatePlayerMutationVariables, GetPlayerQueryVariables } from '~/src/API';
-import { JapaneseWoeid } from "~/src/enums/japanese-woeid";
-import { ParsedInfectedData } from "~/src/graphql/domain/infectedData";
-import { Player, GetPlayerResponse } from "~/src/graphql/domain/player";
+import { CreateCurseMutationVariables } from '~/src/API';
 import * as queries from '~/src/graphql/queries';
 import * as mutations from '~/src/graphql/mutations';
-import { Battle, Command, Curse, InfectedData, PlayerBattle } from "~/src/models";
-
+import { Battle, Command, PlayerBattle } from "~/src/models";
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $fetchInfectedData(input: FetchInfectedDataInput): Promise<FetchInfectedDataResult>
-    $fetchPlayer(input: FetchPlayerInput): Promise<FetchPlayerResult>
-    $createPlayer(input: CreatePlayerInput): Promise<void>
-    $updatePlayer(input: UpdatePlayerInput): Promise<void>
     $createCurse(input: CreateCurseInput): Promise<void>
     $fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult>
     $searchPlayerSelectedCommands(input: SearchPlayerSelectedCommandsInput): Promise<SearchPlayerSelectedCommandsResult>
@@ -31,10 +23,6 @@ declare module 'vue/types/vue' {
 
 declare module '@nuxt/types' {
   interface NuxtAppOptions {
-    $fetchInfectedData(input: FetchInfectedDataInput): Promise<FetchInfectedDataResult>
-    $fetchPlayer(input: FetchPlayerInput): Promise<FetchPlayerResult>
-    $createPlayer(input: CreatePlayerInput): Promise<void>
-    $updatePlayer(input: UpdatePlayerInput): Promise<void>
     $createCurse(input: CreateCurseInput): Promise<void>
     $fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult>
     $searchPlayerSelectedCommands(input: SearchPlayerSelectedCommandsInput): Promise<SearchPlayerSelectedCommandsResult>
@@ -51,10 +39,6 @@ declare module '@nuxt/types' {
 
 declare module 'vuex/types/index' {
   interface Store<S> {
-    $fetchInfectedData(input: FetchInfectedDataInput): Promise<FetchInfectedDataResult>
-    $fetchPlayer(input: FetchPlayerInput): Promise<FetchPlayerResult>
-    $createPlayer(input: CreatePlayerInput): Promise<void>
-    $updatePlayer(input: UpdatePlayerInput): Promise<void>
     $createCurse(input: CreateCurseInput): Promise<void>
     $fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult>
     $searchPlayerSelectedCommands(input: SearchPlayerSelectedCommandsInput): Promise<SearchPlayerSelectedCommandsResult>
@@ -67,36 +51,6 @@ declare module 'vuex/types/index' {
     $fetchPlayerBattleByPlayerId(input: FetchPlayerBattleByPlayerIDInput): Promise<FetchPlayerBattleByPlayerIDResult>
     $updatePlayerBattle(input: UpdatePlayerBattleInput): Promise<void>
   }
-}
-
-interface FetchInfectedDataInput {
-    date: string
-}
-
-interface FetchInfectedDataResult {
-    date: string
-    parsedContent: ParsedInfectedData
-}
-
-interface FetchPlayerInput {
-    id: string
-}
-
-interface FetchPlayerResult {
-    player: Player
-}
-
-interface CreatePlayerInput {
-    id: string
-    name: string
-    maxHP: number
-    woeid: JapaneseWoeid
-    prefecture: string
-}
-
-interface UpdatePlayerInput {
-    id: string
-    prefecture: string
 }
 
 interface CreateCurseInput {
@@ -184,45 +138,6 @@ interface UpdatePlayerBattleInput {
     playerHP: number
     curseHP: number
     histories: string
-}
-
-async function fetchInfectedData(input: FetchInfectedDataInput): Promise<FetchInfectedDataResult> {
-    const infectedDatas = await DataStore.query(InfectedData, data => data.date('eq', input.date));
-
-    const infectedData = infectedDatas[0];
-    return {
-        date: infectedData.date,
-        parsedContent: JSON.parse(JSON.stringify(infectedData))
-    }
-}
-
-async function fetchPlayer(input: FetchPlayerInput): Promise<FetchPlayerResult> {
-    const getPlayerVar: GetPlayerQueryVariables = {
-        id: input.id
-    };
-
-    const response = await API.graphql(graphqlOperation(queries.getPlayer, getPlayerVar)) as GetPlayerResponse;
-    const player = response.data.getPlayer;
-    
-    return {
-        player
-    }
-}
-
-async function createPlayer(input: CreatePlayerInput): Promise<void> {
-    const createPlayerVar: CreatePlayerMutationVariables = {
-        input
-    }
-    await API.graphql(graphqlOperation(mutations.createPlayer, createPlayerVar));
-}
-
-async function updatePlayer(input: UpdatePlayerInput): Promise<void> {
-    // const fetchPlayerResult = await fetchPlayer({...input});
-
-    // await DataStore.save(
-    //     Player.copyOf(fetchPlayerResult.player, updated => {
-    //     updated.prefecture = input.prefecture;
-    // }));
 }
 
 async function createCurse(input: CreateCurseInput): Promise<void> {
@@ -352,10 +267,6 @@ async function updatePlayerBattle(input: UpdatePlayerBattleInput): Promise<void>
 }
 
 const dataAccessPlugin: Plugin = (context, inject) => {
-    inject('fetchInfectedData', fetchInfectedData)
-    inject('fetchPlayer', fetchPlayer)
-    inject('createPlayer', createPlayer)
-    inject('updatePlayer', updatePlayer)
     inject('createCurse', createCurse)
     inject('fetchCommand', fetchCommand)
     inject('searchPlayerSelectedCommands', searchPlayerSelectedCommands)
