@@ -5,25 +5,25 @@
     </div>
     <form method="dialog">
       <div class="nes-field">
-        <label for="name">Name</label>
+        <label for="name">名前</label>
         <input type="text" v-model="name" id="name" class="nes-input">
       </div>
       <div>
-        <label for="description">Description</label>
+        <label for="description">説明</label>
         <textarea v-model="description" id="description" class="nes-textarea"></textarea>
       </div>
       <div class="nes-field">
-        <label for="attack">Attack</label>
+        <label for="attack">攻撃力</label>
         <input type="number" v-model="attack" id="attack" class="nes-input" min="1" max="100">
       </div>
       <div class="nes-field">
-        <label for="critical">Critical</label>
+        <label for="critical">クリティカル率</label>
         <input type="number" v-model="criticalRate" id="critical" class="nes-input" min="1" max="100">
       </div>
       <div class="checkbox-container">
         <label>
           <input type="checkbox" v-model="isOutdoor" class="nes-checkbox" />
-          <span>Outdoor Activity</span>
+          <span>野外活動</span>
         </label>
       </div>
       <success-button
@@ -54,8 +54,8 @@ import SuccessButton from '~/components/setting/atoms/SuccessButton.vue';
 export default class CommonDialog extends Vue {
   private name: string = '';
   private description: string = '';
-  private attack: string = '0';
-  private criticalRate: string = '0';
+  private attack: string = '10';
+  private criticalRate: string = '50';
   private isOutdoor: boolean = false;
 
   // computed
@@ -113,8 +113,7 @@ export default class CommonDialog extends Vue {
     }
 
     if (settingStore.commandDialog.mode === ModalMode.Create) {
-      const createVar: CreateCommandMutationVariables = {
-        input: {
+      await this.$createCommand({
           name: this.name,
           description: this.description,
           attack: Number(this.attack),
@@ -122,11 +121,20 @@ export default class CommonDialog extends Vue {
           isOutdoor: this.isOutdoor,
          inSelectedCommandList: false,
           playerID: playerStore.player.id
-        }
-      }
-      await API.graphql(graphqlOperation(createCommand, createVar));
-      settingStore.closeCommandDialog();
+        });
+    } else {
+      await this.$updateCommand({
+          id: settingStore.commandDialog.commandId!,
+          name: this.name,
+          description: this.description,
+          attack: Number(this.attack),
+          criticalRate: Number(this.criticalRate) / 100,
+          isOutdoor: this.isOutdoor,
+         inSelectedCommandList: false,
+      })
     }
+
+    settingStore.closeCommandDialog();
   }
 }
 </script>

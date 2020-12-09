@@ -1,8 +1,8 @@
 import { Plugin } from '@nuxt/types';
 import { API, graphqlOperation } from "aws-amplify";
-import { CreatePlayerMutationVariables, GetPlayerQueryVariables } from '~/src/API';
+import { CreatePlayerMutationVariables, GetPlayerQueryVariables, UpdatePlayerMutationVariables } from '~/src/API';
 import { JapaneseWoeid } from "~/src/enums/japanese-woeid";
-import { Player } from "~/src/graphql/domain/player";
+import { IPlayer } from "~/src/graphql/domain/player";
 import * as queries from '~/src/graphql/queries';
 import * as mutations from '~/src/graphql/mutations';
 
@@ -32,7 +32,7 @@ declare module 'vuex/types/index' {
 
 interface GetPlayerResponse {
   data: {
-    getPlayer: Player
+    getPlayer: IPlayer
   }
 }
 
@@ -41,7 +41,7 @@ interface FetchPlayerInput {
 }
 
 interface FetchPlayerResult {
-    player: Player
+    player: IPlayer
 }
 
 interface CreatePlayerInput {
@@ -78,12 +78,10 @@ async function createPlayer(input: CreatePlayerInput): Promise<void> {
 }
 
 async function updatePlayer(input: UpdatePlayerInput): Promise<void> {
-    // const fetchPlayerResult = await fetchPlayer({...input});
-
-    // await DataStore.save(
-    //     Player.copyOf(fetchPlayerResult.player, updated => {
-    //     updated.prefecture = input.prefecture;
-    // }));
+   const updatePlayerVar: UpdatePlayerMutationVariables = {
+    input
+  }
+    await API.graphql(graphqlOperation(mutations.updatePlayer, updatePlayerVar));
 }
 
 const playerDataAccessPlugin: Plugin = (context, inject) => {

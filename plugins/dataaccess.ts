@@ -1,19 +1,11 @@
 import { Plugin } from '@nuxt/types';
 import { API, DataStore, graphqlOperation } from "aws-amplify";
 import { CreateCurseMutationVariables } from '~/src/API';
-import * as queries from '~/src/graphql/queries';
-import * as mutations from '~/src/graphql/mutations';
 import { Battle, Command, PlayerBattle } from "~/src/models";
 
 declare module 'vue/types/vue' {
   interface Vue {
     $createCurse(input: CreateCurseInput): Promise<void>
-    $fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult>
-    $searchPlayerSelectedCommands(input: SearchPlayerSelectedCommandsInput): Promise<SearchPlayerSelectedCommandsResult>
-    $listPlayerCommands(input: ListPlayerCommandsInput): Promise<ListPlayerCommandsResult>
-    $createCommand(input: CreateCommandInput): Promise<void>
-    $updateCommand(input: UpdateCommandInput): Promise<void>
-    $updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void>
     $fetchBattle(input: FetchBattleInput): Promise<FetchBattleResult>
     $fetchPlayerBattle(input: FetchPlayerBattleInput): Promise<FetchPlayerBattleResult>
     $fetchPlayerBattleByPlayerId(input: FetchPlayerBattleByPlayerIDInput): Promise<FetchPlayerBattleByPlayerIDResult>
@@ -24,12 +16,6 @@ declare module 'vue/types/vue' {
 declare module '@nuxt/types' {
   interface NuxtAppOptions {
     $createCurse(input: CreateCurseInput): Promise<void>
-    $fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult>
-    $searchPlayerSelectedCommands(input: SearchPlayerSelectedCommandsInput): Promise<SearchPlayerSelectedCommandsResult>
-    $listPlayerCommands(input: ListPlayerCommandsInput): Promise<ListPlayerCommandsResult>
-    $createCommand(input: CreateCommandInput): Promise<void>
-    $updateCommand(input: UpdateCommandInput): Promise<void>
-    $updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void>
     $fetchBattle(input: FetchBattleInput): Promise<FetchBattleResult>
     $fetchPlayerBattle(input: FetchPlayerBattleInput): Promise<FetchPlayerBattleResult>
     $fetchPlayerBattleByPlayerId(input: FetchPlayerBattleByPlayerIDInput): Promise<FetchPlayerBattleByPlayerIDResult>
@@ -40,12 +26,6 @@ declare module '@nuxt/types' {
 declare module 'vuex/types/index' {
   interface Store<S> {
     $createCurse(input: CreateCurseInput): Promise<void>
-    $fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult>
-    $searchPlayerSelectedCommands(input: SearchPlayerSelectedCommandsInput): Promise<SearchPlayerSelectedCommandsResult>
-    $listPlayerCommands(input: ListPlayerCommandsInput): Promise<ListPlayerCommandsResult>
-    $createCommand(input: CreateCommandInput): Promise<void>
-    $updateCommand(input: UpdateCommandInput): Promise<void>
-    $updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void>
     $fetchBattle(input: FetchBattleInput): Promise<FetchBattleResult>
     $fetchPlayerBattle(input: FetchPlayerBattleInput): Promise<FetchPlayerBattleResult>
     $fetchPlayerBattleByPlayerId(input: FetchPlayerBattleByPlayerIDInput): Promise<FetchPlayerBattleByPlayerIDResult>
@@ -60,50 +40,6 @@ interface CreateCurseInput {
     attack: number
     hitRate: number
     imgSrc: string
-}
-
-interface FetchCommandInput {
-    id: string
-}
-
-interface FetchCommandResult {
-    command: Command
-}
-
-interface SearchPlayerSelectedCommandsInput {
-    playerID: string
-}
-
-interface SearchPlayerSelectedCommandsResult {
-    commands: Command[]
-}
-
-interface ListPlayerCommandsInput {
-    playerID: string
-}
-
-interface ListPlayerCommandsResult {
-    commands: Command[]
-}
-
-interface CreateCommandInput {
-    name: string
-    description: string
-    attack: number
-    criticalRate: number
-    isOutdoor: boolean
-    inSelectedCommandList: boolean
-    playerID: string
-}
-
-interface UpdateCommandInput {
-    id: string
-    name: string
-    description: string
-    attack: number
-    criticalRate: number
-    isOutdoor: boolean
-    inSelectedCommandList: boolean
 }
 
 interface UpdateSelectedCommandsInput {
@@ -145,77 +81,6 @@ async function createCurse(input: CreateCurseInput): Promise<void> {
       input
     }
     await API.graphql(graphqlOperation(createCurse, mutationVar));
-}
-
-async function fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult> {
-    const commands: Command[] = await DataStore.query(
-        Command,
-        data => data.id('eq', input.id)
-    );
-
-    return {
-        command: commands[0]
-    }
-}
-
-async function searchPlayerSelectedCommands(input: SearchPlayerSelectedCommandsInput): Promise<SearchPlayerSelectedCommandsResult> {
-    const commands: Command[] = (await DataStore.query(
-        Command,
-        data => data.inSelectedCommandList('eq', true)
-    ))
-    .filter(c => c.player?.id === input.playerID);
-
-    return {
-        commands
-    }
-}
-
-async function listPlayerCommands(input: ListPlayerCommandsInput): Promise<ListPlayerCommandsResult> {
-    const commands: Command[] = (await DataStore.query(Command))
-        .filter(c => c.player?.id === input.playerID);
-
-    return {
-        commands
-    }
-}
-
-async function createCommand(input: CreateCommandInput): Promise<void> {
-    // const fetchPlayerResult = await fetchPlayer({ id: input.playerID });
-
-    // const command: Command = new Command({
-    //     ...input,
-    //     player: fetchPlayerResult.player
-    // });
-    // await DataStore.save(command);
-}
-
-async function updateCommand(input: UpdateCommandInput): Promise<void> {
-    const fetchCommandResult = await fetchCommand({ id: input.id });
-
-    await DataStore.save(
-        Command.copyOf(
-            fetchCommandResult.command,
-            updated => {
-                updated.name = input.name;
-                updated.description = input.description;
-                updated.attack = input.attack;
-                updated.criticalRate = input.criticalRate;
-                updated.isOutdoor = input.isOutdoor;
-                updated.inSelectedCommandList = input.inSelectedCommandList;
-            }));
-}
-
-async function updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void> {
-    await Promise.all(input.ids.map(id => async() => {            
-        const fetchCommandResult = await fetchCommand({ id });
-
-        return DataStore.save(
-            Command.copyOf(
-                fetchCommandResult.command,
-                updated => {
-                    updated.inSelectedCommandList = true;
-                }));
-    }));
 }
 
 async function fetchBattle(input: FetchBattleInput): Promise<FetchBattleResult> {
@@ -268,12 +133,6 @@ async function updatePlayerBattle(input: UpdatePlayerBattleInput): Promise<void>
 
 const dataAccessPlugin: Plugin = (context, inject) => {
     inject('createCurse', createCurse)
-    inject('fetchCommand', fetchCommand)
-    inject('searchPlayerSelectedCommands', searchPlayerSelectedCommands)
-    inject('listPlayerCommands', listPlayerCommands)
-    inject('createCommand', createCommand)
-    inject('updateCommand', updateCommand)
-    inject('updateSelectedCommand', updateSelectedCommand)
     inject('fetchBattle', fetchBattle)
     inject('fetchPlayerBattle', fetchPlayerBattle)
     inject('fetchPlayerBattleByPlayerId', fetchPlayerBattleByPlayerId)

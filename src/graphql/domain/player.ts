@@ -1,6 +1,6 @@
 import { JapaneseWoeid } from "~/src/enums/japanese-woeid";
 
-export interface Player {
+export interface IPlayer {
   id: string
   name: string
   hp: number

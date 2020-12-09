@@ -42,6 +42,7 @@ export default {
     { src: '~/plugins/dataaccess.ts', ssr: false },
     { src: '~/plugins/dataaccess/player.ts', ssr: false },
     { src: '~/plugins/dataaccess/infectedData.ts', ssr: false },
+    { src: '~/plugins/dataaccess/command.ts', ssr: false },
   ],
 
   /*

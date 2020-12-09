@@ -1,10 +1,10 @@
-export interface InfectedData {
+export interface IInfectedData {
   id: string
   content: string
   date: string
 }
 
-export interface ParsedInfectedData {
+export interface IParsedInfectedData {
   sumInfectedNumber: number
   data47: {[key: string]: number}
 }

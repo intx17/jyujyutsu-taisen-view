@@ -4,7 +4,9 @@
     <prefecture-form
       :prefectureValue.sync="prefectureValue"
     />
-    <command-form />
+    <command-form
+      :commands="commands"
+    />
     <command-dialog />
     <success-button
       class="save-btn"
@@ -30,6 +32,8 @@ import CommandForm from '~/components/setting/organisms/CommandForm.vue';
 import SuccessButton from '~/components/setting/atoms/SuccessButton.vue';
 import CommandDialog from '~/components/setting/organisms/CommandDialog.vue';
 import { Player } from '~/src/models';
+import { Context } from '@nuxt/types';
+import { ICommand } from '~/src/graphql/domain/command';
 
 @Component({
   layout: 'default',
@@ -40,9 +44,24 @@ import { Player } from '~/src/models';
     CommandForm,
     SuccessButton,
     CommandDialog,
+  },
+  async asyncData(context: Context) {
+     if (playerStore.player === null) {
+        window.alert('ユーザーデータが存在しません');
+        return;
+      }
+
+    const listPlayerCommandsResult = await context.app.$listPlayerCommands({
+      playerID: playerStore.player.id
+    });
+
+    return {
+      commands: listPlayerCommandsResult.commands
+    }
   }
 })
 export default class Setting extends Vue {
+  private commands!: ICommand[]
   private prefectureValue: string = '';
 
   // methods
@@ -59,26 +78,17 @@ export default class Setting extends Vue {
       .find(o => o.value === this.prefectureValue)?.text ?? '東京都';
 
     // update DB
-    const players = await DataStore.query(
-      Player, 
-      data => data.id('eq', playerInStore.id)
-    );
-    const player = players[0];
-    await DataStore.save(player, updated => updated)
-    const updatePlayerVar: UpdatePlayerMutationVariables = {
-      input: {
-        id: player.id,
-        prefecture
-      }
-    }
-    await API.graphql(graphqlOperation(updatePlayer, updatePlayerVar));
+    await this.$updatePlayer({
+      id: playerInStore.id,
+      prefecture
+    });
 
     // update store
     playerStore.setPlayer({
-      id: player.id,
+      id: playerInStore.id,
       hp: playerInStore.hp,
       prefecture
-    })
+    });
   }
 }
 </script>

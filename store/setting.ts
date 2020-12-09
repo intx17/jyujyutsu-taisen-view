@@ -8,6 +8,7 @@ export enum ModalMode {
 interface ICommandDialog {
   isOpen: boolean
   mode: ModalMode
+  commandId: string | null
   name: string
   description: string
   attack: number
@@ -26,6 +27,7 @@ interface ISettingStore {
 })
 export default class SettingStore extends VuexModule implements ISettingStore {
   commandDialog: ICommandDialog = {
+    commandId: null,
     isOpen: false,
     mode: ModalMode.Create,
     name: '',
@@ -50,6 +52,7 @@ export default class SettingStore extends VuexModule implements ISettingStore {
   @Action
   openCommandCreateDialog () {
     const dialog: ICommandDialog = {
+      commandId: null,
       isOpen: false,
       mode: ModalMode.Create,
       name: '',

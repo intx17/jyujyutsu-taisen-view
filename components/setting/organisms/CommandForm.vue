@@ -11,17 +11,24 @@
       :selectId="`command${count}`"
       :defaultOptionText="`▼コマンド${count}選択`"
       :options="commandOptions"
-      @on-click-button="openDialog"
+      @on-click-button="openUpdateDialog"
     />
+    <button
+      @click="openCreateDialog"
+    >
+      新規
+    </button>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator";
+import { Component, Prop, Vue } from "nuxt-property-decorator";
 import { settingStore } from '~/utils/storeAccessor';
 
 // components
 import SelectWithButtonAndLabel from "~/components/setting/atoms/SelectWithButtonAndLabel.vue";
+import { ICommand } from "~/src/graphql/domain/command";
+import { ISelectOption } from "~/src/components/setting/atoms/selectWithLabel";
 
 @Component({
   components: {
@@ -29,12 +36,25 @@ import SelectWithButtonAndLabel from "~/components/setting/atoms/SelectWithButto
   },
 })
 export default class CommandForm extends Vue {
-  private commandOptions = [
-    { value: "1", text: "北海道" },
-  ];
+  @Prop({ type: Array, required: true, default: () => ([])})
+  private commands!: ICommand[];
+
+  // computed
+  private get commandOptions (): ISelectOption[] {
+    return this.commands.map(c => {
+      return {
+        value: c.id,
+        text: c.name
+      }
+    })
+  }
 
   // methods
-  private openDialog () {
+  private openCreateDialog () {
+    settingStore.openCommandCreateDialog();
+  }
+
+  private openUpdateDialog () {
     settingStore.openCommandUpdateDialog();
   }
 }

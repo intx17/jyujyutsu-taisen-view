@@ -1,7 +1,7 @@
 import { Plugin } from '@nuxt/types';
 import { API, graphqlOperation } from "aws-amplify";
 import { GetInfectedDataQueryVariables } from '~/src/API';
-import { InfectedData } from "~/src/graphql/domain/infectedData";
+import { IInfectedData } from "~/src/graphql/domain/infectedData";
 import * as queries from '~/src/graphql/queries';
 
 interface FetchInfectedDataInput {
@@ -10,12 +10,12 @@ interface FetchInfectedDataInput {
 
 interface GetInfectedDataResponse {
   data: {
-    getInfectedData: InfectedData
+    getInfectedData: IInfectedData
   }
 }
 
 interface FetchInfectedDataResult {
-  infectedData: InfectedData
+  infectedData: IInfectedData
 }
 
 declare module 'vue/types/vue' {

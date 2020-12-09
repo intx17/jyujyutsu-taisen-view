@@ -27,7 +27,6 @@ import CurseContainer from '~/components/battle/organisms/CurseContainer.vue';
 import PlayerContainer from '~/components/battle/organisms/PlayerContainer.vue';
 import { GetInfectedDataQueryVariables } from '~/src/API';
 import { getInfectedData } from '~/src/graphql/queries';
-import { ParsedInfectedData } from '~/src/graphql/domain/infectedData';
 
 @Component({
   layout: 'default',
