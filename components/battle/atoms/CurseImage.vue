@@ -1,6 +1,6 @@
 <template>
   <p :class="{ 'shake-image': shakeImage }" class="curse-image-container">
-    <img :src="imgSrc" class="curse-image">
+    <img v-if="!!imgSrc" :src="imgSrc" class="curse-image">
   </p>
 </template>
 
@@ -23,6 +23,8 @@ export default class CurseImage extends Vue {
 .curse-image-container {
   display: flex;
   justify-content: center;
+  width: 100px;
+  height: 100px;
 }
 
 .curse-image-container.shake-image {

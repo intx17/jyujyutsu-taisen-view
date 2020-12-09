@@ -1,10 +1,10 @@
 <template>
   <div class="nes-container is-rounded is-dark">
     <curse-image
-      :img-src="curse.imgSrc"
+      :img-src="imgSrc"
     />
     <curse-name
-      :name="curse.name"
+      :name="name"
       :is-area-expansion="isAreaExpansion"
     />
     <hp-bar
@@ -52,6 +52,14 @@ export default class CurseContainer extends Vue {
     'test5',
     'test6'
   ]
+
+  private get name (): string {
+    return curseStore.curse?.name ?? ''
+  }
+
+  private get imgSrc (): string {
+    return curseStore.curse?.imgSrc ?? ''
+  }
 
   private get hp (): number {
     return battleStore.battleInProgress?.curseHP ?? 0

@@ -37,13 +37,10 @@ export default async (context: Context) => {
 
   if (player) {
     playerStore.setPlayer(player)
-    console.log(player)
     const battleInProgress = player.battles.items.find(b => b.inProgress) ?? null
     battleStore.setBattleInProgress(battleInProgress)
-    console.log(battleInProgress)
     const playerSelectedCommands = player.commands.items.filter(c => c.inSelectedCommandList)
     playerStore.setSelectedCommands(playerSelectedCommands)
-    console.log(playerSelectedCommands)
 
     if (battleInProgress) {
       const fetchCurseResult = await context.app.$fetchCurse({
@@ -51,7 +48,6 @@ export default async (context: Context) => {
       })
       const curse = fetchCurseResult.curse
       curseStore.setCurse(curse)
-      console.log(curse)
     }
   } else {
     const player = {

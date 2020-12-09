@@ -5,5 +5,5 @@ export interface ICurse {
   maxHP: number
   attack: number
   hitRate: number
-  imgSrc: number
+  imgSrc: string
 }

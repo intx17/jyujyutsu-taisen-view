@@ -45,9 +45,7 @@ type Battle
   id: ID!
   date: AWSDate!
   playerHP: Int!
-  playerMaxHP: Int!
   curseHP: Int!
-  curseMaxHP: Int!
   histories: AWSJSON
   trends: AWSJSON!
   inProgress: Boolean!
