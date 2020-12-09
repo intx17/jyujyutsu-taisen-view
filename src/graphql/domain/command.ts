@@ -1,9 +1,9 @@
 export interface ICommand {
-  readonly id: string;
-  readonly name: string;
-  readonly description: string;
-  readonly attack: number;
-  readonly criticalRate: number;
-  readonly isOutdoor: boolean;
-  readonly inSelectedCommandList: boolean;
+  id: string
+  name: string
+  description: string
+  attack: number
+  criticalRate: number
+  isOutdoor: boolean
+  inSelectedCommandList: boolean
 }

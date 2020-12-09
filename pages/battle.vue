@@ -90,7 +90,12 @@ import { ICommand } from '~/src/graphql/domain/command'
         playerID
       })
       const battleInProgress = fetchInProgressBattleResult.battle
-      console.log(battleInProgress)
+      if (battleInProgress) {
+        playerStore.setPlayerHP(battleInProgress.playerHP)
+        playerStore.setPlayerMaxHP(battleInProgress.playerMaxHP)
+        curseStore.setCurseHP(battleInProgress.curseHP)
+        curseStore.setCurseMaxHP(battleInProgress.curseMaxHP)
+      }
 
       return props
     } catch (e) {

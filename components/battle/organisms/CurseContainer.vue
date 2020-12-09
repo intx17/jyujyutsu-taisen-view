@@ -8,7 +8,8 @@
       :is-area-expansion="isAreaExpansion"
     />
     <hp-bar
-      :hp="curse.hp"
+      :hp="hp"
+      :max-hp="maxHP"
       :hp-text-color="hpTextColor"
     />
     <battle-history
@@ -26,6 +27,7 @@ import CurseName from '~/components/battle/atoms/CurseName.vue'
 import HpBar from '~/components/battle/atoms/HpBar.vue'
 import BattleHistory from '~/components/battle/atoms/BattleHistory.vue'
 import { ICurse } from '~/src/components/battle/organisms/curseContainer'
+import { curseStore } from '~/store'
 
 @Component({
   components: {
@@ -39,7 +41,6 @@ export default class CurseContainer extends Vue {
   @Prop({ type: Object, required: true, default: () => {} })
   private curse!: ICurse
 
-  private hp: number = 50;
   private readonly hpTextColor: string = '#fff';
   private isAreaExpansion: boolean = true;
 
@@ -51,6 +52,14 @@ export default class CurseContainer extends Vue {
     'test5',
     'test6'
   ]
+
+  private get hp (): number {
+    return curseStore.curse.hp
+  }
+
+  private get maxHP (): number {
+    return curseStore.curse.maxHP
+  }
 }
 </script>
 

@@ -226,8 +226,22 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "playerMaxHP": {
+                    "name": "playerMaxHP",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "curseHP": {
                     "name": "curseHP",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "curseMaxHP": {
+                    "name": "curseMaxHP",
                     "isArray": false,
                     "type": "Int",
                     "isRequired": true,
@@ -372,5 +386,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "747011376ae6761d8d693a0cefabb3b1"
+    "version": "d4a99e9e6d7522e2103a0a80e38b4f10"
 };

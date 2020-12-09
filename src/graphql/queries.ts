@@ -65,7 +65,9 @@ export const getPlayer = /* GraphQL */ `
           id
           date
           playerHP
+          playerMaxHP
           curseHP
+          curseMaxHP
           histories
           trends
           inProgress
@@ -213,7 +215,9 @@ export const getBattle = /* GraphQL */ `
       id
       date
       playerHP
+      playerMaxHP
       curseHP
+      curseMaxHP
       histories
       trends
       inProgress
@@ -261,7 +265,9 @@ export const listBattles = /* GraphQL */ `
         id
         date
         playerHP
+        playerMaxHP
         curseHP
+        curseMaxHP
         histories
         trends
         inProgress

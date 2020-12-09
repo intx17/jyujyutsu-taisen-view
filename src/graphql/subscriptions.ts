@@ -60,7 +60,9 @@ export const onCreatePlayer = /* GraphQL */ `
           id
           date
           playerHP
+          playerMaxHP
           curseHP
+          curseMaxHP
           histories
           trends
           inProgress
@@ -104,7 +106,9 @@ export const onUpdatePlayer = /* GraphQL */ `
           id
           date
           playerHP
+          playerMaxHP
           curseHP
+          curseMaxHP
           histories
           trends
           inProgress
@@ -148,7 +152,9 @@ export const onDeletePlayer = /* GraphQL */ `
           id
           date
           playerHP
+          playerMaxHP
           curseHP
+          curseMaxHP
           histories
           trends
           inProgress
@@ -308,7 +314,9 @@ export const onCreateBattle = /* GraphQL */ `
       id
       date
       playerHP
+      playerMaxHP
       curseHP
+      curseMaxHP
       histories
       trends
       inProgress
@@ -351,7 +359,9 @@ export const onUpdateBattle = /* GraphQL */ `
       id
       date
       playerHP
+      playerMaxHP
       curseHP
+      curseMaxHP
       histories
       trends
       inProgress
@@ -394,7 +404,9 @@ export const onDeleteBattle = /* GraphQL */ `
       id
       date
       playerHP
+      playerMaxHP
       curseHP
+      curseMaxHP
       histories
       trends
       inProgress

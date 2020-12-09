@@ -3,13 +3,16 @@
     <p class="title player-container-title">
       プレイヤー
     </p>
-    <hp-bar :hp="hp" />
+    <hp-bar
+      :hp="hp"
+      :max-hp="maxHP"
+    />
     <command-list class="command-list" />
     <p class="kokusen-image-container">
       <img src="/img/kokusen_small.png">
     </p>
     <attack-button
-      :enabled="activeCommand"
+      :enabled="hasActiveCommand"
       @on-click-attack-button="onClickAttackButton"
     />
   </div>
@@ -32,9 +35,15 @@ import { playerStore } from '~/store'
   }
 })
 export default class PlayerContainer extends Vue {
-  private hp: number = 50;
+  private get hp () {
+    return playerStore.player?.hp ?? 0
+  }
 
-  private get activeCommand () {
+  private get maxHP () {
+    return playerStore.player?.maxHP ?? 100
+  }
+
+  private get hasActiveCommand () {
     return playerStore.activeCommand !== null
   }
 

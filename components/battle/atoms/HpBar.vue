@@ -10,7 +10,7 @@
       :class="progressBarColorClass"
       :value="hp"
       class="nes-progress hp-progress"
-      max="100"
+      :max="maxHp"
     />
   </p>
 </template>
@@ -32,6 +32,9 @@ export default class HpBar extends Vue {
   @Prop({ type: Number, required: true, default: 100 })
   private hp!: number
 
+  @Prop({ type: Number, required: true, default: 100 })
+  private maxHp!: number
+
   @Prop({ type: String, required: false, default: '#212529' })
   private hpTextColor?: string
 
@@ -43,11 +46,14 @@ export default class HpBar extends Vue {
   }
 
   private get progressBarColorClass () {
+    const half = this.hp / 2
+    const third = this.hp / 3
+    const ten = this.hp / 10
     return {
-      'is-primary': this.hp > 50,
-      'is-success': this.hp > 30 && this.hp <= 50,
-      'is-warning': this.hp > 10 && this.hp <= 30,
-      'is-error': this.hp <= 10
+      'is-primary': this.hp > half,
+      'is-success': this.hp > third && this.hp <= half,
+      'is-warning': this.hp > ten && this.hp <= third,
+      'is-error': this.hp <= ten
     }
   }
 }

@@ -4,6 +4,7 @@ import { ICommand } from '~/src/graphql/domain/command'
 interface IPlayer {
   id: string
   hp: number
+  maxHP: number
   prefecture: string
 }
 
@@ -26,6 +27,20 @@ export default class PlayerStore extends VuexModule implements IPlayerStore {
   @Mutation
   setPlayer (player: IPlayer | null) {
     this.player = player
+  }
+
+  @Mutation
+  setPlayerHP (hp: number) {
+    const copied: IPlayer = JSON.parse(JSON.stringify(this.player))
+    copied.hp = hp
+    this.player = copied
+  }
+
+  @Mutation
+  setPlayerMaxHP (hp: number) {
+    const copied: IPlayer = JSON.parse(JSON.stringify(this.player))
+    copied.maxHP = hp
+    this.player = copied
   }
 
   @Mutation
