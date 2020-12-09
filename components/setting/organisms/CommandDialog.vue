@@ -120,7 +120,7 @@ export default class CommonDialog extends Vue {
           attack: Number(this.attack),
           criticalRate: Number(this.criticalRate) / 100,
           isOutdoor: this.isOutdoor,
-          inCommandList: false,
+         inSelectedCommandList: false,
           playerID: playerStore.player.id
         }
       }

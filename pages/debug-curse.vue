@@ -6,12 +6,8 @@
         <input type="text" v-model="name" id="name" />
       </div>
       <div>
-        <label for="min-negative">MIN NEGATIVE</label>
-        <input type="number" v-model="minNegative" id="min-negative" />
-      </div>
-      <div>
-        <label for="max-negative">MAX NEGATIVE</label>
-        <input type="number" v-model="maxNegative" id="max-negative" />
+        <label for="min-negative">NEGATIVE</label>
+        <input type="number" v-model="negative" id="min-negative" />
       </div>
       <div>
         <label for="max-hp">MAX HP</label>
@@ -66,8 +62,7 @@ import { Curse } from "~/src/models";
 })
 export default class DebugCurse extends Vue {
   private name: string = "curseName";
-  private minNegative: string = '0';
-  private maxNegative: string = '100';
+  private negative: string = '1000';
   private maxHP: string = '100';
   private attack: string = '10';
   private hitRate: string = '100';
@@ -76,15 +71,13 @@ export default class DebugCurse extends Vue {
 
   // methods
   private get isValidInputs (): boolean {
-    const minNegative = Math.floor(Number(this.minNegative));
-    const maxNegative = Math.floor(Number(this.maxNegative));
+    const negative = Math.floor(Number(this.negative));
     const maxHP = Math.floor(Number(this.maxHP));
     const attack = Math.floor(Number(this.attack));
     const hitRate = Number(this.hitRate);
 
     const result = !!this.name
-      && (Number.isInteger(minNegative) && minNegative >= 0)
-      && (Number.isInteger(maxNegative) && maxNegative > 0)
+      && (Number.isInteger(negative) && negative > 0)
       && (Number.isInteger(maxHP) && maxHP > 0)
       && (Number.isInteger(attack) && attack > 0)
       && (Number.isInteger(hitRate) && hitRate > 0 && hitRate <= 100)
@@ -136,8 +129,7 @@ export default class DebugCurse extends Vue {
   async dbInsert () {
     const curse: Curse = new Curse({
       name: this.name,
-      minNegative: Number(this.minNegative),
-      maxNegative: Number(this.maxNegative),
+      negative: Number(this.negative),
       maxHP: Number(this.maxHP),
       attack: Number(this.attack),
       hitRate: Number(this.hitRate) / 100,

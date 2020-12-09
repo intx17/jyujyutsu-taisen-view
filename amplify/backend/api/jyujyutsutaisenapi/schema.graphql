@@ -10,10 +10,10 @@ type Player @model {
   woeid: Int!
   prefecture: String!
   commands: [Command] @connection(keyName: "byPlayer", fields: ["id"])
-  battles: [Battle] @connection(keyName: "byPlayer", fields: ["id"])
+  battles: [PlayerBattle] @connection(keyName: "byPlayer", fields: ["id"])
 }
 
-type Curse @model @key(name: "byNegative", fields: ["negative"]) {
+type Curse @model {
   id: ID!
   name: String!
   negative: Int!
@@ -26,7 +26,6 @@ type Curse @model @key(name: "byNegative", fields: ["negative"]) {
 type Command
 @model
 @key(name: "byPlayer", fields: ["playerID"])
-@key(name: "bySelected", fields: ["inSelectedCommandList"])
 {
   id: ID!
   name: String!
@@ -39,7 +38,7 @@ type Command
   player: Player @connection(fields: ["playerID"])
 }
 
-type Battle
+type PlayerBattle
   @model
   @key(name: "byPlayer", fields: ["playerID", "date"])
 {
@@ -51,6 +50,18 @@ type Battle
   trends: AWSJSON!
   playerID: ID!
   player: Player @connection(fields: ["playerID"])
+  curseID: ID!
+  curse: Curse @connection(fields: ["curseID"])
+}
+
+type Battle
+  @model
+{
+  id: ID!
+  date: AWSDate!
+  curseHP: Int!
+  histories: AWSJSON
+  trends: AWSJSON!
   curseID: ID!
   curse: Curse @connection(fields: ["curseID"])
 }

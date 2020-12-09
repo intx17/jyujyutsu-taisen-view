@@ -98,7 +98,7 @@ export const schema = {
                     "name": "battles",
                     "isArray": true,
                     "type": {
-                        "model": "Battle"
+                        "model": "PlayerBattle"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -202,8 +202,8 @@ export const schema = {
                 }
             ]
         },
-        "Battle": {
-            "name": "Battle",
+        "PlayerBattle": {
+            "name": "PlayerBattle",
             "fields": {
                 "id": {
                     "name": "id",
@@ -282,7 +282,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Battles",
+            "pluralName": "PlayerBattles",
             "attributes": [
                 {
                     "type": "model",
@@ -359,20 +359,79 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                }
+            ]
+        },
+        "Battle": {
+            "name": "Battle",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
                 },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byNegative",
-                        "fields": [
-                            "negative"
-                        ]
+                "date": {
+                    "name": "date",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "curseHP": {
+                    "name": "curseHP",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "histories": {
+                    "name": "histories",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "trends": {
+                    "name": "trends",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "curseID": {
+                    "name": "curseID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "curse": {
+                    "name": "curse",
+                    "isArray": false,
+                    "type": {
+                        "model": "Curse"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": "id"
                     }
+                }
+            },
+            "syncable": true,
+            "pluralName": "Battles",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
                 }
             ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "dfc478ef9d7922c37ee01e240e7a9590"
+    "version": "6c7145a14fe3c930b9f7aa699f7c22be"
 };

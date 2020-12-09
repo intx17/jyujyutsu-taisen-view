@@ -76,7 +76,7 @@ export default class Setting extends Vue {
     // update store
     playerStore.setPlayer({
       id: player.id,
-      hp: player.hp,
+      hp: playerInStore.hp,
       prefecture
     })
   }

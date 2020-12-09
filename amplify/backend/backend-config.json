@@ -16,5 +16,19 @@
         }
       }
     }
+  },
+  "auth": {
+    "jyujyutsutaisen9f9d3326": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "jyujyutsutaisenstorage": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

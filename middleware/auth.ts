@@ -8,8 +8,9 @@ const { AmplifyEventBus } = require('aws-amplify-vue');
 
 // store
 import { authStore, playerStore } from '~/utils/storeAccessor';
+import { Context } from '@nuxt/types';
 
-export default async () => {
+export default async (context: Context) => {
     // ログイン, ログアウト時
   AmplifyEventBus.$on('authState', (info: any) => {
     switch (info) {
@@ -39,26 +40,23 @@ export default async () => {
     id: userInfo.id
   };
 
-  const player = await API.graphql(graphqlOperation(getPlayer, getPlayerVar)) as GetPlayerResponse;
+  const fetchPlayerResult = await context.app.$fetchPlayer({ id: userInfo.id });
+  const player = fetchPlayerResult.player;
 
-  if (player.data.getPlayer) {
-    console.log('here');
+  if (player) {
     playerStore.setPlayer({
-      id: player.data.getPlayer.id,
+      id: player.id,
       hp: 100,
-      prefecture: player.data.getPlayer.prefecture,
+      prefecture: player.prefecture,
     });
   } else {
-    const createPlayerVar: CreatePlayerMutationVariables = {
-      input: {
+    await context.app.$createPlayer({
         id: userInfo.id,
         name: userInfo.username,
         maxHP: 100,
         woeid: JapaneseWoeid.Tokyo,
         prefecture: '東京都',
-      }
-    }
-    await API.graphql(graphqlOperation(createPlayer, createPlayerVar));
+      });
 
     // リファクタ
     playerStore.setPlayer({

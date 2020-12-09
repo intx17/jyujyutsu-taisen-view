@@ -24,5 +24,23 @@
       "StackId": "arn:aws:cloudformation:ap-northeast-1:231814304354:stack/amplify-jyujyutsutaisen-sandbox-235600/3745f1d0-37d3-11eb-984f-0635424d3560",
       "AmplifyAppId": "d3r4dde1vmvt8q"
     }
+  },
+  "mtitechsa": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jyujyutsutaisen-mtitechsa-132350-authRole",
+      "UnauthRoleArn": "arn:aws:iam::993578311696:role/amplify-jyujyutsutaisen-mtitechsa-132350-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::993578311696:role/amplify-jyujyutsutaisen-mtitechsa-132350-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-jyujyutsutaisen-mtitechsa-132350-deployment",
+      "UnauthRoleName": "amplify-jyujyutsutaisen-mtitechsa-132350-unauthRole",
+      "StackName": "amplify-jyujyutsutaisen-mtitechsa-132350",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:993578311696:stack/amplify-jyujyutsutaisen-mtitechsa-132350/68cf9030-39d6-11eb-bfa2-0693e1093a2e",
+      "AmplifyAppId": "d279f4z4dys1na"
+    },
+    "categories": {
+      "auth": {
+        "jyujyutsutaisen9f9d3326": {}
+      }
+    }
   }
 }

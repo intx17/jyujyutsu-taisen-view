@@ -38,7 +38,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/amplify.js', ssr: false }
+    { src: '~/plugins/amplify.js', ssr: false },
+    { src: '~/plugins/dataaccess.ts', ssr: false }
   ],
 
   /*

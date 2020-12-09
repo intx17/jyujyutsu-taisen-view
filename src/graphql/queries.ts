@@ -206,9 +206,9 @@ export const listCommands = /* GraphQL */ `
     }
   }
 `;
-export const getBattle = /* GraphQL */ `
-  query GetBattle($id: ID!) {
-    getBattle(id: $id) {
+export const getPlayerBattle = /* GraphQL */ `
+  query GetPlayerBattle($id: ID!) {
+    getPlayerBattle(id: $id) {
       id
       date
       playerHP
@@ -248,13 +248,13 @@ export const getBattle = /* GraphQL */ `
     }
   }
 `;
-export const listBattles = /* GraphQL */ `
-  query ListBattles(
-    $filter: ModelBattleFilterInput
+export const listPlayerBattles = /* GraphQL */ `
+  query ListPlayerBattles(
+    $filter: ModelPlayerBattleFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listBattles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listPlayerBattles(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         date
@@ -272,6 +272,63 @@ export const listBattles = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        curseID
+        curse {
+          id
+          name
+          negative
+          maxHP
+          attack
+          hitRate
+          imgSrc
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getBattle = /* GraphQL */ `
+  query GetBattle($id: ID!) {
+    getBattle(id: $id) {
+      id
+      date
+      curseHP
+      histories
+      trends
+      curseID
+      curse {
+        id
+        name
+        negative
+        maxHP
+        attack
+        hitRate
+        imgSrc
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listBattles = /* GraphQL */ `
+  query ListBattles(
+    $filter: ModelBattleFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listBattles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        date
+        curseHP
+        histories
+        trends
         curseID
         curse {
           id
