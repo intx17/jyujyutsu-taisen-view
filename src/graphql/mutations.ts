@@ -75,6 +75,7 @@ export const createPlayer = /* GraphQL */ `
           curseHP
           histories
           trends
+          inProgress
           playerID
           curseID
           createdAt
@@ -121,6 +122,7 @@ export const updatePlayer = /* GraphQL */ `
           curseHP
           histories
           trends
+          inProgress
           playerID
           curseID
           createdAt
@@ -167,6 +169,7 @@ export const deletePlayer = /* GraphQL */ `
           curseHP
           histories
           trends
+          inProgress
           playerID
           curseID
           createdAt
@@ -335,141 +338,6 @@ export const deleteCommand = /* GraphQL */ `
     }
   }
 `;
-export const createPlayerBattle = /* GraphQL */ `
-  mutation CreatePlayerBattle(
-    $input: CreatePlayerBattleInput!
-    $condition: ModelPlayerBattleConditionInput
-  ) {
-    createPlayerBattle(input: $input, condition: $condition) {
-      id
-      date
-      playerHP
-      curseHP
-      histories
-      trends
-      playerID
-      player {
-        id
-        name
-        maxHP
-        woeid
-        prefecture
-        commands {
-          nextToken
-        }
-        battles {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      curseID
-      curse {
-        id
-        name
-        negative
-        maxHP
-        attack
-        hitRate
-        imgSrc
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updatePlayerBattle = /* GraphQL */ `
-  mutation UpdatePlayerBattle(
-    $input: UpdatePlayerBattleInput!
-    $condition: ModelPlayerBattleConditionInput
-  ) {
-    updatePlayerBattle(input: $input, condition: $condition) {
-      id
-      date
-      playerHP
-      curseHP
-      histories
-      trends
-      playerID
-      player {
-        id
-        name
-        maxHP
-        woeid
-        prefecture
-        commands {
-          nextToken
-        }
-        battles {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      curseID
-      curse {
-        id
-        name
-        negative
-        maxHP
-        attack
-        hitRate
-        imgSrc
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deletePlayerBattle = /* GraphQL */ `
-  mutation DeletePlayerBattle(
-    $input: DeletePlayerBattleInput!
-    $condition: ModelPlayerBattleConditionInput
-  ) {
-    deletePlayerBattle(input: $input, condition: $condition) {
-      id
-      date
-      playerHP
-      curseHP
-      histories
-      trends
-      playerID
-      player {
-        id
-        name
-        maxHP
-        woeid
-        prefecture
-        commands {
-          nextToken
-        }
-        battles {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      curseID
-      curse {
-        id
-        name
-        negative
-        maxHP
-        attack
-        hitRate
-        imgSrc
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const createBattle = /* GraphQL */ `
   mutation CreateBattle(
     $input: CreateBattleInput!
@@ -478,9 +346,27 @@ export const createBattle = /* GraphQL */ `
     createBattle(input: $input, condition: $condition) {
       id
       date
+      playerHP
       curseHP
       histories
       trends
+      inProgress
+      playerID
+      player {
+        id
+        name
+        maxHP
+        woeid
+        prefecture
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       curseID
       curse {
         id
@@ -506,9 +392,27 @@ export const updateBattle = /* GraphQL */ `
     updateBattle(input: $input, condition: $condition) {
       id
       date
+      playerHP
       curseHP
       histories
       trends
+      inProgress
+      playerID
+      player {
+        id
+        name
+        maxHP
+        woeid
+        prefecture
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       curseID
       curse {
         id
@@ -534,9 +438,27 @@ export const deleteBattle = /* GraphQL */ `
     deleteBattle(input: $input, condition: $condition) {
       id
       date
+      playerHP
       curseHP
       histories
       trends
+      inProgress
+      playerID
+      player {
+        id
+        name
+        maxHP
+        woeid
+        prefecture
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       curseID
       curse {
         id

@@ -49,10 +49,11 @@ import { ICommand } from '~/src/graphql/domain/command'
       }
 
       const now = moment()
-      if (playerStore.player === null) {
+      if (playerStore.player === null || !playerStore.player.id) {
         window.alert('ユーザーデータが存在しません')
         return
       }
+      const playerID: string = playerStore.player.id
       const prefecture: string = playerStore.player.prefecture
 
       const fetchInfectedDataResult = await context.app.$fetchInfectedData({
@@ -79,10 +80,17 @@ import { ICommand } from '~/src/graphql/domain/command'
 
       // commands
       const listPlayerSelectedCommandsResult = await context.app.$listPlayerSelectedCommands({
-        playerID: playerStore.player.id
+        playerID
       })
       const commands = listPlayerSelectedCommandsResult.commands
       playerStore.setSelectedCommands(commands)
+
+      // battle
+      const fetchInProgressBattleResult = await context.app.$fetchInProgressBattle({
+        playerID
+      })
+      const battleInProgress = fetchInProgressBattleResult.battle
+      console.log(battleInProgress)
 
       return props
     } catch (e) {

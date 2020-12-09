@@ -63,6 +63,7 @@ export const onCreatePlayer = /* GraphQL */ `
           curseHP
           histories
           trends
+          inProgress
           playerID
           curseID
           createdAt
@@ -106,6 +107,7 @@ export const onUpdatePlayer = /* GraphQL */ `
           curseHP
           histories
           trends
+          inProgress
           playerID
           curseID
           createdAt
@@ -149,6 +151,7 @@ export const onDeletePlayer = /* GraphQL */ `
           curseHP
           histories
           trends
+          inProgress
           playerID
           curseID
           createdAt
@@ -299,140 +302,32 @@ export const onDeleteCommand = /* GraphQL */ `
     }
   }
 `;
-export const onCreatePlayerBattle = /* GraphQL */ `
-  subscription OnCreatePlayerBattle {
-    onCreatePlayerBattle {
-      id
-      date
-      playerHP
-      curseHP
-      histories
-      trends
-      playerID
-      player {
-        id
-        name
-        maxHP
-        woeid
-        prefecture
-        commands {
-          nextToken
-        }
-        battles {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      curseID
-      curse {
-        id
-        name
-        negative
-        maxHP
-        attack
-        hitRate
-        imgSrc
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdatePlayerBattle = /* GraphQL */ `
-  subscription OnUpdatePlayerBattle {
-    onUpdatePlayerBattle {
-      id
-      date
-      playerHP
-      curseHP
-      histories
-      trends
-      playerID
-      player {
-        id
-        name
-        maxHP
-        woeid
-        prefecture
-        commands {
-          nextToken
-        }
-        battles {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      curseID
-      curse {
-        id
-        name
-        negative
-        maxHP
-        attack
-        hitRate
-        imgSrc
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeletePlayerBattle = /* GraphQL */ `
-  subscription OnDeletePlayerBattle {
-    onDeletePlayerBattle {
-      id
-      date
-      playerHP
-      curseHP
-      histories
-      trends
-      playerID
-      player {
-        id
-        name
-        maxHP
-        woeid
-        prefecture
-        commands {
-          nextToken
-        }
-        battles {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      curseID
-      curse {
-        id
-        name
-        negative
-        maxHP
-        attack
-        hitRate
-        imgSrc
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateBattle = /* GraphQL */ `
   subscription OnCreateBattle {
     onCreateBattle {
       id
       date
+      playerHP
       curseHP
       histories
       trends
+      inProgress
+      playerID
+      player {
+        id
+        name
+        maxHP
+        woeid
+        prefecture
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       curseID
       curse {
         id
@@ -455,9 +350,27 @@ export const onUpdateBattle = /* GraphQL */ `
     onUpdateBattle {
       id
       date
+      playerHP
       curseHP
       histories
       trends
+      inProgress
+      playerID
+      player {
+        id
+        name
+        maxHP
+        woeid
+        prefecture
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       curseID
       curse {
         id
@@ -480,9 +393,27 @@ export const onDeleteBattle = /* GraphQL */ `
     onDeleteBattle {
       id
       date
+      playerHP
       curseHP
       histories
       trends
+      inProgress
+      playerID
+      player {
+        id
+        name
+        maxHP
+        woeid
+        prefecture
+        commands {
+          nextToken
+        }
+        battles {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       curseID
       curse {
         id

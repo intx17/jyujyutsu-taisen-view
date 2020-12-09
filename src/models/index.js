@@ -4,13 +4,12 @@ import { schema } from './schema';
 
 
 
-const { InfectedData, Player, Command, PlayerBattle, Curse, Battle } = initSchema(schema);
+const { InfectedData, Player, Command, Battle, Curse } = initSchema(schema);
 
 export {
   InfectedData,
   Player,
   Command,
-  PlayerBattle,
-  Curse,
-  Battle
+  Battle,
+  Curse
 };

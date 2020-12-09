@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Plugin } from '@nuxt/types'
 import { API, graphqlOperation } from 'aws-amplify'
-import { CreatePlayerMutationVariables, GetPlayerQueryVariables, UpdatePlayerMutationVariables } from '~/src/API'
-import { JapaneseWoeid } from '~/src/enums/japanese-woeid'
+import { CreatePlayerInput, CreatePlayerMutationVariables, GetPlayerQueryVariables, UpdatePlayerInput, UpdatePlayerMutationVariables } from '~/src/API'
 import { IPlayer } from '~/src/graphql/domain/player'
 import * as queries from '~/src/graphql/queries'
 import * as mutations from '~/src/graphql/mutations'
@@ -19,19 +18,6 @@ interface FetchPlayerInput {
 
 interface FetchPlayerResult {
     player: IPlayer
-}
-
-interface CreatePlayerInput {
-    id: string
-    name: string
-    maxHP: number
-    woeid: JapaneseWoeid
-    prefecture: string
-}
-
-interface UpdatePlayerInput {
-    id: string
-    prefecture: string
 }
 
 async function fetchPlayer (input: FetchPlayerInput): Promise<FetchPlayerResult> {

@@ -19,7 +19,7 @@ export declare class Player {
   readonly woeid: number;
   readonly prefecture: string;
   readonly commands?: (Command | null)[];
-  readonly battles?: (PlayerBattle | null)[];
+  readonly battles?: (Battle | null)[];
   constructor(init: ModelInit<Player>);
   static copyOf(source: Player, mutator: (draft: MutableModel<Player>) => MutableModel<Player> | void): Player;
 }
@@ -37,18 +37,19 @@ export declare class Command {
   static copyOf(source: Command, mutator: (draft: MutableModel<Command>) => MutableModel<Command> | void): Command;
 }
 
-export declare class PlayerBattle {
+export declare class Battle {
   readonly id: string;
   readonly date: string;
   readonly playerHP: number;
   readonly curseHP: number;
   readonly histories?: string;
   readonly trends: string;
+  readonly inProgress: boolean;
   readonly player?: Player;
   readonly curseID: string;
   readonly curse?: Curse;
-  constructor(init: ModelInit<PlayerBattle>);
-  static copyOf(source: PlayerBattle, mutator: (draft: MutableModel<PlayerBattle>) => MutableModel<PlayerBattle> | void): PlayerBattle;
+  constructor(init: ModelInit<Battle>);
+  static copyOf(source: Battle, mutator: (draft: MutableModel<Battle>) => MutableModel<Battle> | void): Battle;
 }
 
 export declare class Curse {
@@ -61,16 +62,4 @@ export declare class Curse {
   readonly imgSrc: string;
   constructor(init: ModelInit<Curse>);
   static copyOf(source: Curse, mutator: (draft: MutableModel<Curse>) => MutableModel<Curse> | void): Curse;
-}
-
-export declare class Battle {
-  readonly id: string;
-  readonly date: string;
-  readonly curseHP: number;
-  readonly histories?: string;
-  readonly trends: string;
-  readonly curseID: string;
-  readonly curse?: Curse;
-  constructor(init: ModelInit<Battle>);
-  static copyOf(source: Battle, mutator: (draft: MutableModel<Battle>) => MutableModel<Battle> | void): Battle;
 }

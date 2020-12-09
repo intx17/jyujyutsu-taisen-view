@@ -68,6 +68,7 @@ export const getPlayer = /* GraphQL */ `
           curseHP
           histories
           trends
+          inProgress
           playerID
           curseID
           createdAt
@@ -206,15 +207,16 @@ export const listCommands = /* GraphQL */ `
     }
   }
 `;
-export const getPlayerBattle = /* GraphQL */ `
-  query GetPlayerBattle($id: ID!) {
-    getPlayerBattle(id: $id) {
+export const getBattle = /* GraphQL */ `
+  query GetBattle($id: ID!) {
+    getBattle(id: $id) {
       id
       date
       playerHP
       curseHP
       histories
       trends
+      inProgress
       playerID
       player {
         id
@@ -248,74 +250,6 @@ export const getPlayerBattle = /* GraphQL */ `
     }
   }
 `;
-export const listPlayerBattles = /* GraphQL */ `
-  query ListPlayerBattles(
-    $filter: ModelPlayerBattleFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPlayerBattles(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        date
-        playerHP
-        curseHP
-        histories
-        trends
-        playerID
-        player {
-          id
-          name
-          maxHP
-          woeid
-          prefecture
-          createdAt
-          updatedAt
-        }
-        curseID
-        curse {
-          id
-          name
-          negative
-          maxHP
-          attack
-          hitRate
-          imgSrc
-          createdAt
-          updatedAt
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
-export const getBattle = /* GraphQL */ `
-  query GetBattle($id: ID!) {
-    getBattle(id: $id) {
-      id
-      date
-      curseHP
-      histories
-      trends
-      curseID
-      curse {
-        id
-        name
-        negative
-        maxHP
-        attack
-        hitRate
-        imgSrc
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const listBattles = /* GraphQL */ `
   query ListBattles(
     $filter: ModelBattleFilterInput
@@ -326,9 +260,21 @@ export const listBattles = /* GraphQL */ `
       items {
         id
         date
+        playerHP
         curseHP
         histories
         trends
+        inProgress
+        playerID
+        player {
+          id
+          name
+          maxHP
+          woeid
+          prefecture
+          createdAt
+          updatedAt
+        }
         curseID
         curse {
           id

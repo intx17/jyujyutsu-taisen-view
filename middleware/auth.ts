@@ -28,7 +28,7 @@ export default async (context: Context) => {
   authStore.setIsLoggedIn(true)
 
   // ストア内プレイヤー情報取得
-  if (playerStore.player !== null) {
+  if (playerStore.player !== null && playerStore.player.id === userInfo.id) {
     return
   }
 

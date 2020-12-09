@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Plugin } from '@nuxt/types'
 import { API, graphqlOperation } from 'aws-amplify'
-import { ListCommandsQueryVariables, CreateCommandMutationVariables, UpdateCommandMutationVariables, ModelCommandFilterInput } from '~/src/API'
+import { ListCommandsQueryVariables, CreateCommandMutationVariables, UpdateCommandMutationVariables, ModelCommandFilterInput, CreateCommandInput, UpdateCommandInput } from '~/src/API'
 import { ICommand } from '~/src/graphql/domain/command'
 import * as queries from '~/src/graphql/queries'
 import * as mutations from '~/src/graphql/mutations'
@@ -36,26 +36,6 @@ interface ListCommandsResponse {
 
 interface ListPlayerCommandsResult {
     commands: ICommand[]
-}
-
-interface CreateCommandInput {
-    name: string
-    description: string
-    attack: number
-    criticalRate: number
-    isOutdoor: boolean
-    inSelectedCommandList: boolean
-    playerID: string
-}
-
-interface UpdateCommandInput {
-    id: string
-    name: string
-    description: string
-    attack: number
-    criticalRate: number
-    isOutdoor: boolean
-    inSelectedCommandList: boolean
 }
 
 interface UpdateSelectedCommandsInput {

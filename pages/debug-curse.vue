@@ -51,10 +51,8 @@
 </template>
 
 <script lang="ts">
-import { DataStore, Storage } from 'aws-amplify'
+import { Storage } from 'aws-amplify'
 import { Component, Vue } from 'nuxt-property-decorator'
-
-import { Curse } from '~/src/models'
 
 @Component({
   layout: 'default',
@@ -127,7 +125,7 @@ export default class DebugCurse extends Vue {
   }
 
   async dbInsert () {
-    const curse: Curse = new Curse({
+    await this.$createCurse({
       name: this.name,
       negative: Number(this.negative),
       maxHP: Number(this.maxHP),
@@ -135,7 +133,6 @@ export default class DebugCurse extends Vue {
       hitRate: Number(this.hitRate) / 100,
       imgSrc: `curse/${this.name}.png`
     })
-    await DataStore.save(curse)
   }
 
   async storageUpload () {
