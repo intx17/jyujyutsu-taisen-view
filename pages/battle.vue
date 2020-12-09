@@ -9,6 +9,7 @@
     />
     <player-container
       class="index-player-container"
+      commands="commands"
       @on-click-attack-button="playerAttack"
     />
   </section>
@@ -24,6 +25,7 @@ import { playerStore, curseStore } from '~/utils/storeAccessor'
 import NewsHeader from '~/components/battle/molecules/NewsHeader.vue'
 import CurseContainer from '~/components/battle/organisms/CurseContainer.vue'
 import PlayerContainer from '~/components/battle/organisms/PlayerContainer.vue'
+import { ICommand } from '~/src/graphql/domain/command'
 
 @Component({
   layout: 'default',
@@ -75,6 +77,13 @@ import PlayerContainer from '~/components/battle/organisms/PlayerContainer.vue'
         }
       }
 
+      // commands
+      const listPlayerSelectedCommandsResult = await context.app.$listPlayerSelectedCommands({
+        playerID: playerStore.player.id
+      })
+      const commands = listPlayerSelectedCommandsResult.commands
+      playerStore.setSelectedCommands(commands)
+
       return props
     } catch (e) {
       // eslint-disable-next-line no-console
@@ -85,6 +94,7 @@ import PlayerContainer from '~/components/battle/organisms/PlayerContainer.vue'
 export default class Battle extends Vue {
   private newsText!: string;
   private curse!: ICurse;
+  private commands!: ICommand[];
 
   // methods
   private playerAttack () {

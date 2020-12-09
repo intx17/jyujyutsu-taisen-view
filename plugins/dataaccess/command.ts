@@ -14,19 +14,19 @@ import * as mutations from '~/src/graphql/mutations'
 //     command: ICommand
 // }
 
-// interface SearchPlayerSelectedCommandsInput {
-//     playerID: string
-// }
+interface ListPlayerSelectedCommandsInput {
+    playerID: string
+}
 
-// interface SearchPlayerSelectedCommandsResult {
-//     commands: ICommand[]
-// }
+interface ListPlayerSelectedCommandsResult {
+    commands: ICommand[]
+}
 
 interface ListPlayerCommandsInput {
     playerID: string
 }
 
-interface ListPlayerCommandsResponse {
+interface ListCommandsResponse {
   data: {
     listCommands: {
       items: ICommand[]
@@ -58,9 +58,9 @@ interface UpdateCommandInput {
     inSelectedCommandList: boolean
 }
 
-// interface UpdateSelectedCommandsInput {
-//     ids: string[]
-// }
+interface UpdateSelectedCommandsInput {
+    ids: string[]
+}
 
 // async function fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult> {
 //     const commands: Command[] = await DataStore.query(
@@ -73,17 +73,26 @@ interface UpdateCommandInput {
 //     }
 // }
 
-// async function searchPlayerSelectedCommands(input: SearchPlayerSelectedCommandsInput): Promise<SearchPlayerSelectedCommandsResult> {
-//     const commands: Command[] = (await DataStore.query(
-//         Command,
-//         data => data.inSelectedCommandList('eq', true)
-//     ))
-//     .filter(c => c.player?.id === input.playerID);
+async function listPlayerSelectedCommands (input: ListPlayerSelectedCommandsInput): Promise<ListPlayerSelectedCommandsResult> {
+  const filter: ModelCommandFilterInput = {
+    playerID: {
+      eq: input.playerID
+    },
+    inSelectedCommandList: {
+      eq: true
+    }
+  }
+  const listVar: ListCommandsQueryVariables = {
+    filter
+  }
+  const response = await API.graphql(graphqlOperation(queries.listCommands, listVar)) as ListCommandsResponse
 
-//     return {
-//         commands
-//     }
-// }
+  const commands = response.data.listCommands.items
+
+  return {
+    commands
+  }
+}
 
 async function listPlayerCommands (input: ListPlayerCommandsInput): Promise<ListPlayerCommandsResult> {
   const filter: ModelCommandFilterInput = {
@@ -94,7 +103,7 @@ async function listPlayerCommands (input: ListPlayerCommandsInput): Promise<List
   const listVar: ListCommandsQueryVariables = {
     filter
   }
-  const response = await API.graphql(graphqlOperation(queries.listCommands, listVar)) as ListPlayerCommandsResponse
+  const response = await API.graphql(graphqlOperation(queries.listCommands, listVar)) as ListCommandsResponse
 
   const commands = response.data.listCommands.items
 
@@ -117,38 +126,43 @@ async function updateCommand (input: UpdateCommandInput): Promise<void> {
   await API.graphql(graphqlOperation(mutations.updateCommand, updateVar))
 }
 
-// async function updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void> {
-//     await Promise.all(input.ids.map(id => async() => {
-//         const fetchCommandResult = await fetchCommand({ id });
+async function updateSelectedCommand (input: UpdateSelectedCommandsInput): Promise<void> {
+  for (const id of input.ids) {
+    if (!id) {
+      continue
+    }
 
-//         return DataStore.save(
-//             Command.copyOf(
-//                 fetchCommandResult.command,
-//                 updated => {
-//                     updated.inSelectedCommandList = true;
-//                 }));
-//     }));
-// }
+    const updateVar: UpdateCommandMutationVariables = {
+      input: {
+        id,
+        inSelectedCommandList: true
+      }
+    }
+
+    // Promise Allしたい
+    await API.graphql(graphqlOperation(mutations.updateCommand, updateVar))
+  }
+}
 
 declare module 'vue/types/vue' {
   interface Vue {
     // $fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult>
-    // $searchPlayerSelectedCommands(input: SearchPlayerSelectedCommandsInput): Promise<SearchPlayerSelectedCommandsResult>
+    // $listPlayerSelectedCommands(input: ListPlayerSelectedCommandsInput): Promise<ListPlayerSelectedCommandsResult>
     $listPlayerCommands(input: ListPlayerCommandsInput): Promise<ListPlayerCommandsResult>
     $createCommand(input: CreateCommandInput): Promise<void>
     $updateCommand(input: UpdateCommandInput): Promise<void>
-    // $updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void>
+    $updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void>
   }
 }
 
 declare module '@nuxt/types' {
   interface NuxtAppOptions {
     // $fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult>
-    // $searchPlayerSelectedCommands(input: SearchPlayerSelectedCommandsInput): Promise<SearchPlayerSelectedCommandsResult>
+    $listPlayerSelectedCommands(input: ListPlayerSelectedCommandsInput): Promise<ListPlayerSelectedCommandsResult>
     $listPlayerCommands(input: ListPlayerCommandsInput): Promise<ListPlayerCommandsResult>
     $createCommand(input: CreateCommandInput): Promise<void>
     $updateCommand(input: UpdateCommandInput): Promise<void>
-    // $updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void>
+    $updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void>
   }
 }
 
@@ -156,21 +170,21 @@ declare module 'vuex/types/index' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Store<S> {
     // $fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult>
-    // $searchPlayerSelectedCommands(input: SearchPlayerSelectedCommandsInput): Promise<SearchPlayerSelectedCommandsResult>
+    $listPlayerSelectedCommands(input: ListPlayerSelectedCommandsInput): Promise<ListPlayerSelectedCommandsResult>
     $listPlayerCommands(input: ListPlayerCommandsInput): Promise<ListPlayerCommandsResult>
     $createCommand(input: CreateCommandInput): Promise<void>
     $updateCommand(input: UpdateCommandInput): Promise<void>
-    // $updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void>
+    $updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void>
   }
 }
 
 const commandDataAccessPlugin: Plugin = (_, inject) => {
   // inject('fetchCommand', fetchCommand)
-  // inject('searchPlayerSelectedCommands', searchPlayerSelectedCommands)
+  inject('listPlayerSelectedCommands', listPlayerSelectedCommands)
   inject('listPlayerCommands', listPlayerCommands)
   inject('createCommand', createCommand)
   inject('updateCommand', updateCommand)
-  // inject('updateSelectedCommand', updateSelectedCommand)
+  inject('updateSelectedCommand', updateSelectedCommand)
 }
 
 export default commandDataAccessPlugin

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="nes-container with-title is-centered is-rounded command-form-container"
+    class="nes-container with-title is-centered command-form-container"
   >
     <p class="title">
       コマンド設定
@@ -9,13 +9,14 @@
       v-for="(count) in [1, 2, 3]"
       :key="count"
       class="command-select"
-      :selected-value.sync="selectedValues[count - 1]"
+      :selected-value.sync="syncedSelectedCommandIds[count - 1]"
       :select-id="`command${count}`"
       :default-option-text="`▼コマンド${count}選択`"
       :options="commandOptions"
       @on-click-button="openUpdateDialog(count - 1)"
     />
     <button
+      class="nes-btn create-btn"
       @click="openCreateDialog"
     >
       新規
@@ -24,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, PropSync, Vue } from 'nuxt-property-decorator'
 import { settingStore } from '~/utils/storeAccessor'
 
 // components
@@ -40,9 +41,10 @@ import { ModalMode } from '~/store/setting'
 })
 export default class CommandForm extends Vue {
   @Prop({ type: Array, required: true, default: () => ([]) })
-  private commands!: ICommand[];
+  private commands!: ICommand[]
 
-  private selectedValues: string[] = ['', '', '']
+  @PropSync('selectedCommandIds', { type: Array, required: true, default: () => ([]) })
+  private syncedSelectedCommandIds!: string[]
 
   // computed
   private get commandOptions (): ISelectOption[] {
@@ -60,7 +62,7 @@ export default class CommandForm extends Vue {
   }
 
   private openUpdateDialog (commandIndex: number) {
-    const selected: ICommand | undefined = this.commands.find(c => c.id === this.selectedValues[commandIndex])
+    const selected: ICommand | undefined = this.commands.find(c => c.id === this.syncedSelectedCommandIds[commandIndex])
     if (!selected) {
       window.alert('コマンドが見つかりません')
       return
@@ -83,5 +85,9 @@ export default class CommandForm extends Vue {
 }
 .command-select + .command-select {
   margin-top: 15px;
+}
+.create-btn {
+  width: 100px;
+  margin-top: 10px;
 }
 </style>

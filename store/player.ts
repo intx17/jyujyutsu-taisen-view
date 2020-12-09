@@ -1,4 +1,5 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators'
+import { ICommand } from '~/src/graphql/domain/command'
 
 interface IPlayer {
   id: string
@@ -6,14 +7,10 @@ interface IPlayer {
   prefecture: string
 }
 
-export interface IPlayerStoreCommand {
-  name: string
-  attack: number
-}
-
 interface IPlayerStore {
   player: IPlayer | null
-  activeCommand: IPlayerStoreCommand | null
+  activeCommand: ICommand | null
+  selectedCommands: ICommand[]
 }
 
 @Module({
@@ -22,8 +19,9 @@ interface IPlayerStore {
   namespaced: true
 })
 export default class PlayerStore extends VuexModule implements IPlayerStore {
-  player: IPlayer | null = null;
-  activeCommand: IPlayerStoreCommand | null = null;
+  player: IPlayer | null = null
+  activeCommand: ICommand | null = null
+  selectedCommands: ICommand[] = []
 
   @Mutation
   setPlayer (player: IPlayer | null) {
@@ -31,7 +29,12 @@ export default class PlayerStore extends VuexModule implements IPlayerStore {
   }
 
   @Mutation
-  setActiveCommand (command: IPlayerStoreCommand | null) {
+  setActiveCommand (command: ICommand | null) {
     this.activeCommand = command
+  }
+
+  @Mutation
+  setSelectedCommands (commands: ICommand[]) {
+    this.selectedCommands = commands
   }
 }

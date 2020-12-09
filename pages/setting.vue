@@ -6,6 +6,7 @@
     />
     <command-form
       :commands="commands"
+      :selected-command-ids.sync="selectedCommandIds"
     />
     <command-dialog />
     <success-button
@@ -50,14 +51,33 @@ import { ICommand } from '~/src/graphql/domain/command'
       playerID: playerStore.player.id
     })
 
+    const commands = listPlayerCommandsResult.commands
+    const selectedCommandIds: string[] = ['', '', '']
+
+    let selectedCount = 0
+    for (const [i, c] of commands.entries()) {
+      if (selectedCount >= 3) {
+        break
+      }
+      if (c.inSelectedCommandList) {
+        selectedCommandIds[i] = c.id
+        selectedCount += 1
+      }
+    }
+
+    const prefectureValue = prefectureOptions.find(o => o.text === playerStore.player?.prefecture)?.value || ''
+
     return {
-      commands: listPlayerCommandsResult.commands
+      commands,
+      selectedCommandIds,
+      prefectureValue
     }
   }
 })
 export default class Setting extends Vue {
   private commands!: ICommand[]
-  private prefectureValue: string = '';
+  private selectedCommandIds!: string[]
+  private prefectureValue!: string;
 
   // methods
   private async save () {
@@ -76,6 +96,10 @@ export default class Setting extends Vue {
     await this.$updatePlayer({
       id: playerInStore.id,
       prefecture
+    })
+
+    await this.$updateSelectedCommand({
+      ids: this.selectedCommandIds
     })
 
     // update store

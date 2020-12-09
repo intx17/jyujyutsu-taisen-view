@@ -20,6 +20,7 @@ import Command from '~/components/battle/atoms/Command.vue'
 
 // interfaces
 import { ICommand } from '~/src/components/battle/atoms/command'
+import { ICommand as IDomainCommand } from '~/src/graphql/domain/command'
 import { playerStore } from '~/utils/storeAccessor'
 
 @Component({
@@ -28,31 +29,27 @@ import { playerStore } from '~/utils/storeAccessor'
   }
 })
 export default class CommandList extends Vue {
-  private activeIndex: number | null = null;
+  private activeIndex: number | null = null
+  private commandList: ICommand[] = []
 
-  private commandList: ICommand[] = [
-    {
-      name: '攻撃1',
-      description: '色々と説明する色々と説明する',
-      attack: 10,
-      isActive: false,
-      isOutdoor: true
-    },
-    {
-      name: '攻撃2',
-      description: '色々と説明する色々と説明する',
-      attack: 20,
-      isActive: false,
-      isOutdoor: false
-    },
-    {
-      name: '攻撃3',
-      description: '色々と説明する色々と説明する',
-      attack: 30,
-      isActive: false,
-      isOutdoor: false
-    }
-  ];
+  // computed
+  private get storeCommandList (): IDomainCommand[] {
+    return playerStore.selectedCommands
+  }
+
+  private created () {
+    this.commandList = this.storeCommandList.map((storeCommand) => {
+      const command: ICommand = {
+        name: storeCommand.name,
+        description: storeCommand.description,
+        attack: storeCommand.attack,
+        isActive: false,
+        isOutdoor: storeCommand.isOutdoor
+      }
+
+      return command
+    })
+  }
 
   // method
   private activateCommand (index: number): void {
@@ -67,10 +64,7 @@ export default class CommandList extends Vue {
     }
 
     this.activeIndex = index
-    playerStore.setActiveCommand({
-      name: this.commandList[this.activeIndex].name,
-      attack: this.commandList[this.activeIndex].attack
-    })
+    playerStore.setActiveCommand(this.storeCommandList[index])
 
     this.commandList = this.commandList.map((c, i) => {
       const isActive = i === index
