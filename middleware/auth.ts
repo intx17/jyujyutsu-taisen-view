@@ -36,21 +36,18 @@ export default async (context: Context) => {
   const player = fetchPlayerResult.player
 
   if (player) {
-    // 初回画面読み込み時だけ読み込む
-    if (!playerStore.player) {
-      playerStore.setPlayer(player)
-      const battleInProgress = player.battles.items.find(b => b.inProgress) ?? null
-      battleStore.setBattleInProgress(battleInProgress)
-      const playerSelectedCommands = player.commands.items.filter(c => c.inSelectedCommandList)
-      playerStore.setSelectedCommands(playerSelectedCommands)
+    playerStore.setPlayer(player)
+    const battleInProgress = player.battles.items.find(b => b.inProgress) ?? null
+    battleStore.setBattleInProgress(battleInProgress)
+    const playerSelectedCommands = player.commands.items.filter(c => c.inSelectedCommandList)
+    playerStore.setSelectedCommands(playerSelectedCommands)
 
-      if (battleInProgress) {
-        const fetchCurseResult = await context.app.$fetchCurse({
-          id: battleInProgress.curseID
-        })
-        const curse = fetchCurseResult.curse
-        curseStore.setCurse(curse)
-      }
+    if (battleInProgress) {
+      const fetchCurseResult = await context.app.$fetchCurse({
+        id: battleInProgress.curseID
+      })
+      const curse = fetchCurseResult.curse
+      curseStore.setCurse(curse)
     }
   } else {
     const player = {
