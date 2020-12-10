@@ -4,8 +4,10 @@ import { ICurse } from '~/src/graphql/domain/curse'
 
 interface IBattleStore {
     battleInProgress: IBattle | null
+    battleInProgressHistories: string[]
     curse: ICurse | null
     shakeCurseImage: boolean
+    isAreaExpansion: boolean
 }
 
 @Module({
@@ -15,21 +17,25 @@ interface IBattleStore {
 })
 export default class BattleStore extends VuexModule implements IBattleStore {
   battleInProgress: IBattle | null = null
+  battleInProgressHistories: string[] = []
   curse: ICurse | null = null
   shakeCurseImage = false
-
-  get battleInProgressHistory (): string[] {
-    return this.battleInProgress?.histories.split('\\n')
-      .filter(s => !!s) ?? []
-  }
+  isAreaExpansion = false
 
   @Mutation
   setBattleInProgress (battle: IBattle | null) {
     if (battle) {
       const histories = battle?.histories.replace(/"/g, '')
-      battle.histories = histories
+        .split('\\n')
+        .filter(s => !!s) ?? []
+      this.battleInProgressHistories = histories
     }
     this.battleInProgress = battle
+  }
+
+  @Mutation
+  setBattleInProgressHistories (histories: string[]) {
+    this.battleInProgressHistories = histories
   }
 
   @Mutation
@@ -47,5 +53,10 @@ export default class BattleStore extends VuexModule implements IBattleStore {
   @Mutation
   setShakeCurseImage (shake: boolean) {
     this.shakeCurseImage = shake
+  }
+
+  @Mutation
+  setIsAreaExpansion (isAreaExpansion: boolean) {
+    this.isAreaExpansion = isAreaExpansion
   }
 }

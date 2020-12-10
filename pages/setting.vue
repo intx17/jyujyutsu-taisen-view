@@ -47,18 +47,17 @@ import { IPlayer } from '~/src/graphql/domain/player'
       return
     }
 
-    const commands = playerStore.selectedCommands
+    const commands = playerStore.player.commands.items
+    const selectedCommands = playerStore.selectedCommands
     const selectedCommandIds: string[] = ['', '', '']
 
     let selectedCount = 0
-    for (const [i, c] of commands.entries()) {
+    for (const [i, c] of selectedCommands.entries()) {
       if (selectedCount >= 3) {
         break
       }
-      if (c.inSelectedCommandList) {
-        selectedCommandIds[i] = c.id
-        selectedCount += 1
-      }
+      selectedCommandIds[i] = c.id
+      selectedCount += 1
     }
 
     const prefectureValue = prefectureOptions.find(o => o.text === playerStore.player?.prefecture)?.value || ''
@@ -102,6 +101,9 @@ export default class Setting extends Vue {
     const copiedPlayer: IPlayer = JSON.parse(JSON.stringify(playerInStore))
     copiedPlayer.prefecture = prefecture
     playerStore.setPlayer(copiedPlayer)
+
+    const selectedCommands = playerStore.player?.commands.items.filter(c => this.selectedCommandIds.includes(c.id)) ?? []
+    playerStore.setSelectedCommands(selectedCommands)
   }
 }
 </script>

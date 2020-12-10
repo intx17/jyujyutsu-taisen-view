@@ -38,10 +38,13 @@ import { battleStore, curseStore } from '~/store'
 })
 export default class CurseContainer extends Vue {
   private readonly hpTextColor: string = '#fff';
-  private isAreaExpansion: boolean = true;
+
+  private get isAreaExpansion (): boolean {
+    return battleStore.isAreaExpansion
+  }
 
   private get battleHistories (): string[] {
-    return battleStore.battleInProgressHistory
+    return battleStore.battleInProgressHistories
   }
 
   private get name (): string {
