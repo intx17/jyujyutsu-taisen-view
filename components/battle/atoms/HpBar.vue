@@ -1,5 +1,5 @@
 <template>
-  <p class="hp-bar">
+  <div class="hp-bar">
     <span
       :style="hpTextStyles"
       class="hp-text"
@@ -12,7 +12,10 @@
       class="nes-progress hp-progress"
       :max="maxHp"
     />
-  </p>
+    <span class="hp-num">
+      {{ hp }}/{{ maxHp }}
+    </span>
+  </div>
 </template>
 
 <script lang="ts">
@@ -66,11 +69,17 @@ export default class HpBar extends Vue {
 }
 
 .hp-text {
-  margin-right: 10px;
+  margin-right: 5px;
+  font-size: 0.8rem;
 }
 
 .hp-progress {
   height: 1rem;
-  width: 90%;
+  width: 70%;
+  margin-right: 5px;
+}
+
+.hp-num {
+  font-size: 0.7rem;
 }
 </style>

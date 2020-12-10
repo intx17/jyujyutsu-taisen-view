@@ -12,7 +12,7 @@
       <img src="/img/kokusen_small.png">
     </p> -->
     <attack-button
-      :enabled="hasActiveCommand"
+      :enabled="enableAttackBtn"
       @on-click-attack-button="onClickAttackButton"
     />
   </div>
@@ -41,6 +41,10 @@ export default class PlayerContainer extends Vue {
 
   private get maxHP () {
     return playerStore.player?.maxHP ?? 100
+  }
+
+  private get enableAttackBtn () {
+    return !battleStore.isProccessing && this.hasActiveCommand
   }
 
   private get hasActiveCommand () {

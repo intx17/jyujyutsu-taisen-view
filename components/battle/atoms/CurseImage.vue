@@ -1,6 +1,6 @@
 <template>
   <p :class="{ 'shake-image': shakeImage }" class="curse-image-container">
-    <img :src="requireImgSrc" class="curse-image">
+    <img v-show="!!imgSrc" :src="requireImgSrc" class="curse-image">
   </p>
 </template>
 
@@ -14,6 +14,9 @@ export default class CurseImage extends Vue {
   private imgSrc!: string
 
   private get requireImgSrc (): string {
+    if (!this.imgSrc) {
+      return ''
+    }
     return require(`~/static/img/${this.imgSrc}`)
   }
 

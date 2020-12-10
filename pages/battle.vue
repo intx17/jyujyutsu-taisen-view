@@ -93,48 +93,55 @@ export default class Battle extends Vue {
 
   // methods
   private async playerAttack () {
-    const activeCommand = playerStore.activeCommand
-    const curse = curseStore.curse
-    const copiedBattle: IBattle = JSON.parse(JSON.stringify(battleStore.battleInProgress))
+    battleStore.setIsProccessing(true)
+    try {
+      const activeCommand = playerStore.activeCommand
+      const curse = curseStore.curse
+      const copiedBattle: IBattle = JSON.parse(JSON.stringify(battleStore.battleInProgress))
 
-    if (!activeCommand) {
-      window.alert('コマンドが選択されていません')
-      return
-    }
+      if (!activeCommand) {
+        window.alert('コマンドが選択されていません')
+        return
+      }
 
-    if (!curse) {
-      window.alert('呪霊が存在しません')
-      return
-    }
+      if (!curse) {
+        window.alert('呪霊が存在しません')
+        return
+      }
 
-    if (!copiedBattle) {
-      window.alert('進行中のバトルが存在しません')
-    }
+      if (!copiedBattle) {
+        window.alert('進行中のバトルが存在しません')
+        return
+      }
 
-    const playerDamage = this.calcCurseAttackDamage(curse, activeCommand)
-    const curseDamage = this.calcPlayerAttackDamage(activeCommand)
+      const playerDamage = this.calcCurseAttackDamage(curse, activeCommand)
+      const curseDamage = this.calcPlayerAttackDamage(activeCommand)
 
-    this.setBattleDamages(copiedBattle, playerDamage, curseDamage)
-    this.setBattleHistories(copiedBattle, playerDamage, curse.name, curseDamage)
+      this.setBattleDamages(copiedBattle, playerDamage, curseDamage)
+      this.setBattleHistories(copiedBattle, playerDamage, curse.name, curseDamage)
 
-    battleStore.setBattleInProgress(copiedBattle)
+      battleStore.setBattleInProgress(copiedBattle)
 
-    const updateInput: UpdateBattleInput = {
-      id: copiedBattle.id,
-      curseHP: copiedBattle.curseHP,
-      playerHP: copiedBattle.playerHP,
-      histories: copiedBattle.histories
-    }
+      const updateInput: UpdateBattleInput = {
+        id: copiedBattle.id,
+        curseHP: copiedBattle.curseHP,
+        playerHP: copiedBattle.playerHP,
+        histories: copiedBattle.histories
+      }
 
-    const battleIsEnded = copiedBattle.playerHP <= 0 || copiedBattle.curseHP <= 0
-    if (battleIsEnded) {
-      updateInput.inProgress = false
-      await this.updatedDB(updateInput)
-      await this.setNewBattle()
-    } else {
-      await this.updatedDB(updateInput)
       // 揺らす
-      this.shakeCurse()
+      await this.shakeCurse()
+
+      const battleIsEnded = copiedBattle.playerHP <= 0 || copiedBattle.curseHP <= 0
+      if (battleIsEnded) {
+        updateInput.inProgress = false
+        await this.updatedDB(updateInput)
+        await this.setNewBattle()
+      } else {
+        await this.updatedDB(updateInput)
+      }
+    } finally {
+      battleStore.setIsProccessing(false)
     }
   }
 
@@ -152,16 +159,11 @@ export default class Battle extends Vue {
       playerID: playerStore.player.id
     })
     const battle = fetchNewBattleResult.battle
-
-    battleStore.setBattleInProgress(battle)
     const copied: IBattle = JSON.parse(JSON.stringify(battle))
     if (copied) {
       const fetchCurseResult = await this.$fetchCurse({
         id: copied.curseID
       })
-      const curse = fetchCurseResult.curse
-      curseStore.setCurse(curse)
-
       copied.inProgress = true
 
       const updateInput: UpdateBattleInput = {
@@ -170,6 +172,11 @@ export default class Battle extends Vue {
       }
       // update DB
       this.updatedDB(updateInput)
+
+      await this.sleep(2)
+      const curse = fetchCurseResult.curse
+      battleStore.setBattleInProgress(battle)
+      curseStore.setCurse(curse)
     }
   }
 
@@ -178,7 +185,7 @@ export default class Battle extends Vue {
     const isCritical = command.criticalRate >= rand
 
     if (isCritical) {
-      return Math.pow(command.attack, 2.5)
+      return Math.ceil(Math.pow(command.attack, 2.5))
     }
 
     return command.attack
@@ -243,6 +250,10 @@ export default class Battle extends Vue {
 
   private openTrendsDialog () {
     battleStore.setIsTrendsDialogOpen(true)
+  }
+
+  private sleep (sec: number) {
+    return new Promise(resolve => setTimeout(resolve, sec * 1000))
   }
 }
 </script>

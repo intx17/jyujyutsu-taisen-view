@@ -38,6 +38,7 @@ export default async (context: Context) => {
   if (player) {
     playerStore.setPlayer(player)
     const battleInProgress = player.battles.items.find(b => b.inProgress) ?? null
+    console.log(battleInProgress)
     battleStore.setBattleInProgress(battleInProgress)
     const playerSelectedCommands = player.commands.items.filter(c => c.inSelectedCommandList)
     playerStore.setSelectedCommands(playerSelectedCommands)
