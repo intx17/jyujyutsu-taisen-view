@@ -6,6 +6,7 @@ interface IBattleStore {
     battleInProgressHistories: string[]
     shakeCurseImage: boolean
     isAreaExpansion: boolean
+    isTrendsDialogOpen: boolean
 }
 
 @Module({
@@ -18,6 +19,7 @@ export default class BattleStore extends VuexModule implements IBattleStore {
   battleInProgressHistories: string[] = []
   shakeCurseImage = false
   isAreaExpansion = false
+  isTrendsDialogOpen = false
 
   @Mutation
   setBattleInProgress (battle: IBattle | null) {
@@ -50,5 +52,10 @@ export default class BattleStore extends VuexModule implements IBattleStore {
   @Mutation
   setIsAreaExpansion (isAreaExpansion: boolean) {
     this.isAreaExpansion = isAreaExpansion
+  }
+
+  @Mutation
+  setIsTrendsDialogOpen (isOpen: boolean) {
+    this.isTrendsDialogOpen = isOpen
   }
 }

@@ -2,6 +2,7 @@
   <div class="nes-container is-rounded is-dark">
     <curse-image
       :img-src="imgSrc"
+      @click.native="onClickCurseImage"
     />
     <curse-name
       :name="name"
@@ -19,13 +20,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Emit, Vue } from 'nuxt-property-decorator'
 
 // components
 import CurseImage from '~/components/battle/atoms/CurseImage.vue'
 import CurseName from '~/components/battle/atoms/CurseName.vue'
 import HpBar from '~/components/battle/atoms/HpBar.vue'
 import BattleHistory from '~/components/battle/atoms/BattleHistory.vue'
+import TrendsDialog from '~/components/battle/atoms/TrendsDialog.vue'
 import { battleStore, curseStore } from '~/store'
 
 @Component({
@@ -33,7 +35,8 @@ import { battleStore, curseStore } from '~/store'
     CurseImage,
     CurseName,
     HpBar,
-    BattleHistory
+    BattleHistory,
+    TrendsDialog
   }
 })
 export default class CurseContainer extends Vue {
@@ -61,6 +64,11 @@ export default class CurseContainer extends Vue {
 
   private get maxHP (): number {
     return curseStore.curse?.maxHP ?? 0
+  }
+
+  // methods
+  @Emit()
+  private onClickCurseImage () {
   }
 }
 </script>

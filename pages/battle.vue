@@ -3,8 +3,10 @@
     <news-header
       :text="newsText"
     />
+    <trends-dialog />
     <curse-container
       class="index-curse-container"
+      @on-click-curse-image="openTrendsDialog"
     />
     <player-container
       class="index-player-container"
@@ -23,10 +25,10 @@ import { playerStore, curseStore, battleStore } from '~/utils/storeAccessor'
 import NewsHeader from '~/components/battle/molecules/NewsHeader.vue'
 import CurseContainer from '~/components/battle/organisms/CurseContainer.vue'
 import PlayerContainer from '~/components/battle/organisms/PlayerContainer.vue'
+import TrendsDialog from '~/components/battle/atoms/TrendsDialog.vue'
 import { IBattle } from '~/src/graphql/domain/battle'
 import { ICurse } from '~/src/graphql/domain/curse'
 import { ICommand } from '~/src/graphql/domain/command'
-import { IPlayer } from '~/src/graphql/domain/player'
 import { UpdateBattleInput } from '~/src/API'
 
 @Component({
@@ -35,7 +37,8 @@ import { UpdateBattleInput } from '~/src/API'
   components: {
     NewsHeader,
     PlayerContainer,
-    CurseContainer
+    CurseContainer,
+    TrendsDialog
   },
   async asyncData (context) {
     try {
@@ -158,7 +161,6 @@ export default class Battle extends Vue {
       })
       const curse = fetchCurseResult.curse
       curseStore.setCurse(curse)
-      console.log(curse)
 
       copied.inProgress = true
 
@@ -237,6 +239,10 @@ export default class Battle extends Vue {
     }
     curseStore.setShaking(true)
     setTimeout(() => curseStore.setShaking(false), 3000)
+  }
+
+  private openTrendsDialog () {
+    battleStore.setIsTrendsDialogOpen(true)
   }
 }
 </script>
