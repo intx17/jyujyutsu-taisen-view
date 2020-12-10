@@ -18,8 +18,17 @@ export default class BattleStore extends VuexModule implements IBattleStore {
   curse: ICurse | null = null
   shakeCurseImage = false
 
+  get battleInProgressHistory (): string[] {
+    return this.battleInProgress?.histories.split('\\n')
+      .filter(s => !!s) ?? []
+  }
+
   @Mutation
   setBattleInProgress (battle: IBattle | null) {
+    if (battle) {
+      const histories = battle?.histories.replace(/"/g, '')
+      battle.histories = histories
+    }
     this.battleInProgress = battle
   }
 

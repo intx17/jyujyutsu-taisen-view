@@ -40,14 +40,9 @@ export default class CurseContainer extends Vue {
   private readonly hpTextColor: string = '#fff';
   private isAreaExpansion: boolean = true;
 
-  private battleHistories = [
-    'test1fwrefawfwrgergesgsgsegresgaeagaa',
-    'test2',
-    'test3',
-    'test4',
-    'test5',
-    'test6'
-  ]
+  private get battleHistories (): string[] {
+    return battleStore.battleInProgressHistory
+  }
 
   private get name (): string {
     return curseStore.curse?.name ?? ''
