@@ -16,6 +16,7 @@ type Player @model {
 type Curse @model {
   id: ID!
   name: String!
+  engName: String!
   negative: Int!
   maxHP: Int!
   attack: Int!

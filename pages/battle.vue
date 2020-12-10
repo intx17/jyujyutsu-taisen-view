@@ -5,7 +5,6 @@
     />
     <curse-container
       class="index-curse-container"
-      :curse="curse"
     />
     <player-container
       class="index-player-container"
@@ -18,14 +17,12 @@
 <script lang="ts">
 import moment from 'moment'
 import { Component, Vue } from 'nuxt-property-decorator'
-import { ICurse } from '~/src/components/battle/organisms/curseContainer'
 import { playerStore, curseStore } from '~/utils/storeAccessor'
 
 // components
 import NewsHeader from '~/components/battle/molecules/NewsHeader.vue'
 import CurseContainer from '~/components/battle/organisms/CurseContainer.vue'
 import PlayerContainer from '~/components/battle/organisms/PlayerContainer.vue'
-import { ICommand } from '~/src/graphql/domain/command'
 
 @Component({
   layout: 'default',
@@ -37,15 +34,8 @@ import { ICommand } from '~/src/graphql/domain/command'
   },
   async asyncData (context) {
     try {
-      const curse: ICurse = {
-        name: 'ベルゼブブ',
-        hp: 50,
-        imgSrc: '/img/curse/beelzebub.png'
-      }
-
       const props = {
-        newsText: '',
-        curse
+        newsText: ''
       }
 
       const now = moment()
@@ -86,8 +76,6 @@ import { ICommand } from '~/src/graphql/domain/command'
 })
 export default class Battle extends Vue {
   private newsText!: string;
-  private curse!: ICurse;
-  private commands!: ICommand[];
 
   // methods
   private playerAttack () {

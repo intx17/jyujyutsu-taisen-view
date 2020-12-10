@@ -3,15 +3,6 @@ import { Plugin } from '@nuxt/types'
 import { DataStore } from 'aws-amplify'
 import { Battle } from '~/src/models'
 
-interface CreateCurseInput {
-    name: string
-    negative: number
-    maxHP: number
-    attack: number
-    hitRate: number
-    imgSrc: string
-}
-
 interface FetchBattleInput {
     id: string
 }
@@ -92,7 +83,6 @@ async function fetchBattle (input: FetchBattleInput): Promise<FetchBattleResult>
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $createCurse(input: CreateCurseInput): Promise<void>
     $fetchBattle(input: FetchBattleInput): Promise<FetchBattleResult>
     $fetchPlayerBattle(input: FetchPlayerBattleInput): Promise<FetchPlayerBattleResult>
     $fetchPlayerBattleByPlayerId(input: FetchPlayerBattleByPlayerIDInput): Promise<FetchPlayerBattleByPlayerIDResult>
@@ -102,7 +92,6 @@ declare module 'vue/types/vue' {
 
 declare module '@nuxt/types' {
   interface NuxtAppOptions {
-    $createCurse(input: CreateCurseInput): Promise<void>
     $fetchBattle(input: FetchBattleInput): Promise<FetchBattleResult>
     $fetchPlayerBattle(input: FetchPlayerBattleInput): Promise<FetchPlayerBattleResult>
     $fetchPlayerBattleByPlayerId(input: FetchPlayerBattleByPlayerIDInput): Promise<FetchPlayerBattleByPlayerIDResult>
@@ -113,7 +102,6 @@ declare module '@nuxt/types' {
 declare module 'vuex/types/index' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Store<S> {
-    $createCurse(input: CreateCurseInput): Promise<void>
     $fetchBattle(input: FetchBattleInput): Promise<FetchBattleResult>
     $fetchPlayerBattle(input: FetchPlayerBattleInput): Promise<FetchPlayerBattleResult>
     $fetchPlayerBattleByPlayerId(input: FetchPlayerBattleByPlayerIDInput): Promise<FetchPlayerBattleByPlayerIDResult>

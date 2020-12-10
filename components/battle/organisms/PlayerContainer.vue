@@ -8,9 +8,9 @@
       :max-hp="maxHP"
     />
     <command-list class="command-list" />
-    <p class="kokusen-image-container">
+    <!-- <p class="kokusen-image-container">
       <img src="/img/kokusen_small.png">
-    </p>
+    </p> -->
     <attack-button
       :enabled="hasActiveCommand"
       @on-click-attack-button="onClickAttackButton"

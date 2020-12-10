@@ -65,9 +65,7 @@ export const getPlayer = /* GraphQL */ `
           id
           date
           playerHP
-          playerMaxHP
           curseHP
-          curseMaxHP
           histories
           trends
           inProgress
@@ -114,6 +112,7 @@ export const getCurse = /* GraphQL */ `
     getCurse(id: $id) {
       id
       name
+      engName
       negative
       maxHP
       attack
@@ -134,6 +133,7 @@ export const listCurses = /* GraphQL */ `
       items {
         id
         name
+        engName
         negative
         maxHP
         attack
@@ -215,9 +215,7 @@ export const getBattle = /* GraphQL */ `
       id
       date
       playerHP
-      playerMaxHP
       curseHP
-      curseMaxHP
       histories
       trends
       inProgress
@@ -241,6 +239,7 @@ export const getBattle = /* GraphQL */ `
       curse {
         id
         name
+        engName
         negative
         maxHP
         attack
@@ -265,9 +264,7 @@ export const listBattles = /* GraphQL */ `
         id
         date
         playerHP
-        playerMaxHP
         curseHP
-        curseMaxHP
         histories
         trends
         inProgress
@@ -285,6 +282,7 @@ export const listBattles = /* GraphQL */ `
         curse {
           id
           name
+          engName
           negative
           maxHP
           attack

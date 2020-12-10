@@ -6,6 +6,10 @@
         <input id="name" v-model="name" type="text">
       </div>
       <div>
+        <label for="eng-name">engName</label>
+        <input id="eng-name" v-model="engName" type="text">
+      </div>
+      <div>
         <label for="min-negative">NEGATIVE</label>
         <input id="min-negative" v-model="negative" type="number">
       </div>
@@ -59,7 +63,8 @@ import { Component, Vue } from 'nuxt-property-decorator'
   middleware: ['auth']
 })
 export default class DebugCurse extends Vue {
-  private name: string = 'curseName';
+  private name: string = '呪霊名';
+  private engName: string = 'curseName';
   private negative: string = '1000';
   private maxHP: string = '100';
   private attack: string = '10';
@@ -127,17 +132,18 @@ export default class DebugCurse extends Vue {
   async dbInsert () {
     await this.$createCurse({
       name: this.name,
+      engName: this.engName,
       negative: Number(this.negative),
       maxHP: Number(this.maxHP),
       attack: Number(this.attack),
       hitRate: Number(this.hitRate) / 100,
-      imgSrc: `curse/${this.name}.png`
+      imgSrc: `curse/${this.engName}.png`
     })
   }
 
   async storageUpload () {
     await Storage.put(`curse/${this.name}.png`, this.file, {
-      level: 'protected', // レベルの宣言
+      level: 'public', // レベルの宣言
       contentType: 'image/png' // file形式
     }).catch(err => window.alert(err))
   }

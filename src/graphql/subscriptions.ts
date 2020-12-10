@@ -60,9 +60,7 @@ export const onCreatePlayer = /* GraphQL */ `
           id
           date
           playerHP
-          playerMaxHP
           curseHP
-          curseMaxHP
           histories
           trends
           inProgress
@@ -106,9 +104,7 @@ export const onUpdatePlayer = /* GraphQL */ `
           id
           date
           playerHP
-          playerMaxHP
           curseHP
-          curseMaxHP
           histories
           trends
           inProgress
@@ -152,9 +148,7 @@ export const onDeletePlayer = /* GraphQL */ `
           id
           date
           playerHP
-          playerMaxHP
           curseHP
-          curseMaxHP
           histories
           trends
           inProgress
@@ -175,6 +169,7 @@ export const onCreateCurse = /* GraphQL */ `
     onCreateCurse {
       id
       name
+      engName
       negative
       maxHP
       attack
@@ -190,6 +185,7 @@ export const onUpdateCurse = /* GraphQL */ `
     onUpdateCurse {
       id
       name
+      engName
       negative
       maxHP
       attack
@@ -205,6 +201,7 @@ export const onDeleteCurse = /* GraphQL */ `
     onDeleteCurse {
       id
       name
+      engName
       negative
       maxHP
       attack
@@ -314,9 +311,7 @@ export const onCreateBattle = /* GraphQL */ `
       id
       date
       playerHP
-      playerMaxHP
       curseHP
-      curseMaxHP
       histories
       trends
       inProgress
@@ -340,6 +335,7 @@ export const onCreateBattle = /* GraphQL */ `
       curse {
         id
         name
+        engName
         negative
         maxHP
         attack
@@ -359,9 +355,7 @@ export const onUpdateBattle = /* GraphQL */ `
       id
       date
       playerHP
-      playerMaxHP
       curseHP
-      curseMaxHP
       histories
       trends
       inProgress
@@ -385,6 +379,7 @@ export const onUpdateBattle = /* GraphQL */ `
       curse {
         id
         name
+        engName
         negative
         maxHP
         attack
@@ -404,9 +399,7 @@ export const onDeleteBattle = /* GraphQL */ `
       id
       date
       playerHP
-      playerMaxHP
       curseHP
-      curseMaxHP
       histories
       trends
       inProgress
@@ -430,6 +423,7 @@ export const onDeleteBattle = /* GraphQL */ `
       curse {
         id
         name
+        engName
         negative
         maxHP
         attack

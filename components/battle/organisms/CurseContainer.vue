@@ -19,14 +19,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
 
 // components
 import CurseImage from '~/components/battle/atoms/CurseImage.vue'
 import CurseName from '~/components/battle/atoms/CurseName.vue'
 import HpBar from '~/components/battle/atoms/HpBar.vue'
 import BattleHistory from '~/components/battle/atoms/BattleHistory.vue'
-import { ICurse } from '~/src/components/battle/organisms/curseContainer'
 import { battleStore, curseStore } from '~/store'
 
 @Component({
@@ -38,9 +37,6 @@ import { battleStore, curseStore } from '~/store'
   }
 })
 export default class CurseContainer extends Vue {
-  @Prop({ type: Object, required: true, default: () => {} })
-  private curse!: ICurse
-
   private readonly hpTextColor: string = '#fff';
   private isAreaExpansion: boolean = true;
 

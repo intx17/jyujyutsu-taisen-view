@@ -41,9 +41,7 @@ export declare class Battle {
   readonly id: string;
   readonly date: string;
   readonly playerHP: number;
-  readonly playerMaxHP: number;
   readonly curseHP: number;
-  readonly curseMaxHP: number;
   readonly histories?: string;
   readonly trends: string;
   readonly inProgress: boolean;
@@ -57,6 +55,7 @@ export declare class Battle {
 export declare class Curse {
   readonly id: string;
   readonly name: string;
+  readonly engName: string;
   readonly negative: number;
   readonly maxHP: number;
   readonly attack: number;

@@ -1,6 +1,7 @@
 <template>
   <p :class="{ 'shake-image': shakeImage }" class="curse-image-container">
-    <img v-if="!!imgSrc" :src="imgSrc" class="curse-image">
+    <amplify-s3-image v-if="!!imgSrc" :image-path="imgSrc" class="curse-image" />
+    <!-- <img v-else :src="imgSrc" class="curse-image"> -->
   </p>
 </template>
 
@@ -16,6 +17,10 @@ export default class CurseImage extends Vue {
   private get shakeImage () {
     return curseStore.shaking
   }
+
+  private get isLocalHost (): boolean {
+    return /^https?:\/\/localhost/.test(location.href)
+  }
 }
 </script>
 
@@ -23,7 +28,7 @@ export default class CurseImage extends Vue {
 .curse-image-container {
   display: flex;
   justify-content: center;
-  width: 100px;
+  width: 100%;
   height: 100px;
 }
 
@@ -34,6 +39,14 @@ export default class CurseImage extends Vue {
 .curse-image {
   width: 100px;
   height: 100px;
+}
+
+.curse-image >>> .amplify-image {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  border: none;
+  cursor: pointer;
 }
 
 @keyframes shakeCurseImage {
