@@ -25,8 +25,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, PropSync, Vue } from 'nuxt-property-decorator'
-import { settingStore } from '~/utils/storeAccessor'
+import { Component, PropSync, Vue } from 'nuxt-property-decorator'
+import { playerStore, settingStore } from '~/utils/storeAccessor'
 
 // components
 import SelectWithButtonAndLabel from '~/components/setting/atoms/SelectWithButtonAndLabel.vue'
@@ -40,13 +40,14 @@ import { ModalMode } from '~/store/setting'
   }
 })
 export default class CommandForm extends Vue {
-  @Prop({ type: Array, required: true, default: () => ([]) })
-  private commands!: ICommand[]
-
   @PropSync('selectedCommandIds', { type: Array, required: true, default: () => ([]) })
   private syncedSelectedCommandIds!: string[]
 
   // computed
+  private get commands (): ICommand[] {
+    return playerStore.player?.commands.items ?? []
+  }
+
   private get commandOptions (): ISelectOption[] {
     return this.commands.map((c) => {
       return {

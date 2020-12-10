@@ -114,6 +114,9 @@ export default class Battle extends Vue {
         return
       }
 
+      // 揺らす
+      await this.shakeCurse()
+
       const playerDamage = this.calcCurseAttackDamage(curse, activeCommand)
       const curseDamage = this.calcPlayerAttackDamage(activeCommand)
 
@@ -128,9 +131,6 @@ export default class Battle extends Vue {
         playerHP: copiedBattle.playerHP,
         histories: copiedBattle.histories
       }
-
-      // 揺らす
-      await this.shakeCurse()
 
       const battleIsEnded = copiedBattle.playerHP <= 0 || copiedBattle.curseHP <= 0
       if (battleIsEnded) {

@@ -5,7 +5,6 @@
       :prefecture-value.sync="prefectureValue"
     />
     <command-form
-      :commands="commands"
       :selected-command-ids.sync="selectedCommandIds"
     />
     <command-dialog />
@@ -47,7 +46,6 @@ import { IPlayer } from '~/src/graphql/domain/player'
       return
     }
 
-    const commands = playerStore.player.commands.items
     const selectedCommands = playerStore.selectedCommands
     const selectedCommandIds: string[] = ['', '', '']
 
@@ -63,14 +61,12 @@ import { IPlayer } from '~/src/graphql/domain/player'
     const prefectureValue = prefectureOptions.find(o => o.text === playerStore.player?.prefecture)?.value || ''
 
     return {
-      commands,
       selectedCommandIds,
       prefectureValue
     }
   }
 })
 export default class Setting extends Vue {
-  private commands!: ICommand[]
   private selectedCommandIds!: string[]
   private prefectureValue!: string;
 
@@ -100,9 +96,21 @@ export default class Setting extends Vue {
     // update store
     const copiedPlayer: IPlayer = JSON.parse(JSON.stringify(playerInStore))
     copiedPlayer.prefecture = prefecture
-    playerStore.setPlayer(copiedPlayer)
-
+    const items = copiedPlayer.commands.items
     const selectedCommands = playerStore.player?.commands.items.filter(c => this.selectedCommandIds.includes(c.id)) ?? []
+    const newItems: ICommand[] = []
+    // TODO: リファクタ
+    for (const item of items) {
+      if (this.selectedCommandIds.includes(item.id)) {
+        const newItem = selectedCommands.find(sc => sc.id === item.id)!
+        newItems.push(newItem)
+        continue
+      }
+      newItems.push(item)
+    }
+
+    copiedPlayer.commands.items = newItems
+    playerStore.setPlayer(copiedPlayer)
     playerStore.setSelectedCommands(selectedCommands)
   }
 }

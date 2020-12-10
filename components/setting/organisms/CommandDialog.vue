@@ -56,6 +56,7 @@ import { ModalMode } from '~/store/setting'
 
 // component
 import SuccessButton from '~/components/setting/atoms/SuccessButton.vue'
+import { IPlayer } from '~/src/graphql/domain/player';
 
 @Component({
   components: {
@@ -123,8 +124,10 @@ export default class CommonDialog extends Vue {
       return
     }
 
+    const copiedPlayer: IPlayer = JSON.parse(JSON.stringify(playerStore.player))
+    const copiedItems = copiedPlayer.commands.items.slice()
     if (settingStore.commandDialog.mode === ModalMode.Create) {
-      await this.$createCommand({
+      const createCommandResult = await this.$createCommand({
         name: this.name,
         description: this.description,
         attack: Number(this.attack),
@@ -133,18 +136,37 @@ export default class CommonDialog extends Vue {
         inSelectedCommandList: false,
         playerID: playerStore.player.id
       })
+
+      copiedItems.push(
+        {
+          id: createCommandResult.id,
+          name: this.name,
+          description: this.description,
+          attack: Number(this.attack),
+          criticalRate: Number(this.criticalRate) / 100,
+          isOutdoor: this.isOutdoor,
+          inSelectedCommandList: false
+        })
     } else {
-      await this.$updateCommand({
+      const selectedCommandIndex = playerStore.selectedCommands.findIndex(sc => sc.id === settingStore.commandDialog.commandId)
+      const isSelectedCommand = selectedCommandIndex !== null && selectedCommandIndex !== undefined && selectedCommandIndex >= 0
+      const command = {
         id: settingStore.commandDialog.commandId!,
         name: this.name,
         description: this.description,
         attack: Number(this.attack),
         criticalRate: Number(this.criticalRate) / 100,
         isOutdoor: this.isOutdoor,
-        inSelectedCommandList: false
-      })
+        inSelectedCommandList: isSelectedCommand
+      }
+      await this.$updateCommand(command)
+      const index = copiedItems.findIndex(ci => ci.id === settingStore.commandDialog.commandId)
+      copiedItems[index] = command
     }
 
+    copiedPlayer.commands.items = copiedItems
+    playerStore.setPlayer(copiedPlayer)
+    playerStore.setSelectedCommands(copiedItems.filter(c => c.inSelectedCommandList))
     settingStore.closeCommandDialog()
   }
 }

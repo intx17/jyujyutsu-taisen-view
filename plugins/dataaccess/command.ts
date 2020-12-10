@@ -38,6 +38,16 @@ interface ListPlayerCommandsResult {
     commands: ICommand[]
 }
 
+interface CreateCommandResponse {
+  data: {
+    createCommand: ICommand
+  }
+}
+
+interface CreateCommandResult {
+  id: string
+}
+
 interface UpdateSelectedCommandsInput {
     ids: string[]
 }
@@ -92,11 +102,14 @@ async function listPlayerCommands (input: ListPlayerCommandsInput): Promise<List
   }
 }
 
-async function createCommand (input: CreateCommandInput): Promise<void> {
+async function createCommand (input: CreateCommandInput): Promise<CreateCommandResult> {
   const createVar: CreateCommandMutationVariables = {
     input
   }
-  await API.graphql(graphqlOperation(mutations.createCommand, createVar))
+  const response = await API.graphql(graphqlOperation(mutations.createCommand, createVar)) as CreateCommandResponse
+  return {
+    id: response.data.createCommand.id
+  }
 }
 
 async function updateCommand (input: UpdateCommandInput): Promise<void> {
@@ -129,7 +142,7 @@ declare module 'vue/types/vue' {
     // $fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult>
     // $listPlayerSelectedCommands(input: ListPlayerSelectedCommandsInput): Promise<ListPlayerSelectedCommandsResult>
     $listPlayerCommands(input: ListPlayerCommandsInput): Promise<ListPlayerCommandsResult>
-    $createCommand(input: CreateCommandInput): Promise<void>
+    $createCommand(input: CreateCommandInput): Promise<CreateCommandResult>
     $updateCommand(input: UpdateCommandInput): Promise<void>
     $updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void>
   }
@@ -140,7 +153,7 @@ declare module '@nuxt/types' {
     // $fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult>
     $listPlayerSelectedCommands(input: ListPlayerSelectedCommandsInput): Promise<ListPlayerSelectedCommandsResult>
     $listPlayerCommands(input: ListPlayerCommandsInput): Promise<ListPlayerCommandsResult>
-    $createCommand(input: CreateCommandInput): Promise<void>
+    $createCommand(input: CreateCommandInput): Promise<CreateCommandResult>
     $updateCommand(input: UpdateCommandInput): Promise<void>
     $updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void>
   }
@@ -152,7 +165,7 @@ declare module 'vuex/types/index' {
     // $fetchCommand(input: FetchCommandInput): Promise<FetchCommandResult>
     $listPlayerSelectedCommands(input: ListPlayerSelectedCommandsInput): Promise<ListPlayerSelectedCommandsResult>
     $listPlayerCommands(input: ListPlayerCommandsInput): Promise<ListPlayerCommandsResult>
-    $createCommand(input: CreateCommandInput): Promise<void>
+    $createCommand(input: CreateCommandInput): Promise<CreateCommandResult>
     $updateCommand(input: UpdateCommandInput): Promise<void>
     $updateSelectedCommand(input: UpdateSelectedCommandsInput): Promise<void>
   }

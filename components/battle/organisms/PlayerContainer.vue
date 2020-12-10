@@ -87,6 +87,7 @@ export default class PlayerContainer extends Vue {
 }
 
 .command-list {
+  margin-top: 10px;
   position: relative;
 }
 
