@@ -122,16 +122,17 @@ export default class Battle extends Vue {
       playerHP: copiedBattle.playerHP,
       histories: copiedBattle.histories
     }
-    if (copiedBattle.playerHP <= 0 || copiedBattle.curseHP <= 0) {
+
+    const battleIsEnded = copiedBattle.playerHP <= 0 || copiedBattle.curseHP <= 0
+    if (battleIsEnded) {
       updateInput.inProgress = false
       await this.updatedDB(updateInput)
       await this.setNewBattle()
     } else {
       await this.updatedDB(updateInput)
+      // 揺らす
+      this.shakeCurse()
     }
-
-    // 揺らす
-    this.shakeCurse()
   }
 
   private updatedDB (input: UpdateBattleInput) {
@@ -157,6 +158,7 @@ export default class Battle extends Vue {
       })
       const curse = fetchCurseResult.curse
       curseStore.setCurse(curse)
+      console.log(curse)
 
       copied.inProgress = true
 

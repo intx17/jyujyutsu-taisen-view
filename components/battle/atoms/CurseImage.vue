@@ -1,7 +1,6 @@
 <template>
   <p :class="{ 'shake-image': shakeImage }" class="curse-image-container">
-    <amplify-s3-image v-if="!!imgSrc" :image-path="imgSrc" class="curse-image" />
-    <!-- <img v-else :src="imgSrc" class="curse-image"> -->
+    <img :src="requireImgSrc" class="curse-image">
   </p>
 </template>
 
@@ -13,6 +12,10 @@ import { curseStore } from '~/utils/storeAccessor'
 export default class CurseImage extends Vue {
   @Prop({ type: String, required: true, default: '' })
   private imgSrc!: string
+
+  private get requireImgSrc (): string {
+    return require(`~/static/img/${this.imgSrc}`)
+  }
 
   private get shakeImage () {
     return curseStore.shaking
