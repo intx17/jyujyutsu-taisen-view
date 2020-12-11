@@ -10,7 +10,7 @@
       </div>
       <div>
         <label for="description">説明</label>
-        <textarea id="description" v-model="description" class="nes-textarea" />
+        <textarea id="description" v-model="description" class="nes-textarea" maxlength="10" />
       </div>
       <div class="nes-field">
         <label for="attack">攻撃力</label>
@@ -56,7 +56,7 @@ import { ModalMode } from '~/store/setting'
 
 // component
 import SuccessButton from '~/components/setting/atoms/SuccessButton.vue'
-import { IPlayer } from '~/src/graphql/domain/player';
+import { IPlayer } from '~/src/graphql/domain/player'
 
 @Component({
   components: {
@@ -162,6 +162,10 @@ export default class CommonDialog extends Vue {
       await this.$updateCommand(command)
       const index = copiedItems.findIndex(ci => ci.id === settingStore.commandDialog.commandId)
       copiedItems[index] = command
+
+      if (playerStore.activeCommand?.id === command.id) {
+        playerStore.setActiveCommand(command)
+      }
     }
 
     copiedPlayer.commands.items = copiedItems

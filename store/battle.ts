@@ -8,6 +8,7 @@ interface IBattleStore {
     isAreaExpansion: boolean
     isTrendsDialogOpen: boolean
     isProccessing: boolean
+    showKokusen: boolean
 }
 
 @Module({
@@ -22,6 +23,7 @@ export default class BattleStore extends VuexModule implements IBattleStore {
   isAreaExpansion = false
   isTrendsDialogOpen = false
   isProccessing = false
+  showKokusen = false
 
   @Mutation
   setBattleInProgress (battle: IBattle | null) {
@@ -64,5 +66,10 @@ export default class BattleStore extends VuexModule implements IBattleStore {
   @Mutation
   setIsProccessing (isProccesiing: boolean) {
     this.isProccessing = isProccesiing
+  }
+
+  @Mutation
+  setShowKokusen (show: boolean) {
+    this.showKokusen = show
   }
 }

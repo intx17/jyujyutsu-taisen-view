@@ -8,9 +8,9 @@
       :max-hp="maxHP"
     />
     <command-list class="command-list" />
-    <!-- <p class="kokusen-image-container">
+    <p v-if="showKokusenImage" class="kokusen-image-container">
       <img src="/img/kokusen_small.png">
-    </p> -->
+    </p>
     <attack-button
       :enabled="enableAttackBtn"
       @on-click-attack-button="onClickAttackButton"
@@ -49,6 +49,10 @@ export default class PlayerContainer extends Vue {
 
   private get hasActiveCommand () {
     return playerStore.activeCommand !== null
+  }
+
+  private get showKokusenImage (): boolean {
+    return battleStore.showKokusen
   }
 
   // methods

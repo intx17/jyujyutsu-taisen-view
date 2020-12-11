@@ -7,11 +7,16 @@ import { authStore, battleStore, curseStore, playerStore } from '~/utils/storeAc
 const { AmplifyEventBus } = require('aws-amplify-vue')
 
 export default async (context: Context) => {
+  const userInfo = await Auth.currentUserInfo()
+
   // ログイン, ログアウト時
   AmplifyEventBus.$on('authState', (info: any) => {
     switch (info) {
       case 'signedIn':
         authStore.setIsLoggedIn(true)
+        if (!userInfo) {
+          location.href = ('/battle')
+        }
         break
       default:
         authStore.setIsLoggedIn(false)
@@ -20,7 +25,6 @@ export default async (context: Context) => {
   })
 
   // ログイン認証情報取得
-  const userInfo = await Auth.currentUserInfo()
   if (!userInfo) {
     authStore.setIsLoggedIn(false)
     return

@@ -6,7 +6,8 @@
       @click="onClickCommandListItem"
     >
       <p v-if="syncedCommand.isActive" class="nes-balloon from-left nes-pointer command-ballon">
-        {{ syncedCommand.description }}
+        {{ syncedCommand.description }}<br>
+        ATK: {{ syncedCommand.attack }} 黒閃率: {{ syncedCommand.criticalRate }}%
       </p>
       <span>
         {{ syncedCommand.name }}
@@ -37,6 +38,7 @@ export default class CommandList extends Vue {
   position: absolute;
   top: -110px;
   left: 20px;
+  font-size: 0.8rem;
 }
 
 .command-list-item {

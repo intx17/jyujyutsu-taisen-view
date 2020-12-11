@@ -43,6 +43,7 @@ export default class CommandList extends Vue {
         name: storeCommand.name,
         description: storeCommand.description,
         attack: storeCommand.attack,
+        criticalRate: storeCommand.criticalRate * 100,
         isActive: false,
         isOutdoor: storeCommand.isOutdoor
       }

@@ -49,7 +49,6 @@ import { UpdateBattleInput } from '~/src/API'
       const now = moment()
       let infectedNumber = 0
       if (playerStore.player === null || !playerStore.player.id) {
-        window.alert('ユーザーデータが存在しません')
         return
       }
       const prefecture: string = playerStore.player.prefecture
@@ -117,8 +116,13 @@ export default class Battle extends Vue {
       // 揺らす
       await this.shakeCurse()
 
+      const isCritical = this.isCritical(activeCommand)
+      if (isCritical) {
+        this.kokusen()
+      }
+
       const playerDamage = this.calcCurseAttackDamage(curse, activeCommand)
-      const curseDamage = this.calcPlayerAttackDamage(activeCommand)
+      const curseDamage = this.calcPlayerAttackDamage(activeCommand, isCritical)
 
       this.setBattleDamages(copiedBattle, playerDamage, curseDamage)
       this.setBattleHistories(copiedBattle, playerDamage, curse.name, curseDamage)
@@ -180,10 +184,12 @@ export default class Battle extends Vue {
     }
   }
 
-  private calcPlayerAttackDamage (command: ICommand) {
+  private isCritical (command: ICommand) {
     const rand = Math.random()
-    const isCritical = command.criticalRate >= rand
+    return command.criticalRate >= rand
+  }
 
+  private calcPlayerAttackDamage (command: ICommand, isCritical: boolean) {
     if (isCritical) {
       return Math.ceil(Math.pow(command.attack, 2.5))
     }
@@ -246,6 +252,14 @@ export default class Battle extends Vue {
     }
     curseStore.setShaking(true)
     setTimeout(() => curseStore.setShaking(false), 3000)
+  }
+
+  private kokusen () {
+    if (battleStore.showKokusen) {
+      return
+    }
+    battleStore.setShowKokusen(true)
+    setTimeout(() => battleStore.setShowKokusen(false), 1000)
   }
 
   private openTrendsDialog () {
